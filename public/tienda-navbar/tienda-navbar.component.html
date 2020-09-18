@@ -1,0 +1,65 @@
+<div id="menu-navbar" gdev-color [background]="'complement1'">
+    <div class="row">
+        <div class="col s8 m3">
+            <ng-container *ngIf="responsive.small; else logo">
+                <div class="titleArea">
+                    <div id="menuTrigger" (click)="menuTrigger()">
+                    <i class="fas fa-bars" *ngIf="!_navbar.open"></i>
+                    <i class="fas fa-times" *ngIf="_navbar.open"></i>
+                </div>
+                <h1> {{_navbar.title}} </h1>
+                </div>
+            </ng-container>
+            <ng-template #logo>
+                <div id="logoContent" [routerLink]="['/inicio']">
+                    <img [src]="'assets/app-logo-neg.png'" alt="logo oficial">
+                </div>        
+            </ng-template>
+        </div>
+        <div class="col s2 m4">
+            <div id="buscar">
+                <form #searchForm="ngForm" (ngSubmit)="onSearch()">
+                    <i class="fas fa-search white-text" id="buscar-btn" (click)="expandSearch()"></i>
+                    <input type="text" name="buscar" class="buscar-input" placeholder="Buscar artículos" [(ngModel)]="queryTofind">
+                    <i class="fas fa-times" id="unexpand" style="display: none;" (click)="unExpand()"></i>
+                    <button class="hide"></button>
+                </form>
+            </div>
+        </div>
+        <div class="col s2 m5">
+                <ul class="menu-items">
+                    <li class="menu-link" id="cart" [routerLink]="['/tienda/cart']">
+                        <ng-container *ngIf="cart.totalCartItems() > 0; else noItems">
+                            <i class="fas fa-shopping-cart"
+                            matBadgeColor="accent"
+                            [matBadge]="cart.totalCartItems()"></i>
+                        </ng-container>
+                        <ng-template #noItems>
+                            <i class="fas fa-shopping-cart"></i>
+                        </ng-template>
+                        
+                    </li>
+                    <li class="menu-link hide-on-med-and-down" id="wish"
+                    [routerLink]="['/tienda/wishlist']"
+                    >
+                        <i class="fas fa-heart"></i>
+                    </li>
+                    <li class="menu-link hide-on-med-and-down" id="account">
+                        Cuenta
+                    </li>
+                    <li class="menu-link hide-on-med-and-down" id="account-icon"
+                    [routerLink]="['/tienda/cuenta']" routerLinkActive="router-link-active" 
+                    >
+                        <i class="fas fa-user"></i>
+                    </li>
+                    <li class="hide-on-med-and-down" id="categories">
+                        <app-menu-categorias></app-menu-categorias>
+                    </li>
+                    <li class="menu-link hide-on-med-and-down" id="page_menu">
+                        <app-menu-pagina></app-menu-pagina>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</div>
+    

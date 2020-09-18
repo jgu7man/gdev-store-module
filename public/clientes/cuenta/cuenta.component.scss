@@ -1,0 +1,17 @@
+#cuenta_container {
+    position: relative;
+}
+
+#sidenav {
+    padding: 0;
+}
+
+::ng-deep .mat-drawer-inner-container {
+    contain: content;
+}
+
+#cuenta_content {
+    width: 79vw;
+    padding-left: 2vw;
+    margin-left: 3vw;
+}

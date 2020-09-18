@@ -1,0 +1,14 @@
+.imgArea {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    .imgContent {
+        flex-grow: 1;
+        width: 33%;
+        position: relative;
+        img {
+            position: relative;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

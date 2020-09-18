@@ -1,0 +1,167 @@
+<div class="container">
+    <div class="row">
+        <div class="col s10">
+            <h5>AGREGAR PRODUCTO NUEVO</h5>
+        </div>
+        <div class="col s2">
+            <button mat-button (click)="location.back()" >REGRESAR</button>
+        </div>
+    </div>
+
+    <form action="#" method="post" onsubmit="return false" #addProduct="ngForm" autocomplete="off">
+        <!-- * DATOS POR DEFAULT DEL PRODUCTO -->
+        <div class="row">
+            <!-- * CONTENIDO -->
+            <div class="col s12 m6">
+                <!-- REFERENCIA O NOMBRE DEL PRODUCTO -->
+                <div class="col s12 input-field">
+                    <input
+                        type="text"
+                        name="referencia"
+                        id="referencia"
+                        [(ngModel)]="product.referencia"
+                        #referencia="ngModel"
+                        placeholder="{{ product.referencia }}"
+                        required
+                    />
+                    <label class="active" for="referencia">Referencia</label>
+                </div>
+
+                <!-- PRECIO -->
+                <div class="col s12 input-field">
+                    <input
+                        type="number"
+                        name="precio"
+                        id="precio"
+                        [(ngModel)]="product.precio"
+                        #precio="ngModel"
+                        required
+                        placeholder="{{ product.precio }}"
+                    />
+                    <label class="active" for="precio">Precio</label>
+                </div>
+
+                <!-- MANEJO DEL STOCK -->
+                <div class="col s6">
+                    <mat-slide-toggle
+                        name="onStock"
+                        [(ngModel)]="product.onStock"
+                        (change)="setStock($event)"
+                        #onStock
+                        >¿En stock?
+                    </mat-slide-toggle>
+                </div>
+
+                <div class="col s6 input-field">
+                    <input
+                        [(ngModel)]="product.stockCant"
+                        placeholder="Opcional"
+                        type="number"
+                        name="stockCant"
+                    />
+                    <label for="stockCant" class="active">Cantidad</label>
+                </div>
+
+                <!-- DESCRIPCIÓN -->
+                <div class="col s12">
+                    <mat-form-field>
+                        <mat-label>Descripción</mat-label>
+                        <textarea
+                        name="descripcion"
+                        [(ngModel)]="product.descripcion"
+                        #descripcion="ngModel"
+                        matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        [matTextareaAutosize]="true"
+                        (resizeToFitContent)="(true)"
+                        [cdkAutosizeMinRows]="1"
+                        [cdkAutosizeMaxRows]="8"
+                        id="descripcion"
+                        >
+                        </textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="col s12" *ngIf="categories">
+                    <mat-form-field>
+                        <mat-label>Categorías</mat-label>
+                        <mat-select
+                            [multiple]="true"
+                            [(ngModel)]="product.categorias"
+                            name="categorias"
+                        >
+                            <mat-option
+                                *ngFor="let categoria of categories"
+                                [value]="categoria.name"
+                            >
+                                {{ categoria.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- * IMAGEN DEL PRODUCTO -->
+            <div class="col s12 m6">
+                <div class="col s12 input-field file-field">
+                    <div class="btn addBtn">
+                        <span>Imagen de referencia</span>
+                        <input
+                            type="file"
+                            name="imagen"
+                            id="imagen"
+                            (change)="onLoadImg($event)"
+                        />
+                    </div>
+                </div>
+
+                <div class="col s12 imgPreview">
+                     <img [src]="product.imagenUrl['url']" [alt]="product.imagenUrl['alt']" id="imgReferencia" />
+                    <div *ngIf="_products.imageLoadPercent">
+                        <span *ngIf="_products.imageLoadPercent != 100; else cargado"
+                            >Cargando: {{ _products.imageLoadPercent }}%</span
+                        >
+                        <ng-template #cargado>
+                            <span>
+                                Cargado: {{ _products.imageLoadPercent }}%
+                                <i class="fas fa-check-circle"></i
+                            ></span>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <!-- GALERÍA -->
+
+                <Gdev-file-image-field [field]="{llamadoAccion:'Subir imágenes'}" >
+                </Gdev-file-image-field>
+            </div>
+        </div>
+
+        <!-- * ATRIBUTOS EXTRAS -->
+
+        <div class="row">
+            <Gdev-call-form
+                [value]="product"
+                [formPath]="'tienda/productos/categorias'"
+                [formName]="'motos nuevas'"
+                (formValues)="merge($event)"
+            >
+            </Gdev-call-form>
+        </div>
+
+        <!-- * BOTÓN DE GUARDADO -->
+
+        <div class="row">
+            <div class="col s12 center">
+                <button
+                    class="btn light-blue darken-4 waves-light"
+                    (click)="onSubmit()"
+                    [disabled]="!addProduct.form.valid && product.imagenUrl == undefined"
+                >
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,63 @@
+#articulo {
+    height: 75vh;
+}
+
+#desc {
+    position: relative;
+    height: 75%;
+    overflow-y: auto;
+}
+
+#article-descripcion {
+    position: absolute;
+    bottom: 0;
+    transition: all .3s ease-out;
+}
+
+.cambio {
+    bottom: -100% !important;
+}
+
+#desc::-webkit-scrollbar {
+    display: none;
+}
+
+#article-descripcion h3 {
+    font-weight: 700;
+}
+
+.descripcion {
+    text-align: justify;
+}
+
+#article-image .imgContainer {
+    width: 75%;
+}
+
+.slider-nav-bar {
+    position: absolute;
+    top: 50vh;
+    font-size: 26px;
+    color: #005daa;
+    cursor: pointer;
+}
+
+.right-btn {
+    right: 1em;
+}
+
+.left-btn {
+    left: 1em;
+}
+
+.btn-list {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.option-icon {
+    width: 33.333333%;
+    font-size: 16px;
+    color: #005daa;
+    text-align: center;
+}

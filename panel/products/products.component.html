@@ -1,0 +1,57 @@
+<div id="products">
+  	<div class="row" id="productTab">
+		
+		<div class="col s12" id="productsTable">
+      		<div class="row">
+
+				<!-- * TÍTULO * -->
+				
+				<div class="col s8 m10"> 
+          			<h5>PRODUCTOS</h5>
+				</div>
+				
+				<!-- * OPCIONES DEL PANEL * -->
+
+				<div class="col s2">
+                    <button
+                    mat-raised-button
+                    [color]="'primary'" 
+					class="" 
+					[routerLink]="['./add']" 
+					>Agregar</button>
+				</div>
+				
+			</div>
+			<div class="row" id="sort_menu">
+				<gdev-sort-options *ngIf="categories.length > 0"
+				[sortOptions]="false"
+				[compareOptions]="false"
+				[filterByField]="'categorias'"
+				[fieldTypeValue]="'array'"
+				[fieldValues]="categories">
+				</gdev-sort-options>
+
+			</div>
+			<!-- TERMINA CABECERA -->
+				
+
+
+
+				<!-- * TABLA * -->
+			<div class="row">
+				<gdev-index-caller></gdev-index-caller>
+				<div class="col s12">   
+					<app-collapsible-table></app-collapsible-table>
+					<!-- <gdev-loading-data *ngIf="!products || products.length <= 0"></gdev-loading-data> -->
+				</div>
+			</div>
+		</div>
+
+		<!-- TERMINA TABLA -->
+
+
+
+		
+
+  <!-- TERMINA MARCO -->
+</div>

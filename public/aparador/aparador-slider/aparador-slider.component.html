@@ -1,0 +1,29 @@
+<div class="row" id="articulo" *ngIf="moto">
+    <div class="col s12 m8">
+        <div id="article-image">
+            <div class="imgContainer">
+                <img [src]="moto.imagenUrl" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4" id="desc">
+        <div id="article-descripcion">
+            <h3>{{moto.referencia}}</h3>
+            <p class="precio"><b>${{moto.precio }}</b></p>
+            <p class="descripcion">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem sed libero accusamus eveniet obcaecati quas nam accusantium, voluptates quos temporibus veniam quasi quia officiis labore corrupti inventore maiores voluptatum ipsam.</p>
+            <div class="options-list">
+                <ul class="btn-list">
+                    <li class="option-icon">
+                        <i class="fas fa-heart"></i>
+                    </li>
+                    <li class="option-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </li>
+                    <li class="option-icon">
+                        <i class="fas fa-eye"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

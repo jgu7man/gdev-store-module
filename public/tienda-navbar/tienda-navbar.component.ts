@@ -1,0 +1,77 @@
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { CartService } from '../cart/cart.service';
+import { MobileNavbarService } from './mobile-navbar.service';
+import { Router } from '@angular/router';
+import { GdevResponsiveService } from '../../../Gdev-Tools/commons/gdev-responsive.service';
+import { GdevSearchService } from '../../../Gdev-Tools/search/gdev-search.service';
+import { Loading } from 'src/app/Gdev-Tools/loading/loading.service';
+
+@Component({
+  selector: 'app-tienda-navbar',
+  templateUrl: './tienda-navbar.component.html',
+  styleUrls: ['./tienda-navbar.component.scss'],
+})
+export class TiendaNavbarComponent implements OnInit {
+
+  logo: string
+  @Input() open: boolean = false
+  queryTofind: string = ''
+  
+
+  constructor (
+    public cart: CartService,
+    public responsive: GdevResponsiveService,
+    public _navbar: MobileNavbarService,
+    private _search: GdevSearchService,
+    private _router: Router,
+    private _loading: Loading
+  ) {
+    this.logo = !responsive.small ? 
+      'assets/img/lasmotos-logotipo-h-trans-neg.png'
+      :  'assets/img/lasmotos-logotipo-trans-neg.png'
+  }
+  
+  menuTrigger() {
+    $( "#menuTrigger" ).toggleClass( 'rotate' )
+    // if ( window.screen.width <= 500 ) $( "#menuList" ).slideToggle()
+    this._navbar.open = !this._navbar.open
+    console.log( this._navbar.open );
+    this._navbar.toggleMenu.next(this._navbar.open)
+  }
+
+  ngOnInit() {
+    
+
+    $( '#page_menu' ).hover(
+      () => $( '#menu-pagina' ).slideDown(),
+      () => $( '#menu-pagina' ).slideUp()
+    )
+
+    
+  }
+
+  expandSearch() {
+    $('.buscar-input').addClass('expand-input')
+    $('#buscar').css('justify-content', 'left')
+    $('#unexpand').toggle()
+  }
+
+  unExpand() {
+    $('.buscar-input').removeClass('expand-input')
+    $('#buscar').css('justify-content', 'center')
+    $('#unexpand').toggle()
+  }
+
+  onSearch() {
+    this._search.onSearchByString( this.queryTofind, 'productos', 'referencia' ).then( ( res ) => {
+      var resultados = JSON.parse( sessionStorage.getItem( 'lasmotosresultados' ) )
+      if ( resultados ) sessionStorage.removeItem( 'lasmotosresultados' )
+      sessionStorage.setItem( 'lasmotosresultados', JSON.stringify( res ) )
+      this._router.navigateByUrl( '/tienda', { skipLocationChange: true } ).then( () => {
+        this._router.navigate( [ '/tienda/resultados' ] )
+      })
+      console.log(res);
+    })
+  }
+
+}

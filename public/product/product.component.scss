@@ -1,0 +1,175 @@
+#articulo {
+    height: 75vh;
+}
+
+#desc {
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
+}
+
+#article-descripcion {
+    position: absolute;
+    top: 0;
+    transition: all .3s ease-out;
+}
+
+.cambio {
+    top: 100% !important;
+}
+
+#desc::-webkit-scrollbar {
+    display: none;
+}
+
+#article-descripcion h3 {
+    font-weight: 700;
+}
+
+.descripcion {
+    text-align: justify;
+}
+
+#article-image .imgContainer {
+    width: 75%;
+}
+
+.slider-nav-bar {
+    position: absolute;
+    top: 50vh;
+    font-size: 26px;
+    color: #005daa;
+    cursor: pointer;
+}
+
+.right-btn {
+    right: 1em;
+}
+
+.left-btn {
+    left: 1em;
+}
+
+.btn-list {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.option-icon {
+    width: 33.333333%;
+    font-size: 16px;
+    color: #005daa;
+    text-align: left;
+    img {
+        max-width: 50px;
+        top: 0;
+    }
+}
+
+.imgContainer{
+    position: relative;
+    overflow: hidden;
+    img {
+        position: relative;
+        z-index: 2;
+        transition: all .3s ease-in-out;
+    }
+    .bg-box {
+        width: 300px;
+        height: 250px;
+        position: absolute;
+        z-index: 1;
+        background: linear-gradient(180deg, #005daa, #024175);
+        border-radius: 1em;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        opacity: .75;
+    }
+    #productImg.entrar {
+        animation: entrar .5s ease-out  1 ;
+    }
+    #productImg.salir {
+        animation: salir .5s ease-in 1 forwards;
+    }
+    
+}
+
+.imgArea {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    .imgContent {
+        flex-grow: 1;
+        width: 33%;
+        position: relative;
+        padding: 0 1em 1em 1em;
+        cursor: pointer;
+        img {
+            position: relative;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+::ng-deep .mat-dialog-content{
+    overflow: hidden;
+    max-height: unset;
+    img {
+        width: unset;
+        height: unset;
+    }
+}
+
+.close {
+    cursor: pointer;
+}
+
+#video {
+    display: flex;
+    justify-content: center;
+}
+
+.back {
+    cursor: pointer;
+    position: absolute;
+    left: 3em;
+    font-size: 1.5em;;
+}
+
+#product_actions {
+    margin-top: 3em;
+    padding: 1em;
+}
+
+#actions {
+    display: flex; 
+    justify-content: space-around;
+}
+
+@keyframes salir {
+    from{left: 50%;}
+    to{left: 150%;}
+}
+
+@keyframes entrar {
+    from{left: -50%}
+    to{left: 50%;}
+
+}
+
+@media screen and (max-width: 450px){
+    
+    #article-image {
+        .imgContainer{
+        width: 100%;
+        .bg-box {
+            width: 220px;
+            height: 200px;
+        }
+    } 
+    }
+    #desc {
+        height: 100%;
+    }
+}

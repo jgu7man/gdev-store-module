@@ -1,0 +1,18 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { ClienteModel } from '../../cliente.model';
+
+@Component({
+  templateUrl: './datos-cuenta.component.html',
+  styleUrls: ['./datos-cuenta.component.scss']
+})
+export class DatosCuentaComponent implements OnInit {
+
+  cliente: ClienteModel
+  constructor() { }
+
+  ngOnInit(): void {
+    var cliente = JSON.parse(localStorage.getItem('lasmotoscliente'))
+    if (cliente) this.cliente = cliente
+  }
+
+}

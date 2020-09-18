@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col s12 m3">
+        <img [src]="product.description.imagenUrl['url']" [alt]="product.description.imagenUrl['alt']">
+    </div>
+    <div class="col s7 referencia">
+        <h5 [routerLink]="['/tienda/producto',product.description.id]" > {{product.description.referencia}} </h5>
+        <p> ${{product.description.precio}} </p>
+    </div>
+    <div class="col s5 m2 precios">
+        <app-addcart-btn [productId]="product.productId"></app-addcart-btn>
+        <h6 class="precio_total">
+            $<b>{{product.description.precio * productOnCart.cant}}</b>
+        </h6>
+    </div>
+    <!-- <div class="col s6"></div> -->
+</div>
