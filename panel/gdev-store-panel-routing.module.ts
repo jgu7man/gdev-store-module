@@ -7,16 +7,20 @@ import { GdevCategoryAttributesComponent } from './categories/category-attribute
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: GdevStoreComponent, children:[
-    { path: '', component: DashboardComponent },
+    { path: '', pathMatch: 'full', redirectTo: 'inicio' },
+    { path: 'inicio', component: DashboardComponent },
     { path: 'categories', component: CategoriesComponent },
     { path: 'products', component: ProductsComponent },
     { path: 'attributes/:id', component: GdevCategoryAttributesComponent },
     { path: 'products/add', component: AddProductComponent },
     { path: 'products/edit/:id', component: EditProductComponent },
-  ] },
+  ]
+  },
+  { path: 'login', component: LoginComponent },
 ];
 
 const routerOptions: ExtraOptions = {

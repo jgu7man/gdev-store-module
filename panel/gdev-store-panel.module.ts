@@ -21,6 +21,9 @@ import { EditProductComponent } from './products/edit-product/edit-product.compo
 import { DelProdcutComponent } from './products/del-prodcut/del-prodcut.component';
 import { GdevToolsModule } from '../../Gdev-Tools/gdev-tools.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
+import { TopbarComponent } from './topbar/topbar.component';
 
 @NgModule( {
   declarations: [
@@ -36,7 +39,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AddProductComponent,
     EditProductComponent,
     DelProdcutComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent,
+    AdminComponent,
+    TopbarComponent
   ],
   imports: [
     CommonModule,

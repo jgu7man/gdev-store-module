@@ -18,6 +18,15 @@ export class GdevStoreComponent implements OnInit {
 
   sidenavStructure: SidenavNode[] = [
     {
+      name: 'Incio',
+      route: 'inicio',
+      routeId: 'inicio',
+    },
+    {
+      name: 'Diseño',
+      routeId: 'diseno',
+    },
+    {
       name: 'Categorías',
       route: 'categories',
       routeId: 'categories',
@@ -32,6 +41,10 @@ export class GdevStoreComponent implements OnInit {
       childs: [
 
       ]
+    },
+    {
+      name: 'Pedidos',
+      routeId: 'pedidos',
     },
   ]
       
