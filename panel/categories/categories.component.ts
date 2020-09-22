@@ -28,7 +28,7 @@ export class CategoriesComponent implements OnInit {
     private _dialog: MatDialog,
     private _route: ActivatedRoute
   ) {
-
+    this._categories.getCategories()
     this._title.setTitle( 'Panel - Tienda - Categorias' )
   }
 

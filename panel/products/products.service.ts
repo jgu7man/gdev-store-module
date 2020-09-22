@@ -27,6 +27,7 @@ export class GdevStoreProductsService {
             var dotsSplit = productId.split( '.' )
             productId = dotsSplit.length == 1 ? productId : dotsSplit.join( '_' )
             
+            Object.keys(product).forEach(key => {if(product[key] == undefined) delete product[key]})
             var productObject = {}
             productObject = { ...productObject, ...product }
             productObject['id'] = productId

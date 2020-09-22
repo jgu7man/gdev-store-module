@@ -29,11 +29,7 @@ export class AddCategoryComponent implements OnInit {
   onSubmit() {
     this._category.addCategory( this.category )
       .then( () => {
-        console.log('listo');
         this._dialog.close()
-        this._router.navigateByUrl( 'panel/store' ).then( () => {
-          this._router.navigate(['panel/store/categories'])
-        })
       } )
       .catch( error => { this._alerta.sendMessageAlert( 'Oops! Algo salió mal' ) } )
   }

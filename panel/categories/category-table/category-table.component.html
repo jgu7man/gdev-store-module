@@ -22,7 +22,7 @@
         </td>
     <mat-menu #options="matMenu">
         <button mat-menu-item (click)="onEdit(categorySelected.name)">Editar</button>
-        <button mat-menu-item [routerLink]="['/panel/store/attributes',categorySelected.name]" >Atributos</button>
+        <!-- <button mat-menu-item [routerLink]="['/panel/attributes',categorySelected.name]" >Atributos</button> -->
         <button mat-menu-item (click)="onDel(categorySelected.name)" >Eliminar</button>
     </mat-menu>
     </ng-container>

@@ -6,23 +6,22 @@
     </div>
 
     <form action="#" method="post" onsubmit="return false" #categoryForm="ngForm">
-        <div class="row">
-                <!-- NOMBRE DE LA CATEGORIA -->
-                <div class="col s12 input-field">
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        [(ngModel)]="category.name"
-                        #name="ngModel"
-                        required
-                        
-                    />
-                    <label class="active" for="name">Nombre</label>
-                </div>
-
-
-        </div>
+        <!-- NOMBRE DE LA CATEGORIA -->
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input
+            matInput
+            type="text"
+            name="nombre"
+            [(ngModel)]="category.name"
+            #nombre="ngModel"
+            required
+            >
+            <mat-error *ngIf="nombre.invalid
+            || (nombre.dirty && nombre.touched)">
+                Este campo es necesario
+            </mat-error>
+        </mat-form-field>
 
         
 
@@ -31,7 +30,8 @@
         <div class="row">
             <div class="col s12 center">
                 <button
-                    class="btn light-blue darken-4 waves-light"
+                    mat-raised-button
+                    color="primary"
                     (click)="onSubmit()"
                     [disabled]="!categoryForm.form.valid"
                 >

@@ -16,12 +16,15 @@ const routes: Routes = [
   { path: '', component: GdevStoreComponent, children:[
     { path: '', pathMatch: 'full', redirectTo: 'inicio' },
     { path: 'inicio', component: DashboardComponent },
+    
     { path: 'categories', component: CategoriesComponent },
     { path: 'products', component: ProductsComponent },
     { path: 'attributes/:id', component: GdevCategoryAttributesComponent },
     { path: 'products/add', component: AddProductComponent },
     { path: 'products/edit/:id', component: EditProductComponent },
+    
     { path: 'admins', component: AdminComponent },
+    
     { path: 'slider', component: HeroSliderComponent },
     { path: 'slider-config', component: GdevSliderConfigComponent },
   ]

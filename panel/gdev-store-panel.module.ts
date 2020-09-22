@@ -30,6 +30,9 @@ import { PageDesignComponent } from './page-design/page-design.component';
 import { HeroSliderComponent } from './page-design/hero-slider/hero-slider.component';
 import { AddSlideComponent } from './page-design/hero-slider/add-slide/add-slide.component';
 import { SlideComponent } from './page-design/hero-slider/slide/slide.component';
+import { ProdVarianteComponent } from './products/prod-variante/prod-variante.component';
+import { ProdAddonsComponent } from './products/prod-addons/prod-addons.component';
+import { ProdDescComponent } from './products/prod-desc/prod-desc.component';
 
 @NgModule( {
   declarations: [
@@ -55,6 +58,9 @@ import { SlideComponent } from './page-design/hero-slider/slide/slide.component'
     HeroSliderComponent,
     AddSlideComponent,
     SlideComponent,
+    ProdVarianteComponent,
+    ProdAddonsComponent,
+    ProdDescComponent,
   ],
   imports: [
     CommonModule,

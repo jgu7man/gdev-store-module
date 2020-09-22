@@ -1,7 +1,7 @@
 import { GdevStoreCategoriesService } from './../categories/categories.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { GdevStoreProductModel } from './product.model';
+import { GdevStoreProductModel, ProdDesc } from './product.model';
 import { Router } from '@angular/router';
 import { GdevStoreProductsService } from './products.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,6 +10,8 @@ import { GdevIndexService } from 'src/app/Gdev-Tools/query-index/gdev-index.serv
 import { GdevStoreCategoryModel } from '../categories/category.model';
 import { CollapsibleTableService, Column } from '../../../Gdev-Tools/collapsible-table/collapsible-table.service';
 import { Loading } from '../../../Gdev-Tools/loading/loading.service';
+import { MatSelectionListChange, MatSelectionList } from '@angular/material/list';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +21,12 @@ import { Loading } from '../../../Gdev-Tools/loading/loading.service';
 export class ProductsComponent implements OnInit {
 
   products: GdevStoreProductModel[]
+  prodSelected: GdevStoreProductModel
   categories: string[] = []
+  preDesc: ProdDesc = {cant:0,exp:new Date(),type:'%'}
+
+  @ViewChild( 'currentProduct' ) productPanel: MatDrawer
+  @ViewChild( 'listPanel' ) listPanel: MatSelectionList
   
   columns: Column[] = [
     { key: 'imagenUrl', name: 'Imagen', colspan: 2, type: 'image' },
@@ -39,6 +46,7 @@ export class ProductsComponent implements OnInit {
     private _dialog: MatDialog,
     public _index: GdevIndexService
   ) {
+    this.prodSelected = new GdevStoreProductModel('',0,false,0,'','',[], [], [], [], this.preDesc, '')
     this._collapsitable.tableFieldsPath = 'tienda/productos/categorias/motos nuevas'
     this._collapsitable.columns = this.columns
     this._collapsitable.options = { delete: true, edit: true, go: true }
@@ -74,9 +82,9 @@ export class ProductsComponent implements OnInit {
   async loadProducts() {
     this._index.initIndex( 'productos', 'id', 20 )
     this._index.queryData.subscribe( data => {
-      this.products = []
-      this.products = data as GdevStoreProductModel[]
-      this._collapsitable.items = this.products
+      this.products = data
+      // this.products = data as GdevStoreProductModel[]
+      // this._collapsitable.items = this.products
       console.log( this.products );
     } )
     this._index.loadingQuery.subscribe( resp => {
@@ -86,6 +94,19 @@ export class ProductsComponent implements OnInit {
       } 
     } )
     return
+  }
+
+  onProdSelected( selected: MatSelectionListChange ) {
+    if ( this.productPanel.opened ) { this.productPanel.close() }
+    this.prodSelected = selected.option.value
+    console.log(this.prodSelected);
+    this.productPanel.open()
+  }
+
+  onClosePanel() {
+    this.productPanel.close()
+    this.listPanel.deselectAll()
+    this.prodSelected = new GdevStoreProductModel( '', 0, false, 0, '', '', [], [], [], [], this.preDesc, '' )
   }
 
   onEdit() {

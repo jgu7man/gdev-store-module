@@ -30,7 +30,7 @@ export class AddProductComponent implements OnInit {
     public location: Location
   ) {
     this.product = undefined
-    this.product = new GdevStoreProductModel( '', '', 0, false, '', {}, '', [], [] )
+    this.product = new GdevStoreProductModel( '', 0,  false, '', {}, '', [], [] )
   }
 
   async ngOnInit() {
@@ -41,6 +41,10 @@ export class AddProductComponent implements OnInit {
     this._products.galleyImageUrl.subscribe( imageUrl => {
       this.product.galeria.push(imageUrl)
     } )
+  }
+
+  getImageURL(imageURL) {
+    this.product.imagenUrl = imageURL
   }
 
 
@@ -72,6 +76,17 @@ export class AddProductComponent implements OnInit {
       } );
     }
   
+  catchVariantes(variantes) {
+    this.product.variantes = variantes
+  }
+
+  catchAddons( addons ) {
+    this.product.addons = addons
+  }
+
+  catchDesc( desc ) {
+    this.product.desc = desc
+  }
 
 
 
@@ -81,8 +96,8 @@ export class AddProductComponent implements OnInit {
 
   onSubmit( ) {
     this._products.addProduct( this.product ).then( () => {
-      this.router.navigateByUrl( '/panel/store', { skipLocationChange: true } ).then( () => {
-        this.router.navigate( [ '/panel/store/products' ] );
+      this.router.navigateByUrl( '/panel/', { skipLocationChange: true } ).then( () => {
+        this.router.navigate( [ '/panel/products' ] );
       } );
     })
   }

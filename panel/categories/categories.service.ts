@@ -2,6 +2,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { GdevStoreCategoryModel } from './category.model';
 import { AlertService } from 'src/app/Gdev-Tools/alerts/alert.service';
+import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class GdevStoreCategoriesService {
@@ -12,10 +13,17 @@ export class GdevStoreCategoriesService {
     */
     public path: string
 
+    categories$: Observable<any> = new Observable()
+
     constructor (
         private fs: AngularFirestore,
         private _alerta: AlertService
-    ) { }
+    ) {
+     }
+
+    getCategories() {
+        this.categories$ = this.fs.collection('tienda/productos/categorias').valueChanges()
+    }
     
 
     async loadCategories() {

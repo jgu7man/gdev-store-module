@@ -1,5 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { GdevStoreProductModel } from '../product.model';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { GdevStoreProductModel, ProdDesc } from '../product.model';
 import { GdevStoreProductsService } from '../products.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GdevStoreCategoriesService } from '../../categories/categories.service';
@@ -14,7 +14,8 @@ import { FormConstructorService } from '../../../../Gdev-Tools/form-constructor/
 })
 export class EditProductComponent implements OnInit {
 
-  public product: GdevStoreProductModel
+  @Input() public product: GdevStoreProductModel
+  defultDesc: ProdDesc = {cant:0, exp:new Date(), type:'%'}
   public imgToLoad: any;
   public precio = [ '$', /[1-9]/, /\d/, /\d/, ',', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/ ]
   public categories: any[]
@@ -28,24 +29,13 @@ export class EditProductComponent implements OnInit {
     private _form: FormConstructorService
   ) {
     this.product = undefined
-    this.product = new GdevStoreProductModel( '', '', 0, false, '', {}, '', [], [] )
+    this.product = new GdevStoreProductModel( '', 0, false, '', {}, '', [], [] )
   }
 
   async ngOnInit() {
-    this.product.id = this._ruta.snapshot.params.id
-    this._products.getProduct( this.product.id ).then( product => {
-      this.product = product
-      console.log( this.product );
-      this._form.value$.next(this.product)
-    })
     this.categories = await this._categorias.loadCategories()
+    if ( !this.product.desc ) this.product.desc = this.defultDesc;
     
-    this._products.imageUrl.subscribe( imageUrl => {
-      this.product.imagenUrl = imageUrl
-    } )
-    this._products.galleyImageUrl.subscribe( imageUrl => {
-      this.product.galeria.push( imageUrl )
-    } )
   }
 
 
@@ -77,6 +67,21 @@ export class EditProductComponent implements OnInit {
     } );
   }
 
+  getImageURL( imageURL ) {
+    this.product.imagenUrl = imageURL
+  }
+
+  catchVariantes( variantes ) {
+    this.product.variantes = variantes
+  }
+
+  catchAddons( addons ) {
+    this.product.addons = addons
+  }
+
+  catchDesc( desc ) {
+    this.product.desc = desc
+  }
 
 
 

@@ -1,65 +1,64 @@
 <div class="container">
-    <div class="row">
+    <div class="row align-cols">
         <div class="col s10">
-            <h5>EDITAR PRODUCTO</h5>
+            <h2>PRODUCTO</h2>
         </div>
         <div class="col s2">
-            <button mat-button (click)="location.back()" >REGRESAR</button>
+            <button mat-raised-button (click)="closeForm.emit()" >REGRESAR</button>
         </div>
     </div>
 
-    <form *ngIf="product" action="#" method="post" onsubmit="return false" #addProduct="ngForm" autocomplete="off">
+    <form action="#" method="post" onsubmit="return false" #addProduct="ngForm" autocomplete="off">
         <!-- * DATOS POR DEFAULT DEL PRODUCTO -->
         <div class="row">
             <!-- * CONTENIDO -->
-            <div class="col s12 m6">
+            <div class="col s12 m6 mat-elevation-z2" id="prodData">
                 <!-- REFERENCIA O NOMBRE DEL PRODUCTO -->
-                <div class="col s12 input-field">
-                    <input
-                        type="text"
-                        name="referencia"
-                        id="referencia"
-                        [(ngModel)]="product.referencia"
-                        #referencia="ngModel"
-                        placeholder="{{ product.referencia }}"
-                        required
-                    />
-                    <label class="active" for="referencia">Referencia</label>
+                <div class="row">
+                    <div class="col s12 ">
+                        <mat-form-field>
+                            <mat-label>Referencia</mat-label>
+                            <input
+                            matInput
+                            type="text"
+                            name="referencia"
+                            #referencia="ngModel"
+                            [(ngModel)]="product.referencia"
+                            required
+                            >
+                            <mat-error *ngIf="referencia.invalid
+                            || (referencia.dirty && referencia.touched)">
+                                Es necesario el nombre (referencia) del producto
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
                 </div>
 
-                <!-- PRECIO -->
-                <div class="col s12 input-field">
-                    <input
-                        type="number"
-                        name="precio"
-                        id="precio"
-                        [(ngModel)]="product.precio"
-                        #precio="ngModel"
-                        required
-                        placeholder="{{ product.precio }}"
-                    />
-                    <label class="active" for="precio">Precio</label>
-                </div>
+                
 
                 <!-- MANEJO DEL STOCK -->
-                <div class="col s6">
-                    <mat-slide-toggle
-                        name="onStock"
-                        [(ngModel)]="product.onStock"
-                        (change)="setStock($event)"
-                        #inStock
-                        >¿En stock?
-                    </mat-slide-toggle>
-                </div>
-
-                <div class="col s6 input-field">
-                    <input
-                        [(ngModel)]="product.stockCant"
-                        placeholder="Opcional"
-                        type="number"
-                        name="stockCant"
-                    />
-                    <label for="stockCant" class="active">Cantidad</label>
+                <div class="row align-cols">
+                    <div class="col s6">
+                        <mat-slide-toggle
+                            name="onStock"
+                            [(ngModel)]="product.onStock"
+                            (change)="setStock($event)"
+                            #onStock
+                            >¿En stock?
+                        </mat-slide-toggle>
+                    </div>
+    
+                    <div class="col s6">
+                        <mat-form-field>
+                            <mat-label>Cantidad</mat-label>
+                            <input
+                            matInput
+                            type="number"
+                            name="cantidad"
+                            [(ngModel)]="product.stockCant"
+                            >
+                        </mat-form-field>
+                    </div>
                 </div>
 
                 <!-- DESCRIPCIÓN -->
@@ -83,6 +82,7 @@
                     </mat-form-field>
                 </div>
 
+                <!-- Categorías -->
                 <div class="col s12" *ngIf="categories">
                     <mat-form-field>
                         <mat-label>Categorías</mat-label>
@@ -100,68 +100,74 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+
+                <div class="col s12">
+                    <h4>Precios</h4>
+                    <mat-tab-group backgroundColor="accent">
+                        <mat-tab label="Precio">
+                            <mat-form-field>
+                                <mat-label>Precio</mat-label>
+                                <input
+                                matInput
+                                type="number"
+                                name="precio"
+                                #precio="ngModel"
+                                [(ngModel)]="product.precio"
+                                required
+                                >
+                                <mat-error *ngIf="precio.invalid
+                                || (precio.dirty && precio.touched)">
+                                    El precio es necesario
+                                </mat-error>
+                            </mat-form-field>
+
+                        </mat-tab>
+                        <mat-tab label="Variantes">
+                            Agrega variantes del producto como características, después especifica el valor de cada característica
+                            <gdev-prod-variante [Variantes]="product.variantes"  (onChange)="catchVariantes($event)" ></gdev-prod-variante>
+                        </mat-tab>
+                        <mat-tab label="Adicionales">
+                            Agregar caraterísticas adicionales
+                            <gdev-prod-addons [Addons]="product.addons" (onChange)="catchAddons($event)"></gdev-prod-addons>
+                        </mat-tab>
+                        <mat-tab label="Descuento">
+                            Agrega un descuento para este producto que puede ser en dinero o porcentaje sobre el precio total
+                            <gdev-prod-desc *ngIf="product.desc" [Desc]="product.desc" (OnChange)="catchDesc($event)"></gdev-prod-desc>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
             </div>
 
             <!-- * IMAGEN DEL PRODUCTO -->
-            <div class="col s12 m6">
-                <div class="col s12 input-field file-field">
-                    <div class="btn addBtn">
-                        <span>Imagen de referencia</span>
-                        <input
-                            type="file"
-                            name="imagen"
-                            id="imagen"
-                            (change)="onLoadImg($event)"
-                        />
-                    </div>
-                    <div class="file-path-wrapper" type="hidden">
-                        <input class="file-path validate" type="text">
-                    </div>
-                </div>
-
-                <div class="col s12 imgPreview">
-                    <img [src]="product.imagenUrl['url']" [alt]="product.imagenUrl['alt']" id="imgReferencia" />
-                    <div *ngIf="_products.imageLoadPercent">
-                        <span *ngIf="_products.imageLoadPercent != 100; else cargado"
-                            >Cargando: {{ _products.imageLoadPercent }}%</span
-                        >
-                        <ng-template #cargado>
-                            <span>
-                                Cargado: {{ _products.imageLoadPercent }}%
-                                <i class="fas fa-check-circle"></i
-                            ></span>
-                        </ng-template>
-                    </div>
+            <div class="col s12 m6 mat-elevation-z2" >
+                <div class="col s12">
+                    Sube una imagen de producto, es necesaria
+                    <gdev-file-uploader [folder]="'productos'"
+                    (imageURL)="getImageURL($event)"
+                    [imgPreview]="product.imagenUrl['url']"
+                    ></gdev-file-uploader>
                 </div>
 
                 <!-- GALERÍA -->
-                <div class="col s12 gallery">
-                    <p>Galería</p>
-                    <Gdev-file-image-field [field]="{llamadoAccion:'Subir imágenes'}" >
-                    </Gdev-file-image-field>
-                </div>
+
+                Puedes agregar más imágenes del producto como galería
+                <Gdev-file-image-field [field]="{llamadoAccion:'Subir imágenes'}" >
+                </Gdev-file-image-field>
             </div>
         </div>
 
-        <!-- * ATRIBUTOS EXTRAS -->
-
         <div class="row">
-            <Gdev-call-form 
-            *ngIf="product.referencia"
-                [value]="product"
-                [formPath]="'tienda/productos/categorias'"
-                [formName]="'motos nuevas'"
-                (formValues)="merge($event)"
-            >
-            </Gdev-call-form>
+            
         </div>
+            
 
         <!-- * BOTÓN DE GUARDADO -->
 
         <div class="row">
             <div class="col s12 center">
                 <button
-                    class="btn light-blue darken-4 waves-light"
+                    mat-raised-button
+                    color="primary"
                     (click)="onSubmit()"
                     [disabled]="!addProduct.form.valid && product.imagenUrl == undefined"
                 >

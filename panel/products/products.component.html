@@ -1,57 +1,99 @@
-<div id="products">
-  	<div class="row" id="productTab">
+<mat-drawer-container [hasBackdrop]="false">
+	<mat-drawer #currentProduct [mode]="'over'" [position]="'end'">
+		<gdev-edit-product [product]="prodSelected" (closeForm)="onClosePanel()" ></gdev-edit-product>
+	</mat-drawer>
+	<mat-drawer-content>
 		
-		<div class="col s12" id="productsTable">
-      		<div class="row">
-
-				<!-- * TÍTULO * -->
+		<div id="products">
+			<div class="row" id="productTab">
 				
-				<div class="col s8 m10"> 
-          			<h5>PRODUCTOS</h5>
+				<div class="col s12" id="productsTable">
+					<div class="row">
+
+						<!-- * TÍTULO * -->
+						
+						<div class="col s8 m10"> 
+							<h2>PRODUCTOS</h2>
+						</div>
+						
+						<!-- * OPCIONES DEL PANEL * -->
+
+						<div class="col s2">
+							<button
+							mat-raised-button
+							[color]="'primary'" 
+							class="" 
+							[routerLink]="['./add']" 
+							>Agregar</button>
+						</div>
+						
+					</div>
+					<div class="row" id="sort_menu">
+						<gdev-sort-options *ngIf="categories.length > 0"
+						[sortOptions]="false"
+						[compareOptions]="false"
+						[filterByField]="'categorias'"
+						[fieldTypeValue]="'array'"
+						[fieldValues]="categories">
+						</gdev-sort-options>
+
+					</div>
+					<!-- TERMINA CABECERA -->
+						
+
+
+
+						<!-- * TABLA * -->
+						<div class="row" *ngIf="products" [class.mat-elevation-z3]="true">
+							<gdev-index-caller
+							style="padding: 1em;"
+							></gdev-index-caller>
+							<div class="row table-headers" gdev-color [background]="'bg1'">
+								<div class="col s2">Imagen</div>
+								<div class="col s4">Referencia</div>
+								<div class="col s3">Categorías</div>
+								<div class="col s2">Disponible</div>
+							</div>
+						<div class="col s12">   
+							<mat-selection-list #listPanel [multiple]="false"
+							(selectionChange)="onProdSelected($event)">
+								<mat-list-option *ngFor="let product of products" [value]="product">
+									<div class="row align-cols">
+										<div class="col s2 prodImg">
+											<img [src]="product.imagenUrl['url']" [alt]="product.referencia">
+										</div>
+										<div class="col s4">
+											{{product.referencia}}
+										</div>
+										<div class="col s3">
+											<span *ngFor="let catego of product.categorias; index as i">
+												{{catego}}<span *ngIf="i != product.categorias.length -1">, </span>
+											</span>
+										</div>
+										<div class="col s2">
+											<ng-container *ngIf="!product.onStock; else onStock">
+												<i class="fas fa-circle grey-text"></i>
+											</ng-container>
+											<ng-template #onStock>
+												<i class="fas fa-circle blue-text"></i>
+											</ng-template>
+										</div>
+									</div>
+								</mat-list-option>
+							</mat-selection-list>
+							<!-- <gdev-loading-data *ngIf="!products || products.length <= 0"></gdev-loading-data> -->
+						</div>
+					</div>
 				</div>
-				
-				<!-- * OPCIONES DEL PANEL * -->
 
-				<div class="col s2">
-                    <button
-                    mat-raised-button
-                    [color]="'primary'" 
-					class="" 
-					[routerLink]="['./add']" 
-					>Agregar</button>
-				</div>
-				
-			</div>
-			<div class="row" id="sort_menu">
-				<gdev-sort-options *ngIf="categories.length > 0"
-				[sortOptions]="false"
-				[compareOptions]="false"
-				[filterByField]="'categorias'"
-				[fieldTypeValue]="'array'"
-				[fieldValues]="categories">
-				</gdev-sort-options>
+				<!-- TERMINA TABLA -->
+
 
 			</div>
-			<!-- TERMINA CABECERA -->
 				
 
-
-
-				<!-- * TABLA * -->
-			<div class="row">
-				<gdev-index-caller></gdev-index-caller>
-				<div class="col s12">   
-					<app-collapsible-table></app-collapsible-table>
-					<!-- <gdev-loading-data *ngIf="!products || products.length <= 0"></gdev-loading-data> -->
-				</div>
-			</div>
+		<!-- TERMINA MARCO -->
 		</div>
-
-		<!-- TERMINA TABLA -->
-
-
-
-		
-
-  <!-- TERMINA MARCO -->
-</div>
+	
+	</mat-drawer-content>
+</mat-drawer-container>
