@@ -11,11 +11,14 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { HeroSliderComponent } from './page-design/hero-slider/hero-slider.component';
 import { GdevSliderConfigComponent } from '../../Gdev-Tools/gdev-slider/gdev-slider-config/gdev-slider-config.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { ClientesComponent } from './clientes/clientes.component';
 
 const routes: Routes = [
   { path: '', component: GdevStoreComponent, children:[
-    { path: '', pathMatch: 'full', redirectTo: 'inicio' },
+    { path: '', pathMatch: 'full', redirectTo: '/panel/inicio' },
     { path: 'inicio', component: DashboardComponent },
+    { path: 'contacto', component: ContactoComponent },
     
     { path: 'categories', component: CategoriesComponent },
     { path: 'products', component: ProductsComponent },
@@ -27,6 +30,7 @@ const routes: Routes = [
     
     { path: 'slider', component: HeroSliderComponent },
     { path: 'slider-config', component: GdevSliderConfigComponent },
+    { path: 'clientes', component: ClientesComponent },
   ]
   },
   { path: 'login', component: LoginComponent },

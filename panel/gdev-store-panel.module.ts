@@ -33,6 +33,8 @@ import { SlideComponent } from './page-design/hero-slider/slide/slide.component'
 import { ProdVarianteComponent } from './products/prod-variante/prod-variante.component';
 import { ProdAddonsComponent } from './products/prod-addons/prod-addons.component';
 import { ProdDescComponent } from './products/prod-desc/prod-desc.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { ClientesComponent } from './clientes/clientes.component';
 
 @NgModule( {
   declarations: [
@@ -61,6 +63,8 @@ import { ProdDescComponent } from './products/prod-desc/prod-desc.component';
     ProdVarianteComponent,
     ProdAddonsComponent,
     ProdDescComponent,
+    ContactoComponent,
+    ClientesComponent,
   ],
   imports: [
     CommonModule,
