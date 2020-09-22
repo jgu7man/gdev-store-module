@@ -19,7 +19,6 @@ export class TopbarComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.login.$admin.subscribe(admin => console.log(admin))
   }
 }
 

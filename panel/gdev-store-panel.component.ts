@@ -24,7 +24,13 @@ export class GdevStoreComponent implements OnInit {
     },
     {
       name: 'Diseño',
-      routeId: 'diseno',
+      routeId: ['slider'],
+      childs: [
+        {
+          name: 'Slider',
+          route: 'slider'
+        }
+      ]
     },
     {
       name: 'Categorías',
@@ -45,6 +51,11 @@ export class GdevStoreComponent implements OnInit {
     {
       name: 'Pedidos',
       routeId: 'pedidos',
+    },
+    {
+      name: 'Admins',
+      routeId: 'admins',
+      route: 'admins'
     },
   ]
       

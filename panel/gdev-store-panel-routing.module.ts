@@ -8,6 +8,9 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
+import { HeroSliderComponent } from './page-design/hero-slider/hero-slider.component';
+import { GdevSliderConfigComponent } from '../../Gdev-Tools/gdev-slider/gdev-slider-config/gdev-slider-config.component';
 
 const routes: Routes = [
   { path: '', component: GdevStoreComponent, children:[
@@ -18,6 +21,9 @@ const routes: Routes = [
     { path: 'attributes/:id', component: GdevCategoryAttributesComponent },
     { path: 'products/add', component: AddProductComponent },
     { path: 'products/edit/:id', component: EditProductComponent },
+    { path: 'admins', component: AdminComponent },
+    { path: 'slider', component: HeroSliderComponent },
+    { path: 'slider-config', component: GdevSliderConfigComponent },
   ]
   },
   { path: 'login', component: LoginComponent },

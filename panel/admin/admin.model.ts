@@ -1,7 +1,12 @@
 export interface AdminInterface {
-    uid: string;
     email: string;
-    photoURL?: string;
+    password?:string
     displayName?: string;
-    rol?: string
+    rol?: 'admin' | 'editor' | 'colab' | 'revoke'
+    uid?: string;
+}
+
+export interface AdminRol {
+    value: string,
+    viewValue: string
 }

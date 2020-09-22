@@ -24,6 +24,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { TopbarComponent } from './topbar/topbar.component';
+import { AddAdminComponent } from './admin/add-admin/add-admin.component';
+import { EditAdminComponent } from './admin/edit-admin/edit-admin.component';
+import { PageDesignComponent } from './page-design/page-design.component';
+import { HeroSliderComponent } from './page-design/hero-slider/hero-slider.component';
+import { AddSlideComponent } from './page-design/hero-slider/add-slide/add-slide.component';
+import { SlideComponent } from './page-design/hero-slider/slide/slide.component';
 
 @NgModule( {
   declarations: [
@@ -42,7 +48,13 @@ import { TopbarComponent } from './topbar/topbar.component';
     DashboardComponent,
     LoginComponent,
     AdminComponent,
-    TopbarComponent
+    TopbarComponent,
+    AddAdminComponent,
+    EditAdminComponent,
+    PageDesignComponent,
+    HeroSliderComponent,
+    AddSlideComponent,
+    SlideComponent,
   ],
   imports: [
     CommonModule,
@@ -55,7 +67,10 @@ import { TopbarComponent } from './topbar/topbar.component';
   entryComponents: [
     AddCategoryComponent,
     EditCategoryComponent,
-    DelCategoryComponent
+    DelCategoryComponent,
+    AddAdminComponent,
+    EditAdminComponent,
+    AddSlideComponent
   ],
   exports: [
     GdevStoreComponent

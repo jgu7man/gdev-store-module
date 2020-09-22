@@ -8,7 +8,7 @@
     
     <span class="espacio"></span>
     
-    <div class="col right user-profile" *ngIf="login.$admin | async as user; else unlogged">
+    <div class="col right user-profile" *ngIf="login.admin$ | async as user; else unlogged">
         
         <button mat-icon-button
         [matMenuTriggerFor]="menuProfile"
