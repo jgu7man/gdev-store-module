@@ -1,0 +1,20 @@
+#logo {
+    img {
+        width: 50%;
+    }
+}
+
+#footer {
+    position: absolute;
+    width: 100vw;
+}
+
+.collection {
+    width: 80%;
+    border: none !important;
+    .collection-item {
+        background: transparent;
+        color: #fff !important;
+        border: none !important;
+    }
+}

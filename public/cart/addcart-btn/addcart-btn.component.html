@@ -1,7 +1,7 @@
 <div class="addCartBtn" > 
     <ng-container *ngIf="!productOnCart; else onCart">
-        <button mat-button
-        [color]="'white'"
+        <button mat-raised-button
+        color="primary"
         (click)="addProdCart()"
         >Agregar al carrito
         </button>

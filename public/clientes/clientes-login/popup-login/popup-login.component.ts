@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClienteLoginService } from '../cliente-login.service';
 import { Router } from '@angular/router';
 import { ClienteModel } from '../../cliente.model';
+import { GdevLoginFields } from '../../../../../Gdev-Tools/gdev-login/components/login-card/login-card.component';
 
 @Component({
   templateUrl: './popup-login.component.html',
@@ -22,8 +23,14 @@ export class PopupLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onPasswordLoggin(login:GdevLoginFields) {
+    this.login.emailSingIn( login.email, login.password )
+    .then(()=> this.dialog.close())
+  }
+
   onRegistered(event) {
     this.tabIndex = 0
+    this.dialog.close()
   }
 
   onLogged(event) {

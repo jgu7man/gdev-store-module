@@ -30,7 +30,7 @@ export class DeliveryFormComponent implements OnInit {
   }
 
   onSubmit() {
-    localStorage.setItem( 'lasmotosship', JSON.stringify( this.delivery ) )
+    localStorage.setItem( 'gdev-ship', JSON.stringify( this.delivery ) )
     
   }
 

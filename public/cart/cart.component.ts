@@ -34,7 +34,7 @@ export class CartComponent implements OnInit {
   }
 
   get precio_total() {
-    var localCart: CartProductModel[] = JSON.parse( localStorage.getItem( 'lasmotoscart' ) )
+    var localCart: CartProductModel[] = JSON.parse( localStorage.getItem( 'gdev-cart' ) )
     var totales = []
     if(this.products) {
       this.products.forEach( cartProd => {
@@ -51,7 +51,7 @@ export class CartComponent implements OnInit {
 
   async confirmOrder() {
     var productsOrder: ProductOrdered[] = [] 
-    var localCart: CartProductModel[] = JSON.parse( localStorage.getItem( 'lasmotoscart' ) )
+    var localCart: CartProductModel[] = JSON.parse( localStorage.getItem( 'gdev-cart' ) )
 
     await this.loading.asyncForEach( this.products, async ( product: CartProductModel ) => {
       
@@ -69,11 +69,11 @@ export class CartComponent implements OnInit {
       return productsOrder.push(prodOrdered)
     })
 
-    localStorage.setItem( 'lasmotosorder', JSON.stringify( {
+    localStorage.setItem( 'gdev-order', JSON.stringify( {
       products: productsOrder
     } ) )
     
-    this.router.navigate(['/tienda/ship'])
+    this.router.navigate(['/ship'])
     
   }
 

@@ -5,23 +5,23 @@
     overflow-y: auto;
     position: fixed;
     width: 20vw;
-    background: hsla(207, 100%, 18%, 1);
+    background: #c53c03;
     top: 9vh;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
     z-index: 1;
     a.collection-item {
         padding: 1em 4em;
         color: #fff;
-        background: hsla(207, 100%, 18%, 1);
-        border-bottom: 1px solid hsla(207, 100%, 15%, 1);
+        background: #c53c03;
+        border-bottom: 1px solid #cc9f8c;
     }
     
     .collection .collection-item.active {
-        background-color: #155a90 !important;
+        background-color: #fff !important;
     }
     
     .collection a.collection-item:not(.active):hover {
-        background: hsla(207, 100%, 26%, 1);
+        background: #da5117;
     }
     
     
@@ -33,7 +33,7 @@
     ::ng-deep .mat-accordion .mat-expansion-panel:first-of-type,
     ::ng-deep .mat-accordion .mat-expansion-panel:last-of-type,
     ::ng-deep .mat-expansion-panel {
-        background-color: hsla(207, 100%, 23%, 1);
+        background-color: #c53c03;
         border-radius: none !important;
         margin: 0 !important;
         color: #fff;
@@ -68,7 +68,7 @@
 
 
 #admin-logo {
-    background: #005daa;
+    background: #c53c03;
     width: 20vw;
     height: 10vh;
     padding: .5em 3em;

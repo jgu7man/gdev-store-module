@@ -1,0 +1,28 @@
+<div id="footer" class="continer" gdev-color [background]="'dark'" *ngIf="getIn">
+    <div class="row align-cols">
+        <div class="col s12 m4" id="logo">
+            <img src="/assets/app-logo-neg.png" alt="Logo oficial">
+        </div>
+
+        <div class="col s12 m4">
+            <h3 class="white-text">Enlaces</h3>
+            <div class="collection">
+                <a class="collection-item"
+                [routerLink]="['/']"
+                >Inicio</a>
+                <a class="collection-item"
+                [routerLink]="['/contacto']"
+                >Contacto</a>
+                <a class="collection-item"
+                [routerLink]="['/cuenta']"
+                >Mi cuenta</a>
+                <a class="collection-item"
+                [routerLink]="['/cart']"
+                >Carrito</a>
+                <a class="collection-item"
+                [routerLink]="['/whislist']"
+                >Lista de deseos</a>
+            </div>
+        </div>
+    </div>
+</div>

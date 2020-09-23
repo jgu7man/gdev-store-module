@@ -17,8 +17,8 @@ const moduleTitle = 'Las motos'
 
 const routes: Routes = [
   {
-    path: 'tienda', component: GdevStorePublicComponent, data: { title: `${ moduleTitle } - Tienda` }, children: [
-      { path: '', redirectTo: '/tienda/aparador', pathMatch: 'full' },
+    path: '', component: GdevStorePublicComponent, data: { title: `${ moduleTitle } - Tienda` }, children: [
+      { path: '', redirectTo: 'aparador', pathMatch: 'full' },
       { path: 'aparador', component: AparadorComponent, data: { title: `${ moduleTitle } - Aparador`, aparador:true } },
       { path: 'aparador/:id', component: AparadorComponent },
       { path: 'categorias', component: CategoriasComponent },

@@ -12,6 +12,12 @@
     position: absolute;
     top: 0;
     transition: all .3s ease-out;
+    h1 {
+        font-size: 32px;
+    }
+    .description{
+        font-size: 18px;
+    }
 }
 
 .cambio {
@@ -28,10 +34,18 @@
 
 .descripcion {
     text-align: justify;
+    font-size: 18px;
 }
 
 #article-image .imgContainer {
-    width: 75%;
+    max-height: 80vh;
+    img{
+        width: 100%;
+        max-height: 150%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, 0%);
+    }
 }
 
 .slider-nav-bar {
@@ -140,6 +154,9 @@
 #product_actions {
     margin-top: 3em;
     padding: 1em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 #actions {

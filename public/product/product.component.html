@@ -3,37 +3,20 @@
         <i class="fas fa-arrow-left"></i>
     </div>
     <div class="row" id="articulo" *ngIf="Product">
-        <div class="col s12 m8">
+        <div class="col s12 m6">
             <div id="article-image">
                 <div class="imgContainer">
-                    <ng-container *ngIf="!Product.imagenUrl['alt']; else alt">
-                        <img id="productImg" [src]="Product.imagenUrl">
-                    </ng-container>
-                    <ng-template #alt>
-                        <img id="productImg" [src]="Product.imagenUrl['url']" [alt]="Product.imagenUrl['alt']">
-                    </ng-template>
-                    
-                    <!-- <img id="productImg" [src]="Product.imagenUrl['url']" [alt]="Product.imagenUrl['alt']"> -->
-                    <div class="bg-box"></div>
+                    <img id="productImg" [src]="Product.imagenUrl['url']" [alt]="Product.referencia">
                 </div>
             </div>
         </div>
         
-        <div class="col s12 m4" id="desc">
+        <div class="col s12 m6" id="desc">
             <div id="article-descripcion">
-                <h3>{{Product['referencia']}}</h3>
+                <h1>{{Product['referencia']}}</h1>
                 
                 <p class="precio">
                     <b style="font-size: 1.5em;">${{ Product['precio'] | mask: 'separator':',' }}</b><br>
-                    <span style="font-size: 0.8em;">
-                        <ng-container *ngIf="Product['Incluye SOAT y matrícula']; else noInlcuye">
-                            SOAT y matrícula incluido
-                        </ng-container>
-                        <ng-template #noInlcuye>
-                            No incluye SOAT ni matrícula
-                        </ng-template>
-                    </span>
-                    
                 </p>
                 
                 <p class="descripcion" *ngIf="Product['descripcion']">
@@ -42,97 +25,23 @@
                         ... <a (click)="scroll()">Leer más</a>
                     </span>
                 </p>
-                <div class="options-list">
-                    <ul class="btn-list">
-                        <li class="option-icon" >
-                            <ng-container 
-                            *ngIf="validateIcon('ABS Sistema Antibloqueo de Frenos'); 
-                            else no_abs">
-                                <img src="/assets/img/vialidad_ico/abs_si_lasmotos_ico.svg" width="50px">
-                            </ng-container>
-                            <ng-template #no_abs>
-                                <img src="/assets/img/vialidad_ico/abs_no_lasmotos_ico.svg" width="50px">
-                            </ng-template>
-                        </li>
-                        <li class="option-icon" >
-                            <ng-container 
-                            *ngIf="validateIcon('Sistema de Encendido Automático de Luces'); 
-                            else no_sal">
-                                <img src="/assets/img/vialidad_ico/sal_si_lasmotos_ico.svg" width="50px">
-                            </ng-container>
-                            <ng-template #no_sal>
-                                <img src="/assets/img/vialidad_ico/sal_no_lasmotos_ico.svg" width="50px">
-                            </ng-template>
-                        </li>
-                        <li class="option-icon" >
-                            <ng-container 
-                            *ngIf="validateIcon('DRL Sistema de luces de circulación diurna'); 
-                            else no_drl">
-                                <img src="/assets/img/vialidad_ico/drl_si_lasmotos_ico.svg" width="50px">
-                            </ng-container>
-                            <ng-template #no_drl>
-                                <img src="/assets/img/vialidad_ico/drl_no_lasmotos_ico.svg" width="50px">
-                            </ng-template>
-                        </li>
-                    </ul>
-                </div>
-                <div id="product_actions">
-                    <mat-card>
-                        <mat-card-content id="actions">
-                            <app-addcart-btn 
-                            [productId]="Product.id">
-                            </app-addcart-btn>
-                                
-                            <app-add-wishlist 
-                            [product]="Product.id">
-                            </app-add-wishlist>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
+                
+            </div>
+            <div id="product_actions">
+                <mat-card>
+                    <mat-card-content id="actions">
+                        <app-addcart-btn 
+                        [productId]="Product.id">
+                        </app-addcart-btn>
+                            
+                        <app-add-wishlist 
+                        [product]="Product.id">
+                        </app-add-wishlist>
+                    </mat-card-content>
+                </mat-card>
             </div>
         </div>
     </div>
     
-    <div class="row" *ngIf="!sended && Product">
-        <div class="col s12 m3"></div>
-        <div class="col s12 m6">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header class="blue darken-4 white-text">
-                    Compartenos tus datos y conoce nuestros planes de crédito
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
-        </div>
-        <div class="col s12 m3"></div>
-    </div>
-    
-    <div id="product_more" *ngIf="Product">
-        <div class="row">
-            <div class="col s12" #details>
-                <mat-tab-group mat-align-tabs="center">
-                    <mat-tab label="VIDEOS" *ngIf="this.Product[ '#Link de youtube' ]">
-                        <div id="video" >
-                            <iframe width="560" height="315" [src]="convertYTlink(Product['#Link de youtube'])" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </mat-tab>
-                    <mat-tab id="descrip" label="DESCRIPCIÓN" *ngIf="Product['descripcion'].length > 250">
-                        <p> {{Product['descripcion']}}</p>
-                    </mat-tab>
-                    <mat-tab label="GALERÍA" *ngIf="Product.galeria && Product.galeria.length > 0">
-                        <div class="imgArea">
-                            <div 
-                            class="imgContent"
-                            (click)="openImage(image.url)"
-                            *ngFor="let image of Product.galeria; let i=index">
-                            <img [id]="image.alt" [src]="image.url" [alt]="image.alt">
-                        </div>
-                    </div>
-                </mat-tab>
-                <mat-tab label="DETALLES">
-                    <app-product-details [product]="Product" [categoria]="catego"></app-product-details>
-                </mat-tab>
-            </mat-tab-group>
-        </div>
-    </div>
-</div>
 
 </div>

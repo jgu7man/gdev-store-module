@@ -33,17 +33,17 @@ export class CartService {
   
 
   get LocalClient() {
-    var cliente: ClienteModel = JSON.parse( localStorage.getItem( 'lasmotoscliente' ) )
+    var cliente: ClienteModel = JSON.parse( localStorage.getItem( 'gdev-cliente' ) )
     return cliente ? cliente : false
   }
 
   get LocalCart() {
-    var localCart = JSON.parse( localStorage.getItem( 'lasmotoscart' ) )
+    var localCart = JSON.parse( localStorage.getItem( 'gdev-cart' ) )
     return localCart ? localCart : false
   }
 
   setLocalCart( cart ) {
-    localStorage.setItem( 'lasmotoscart', JSON.stringify( cart ) )
+    localStorage.setItem( 'gdev-cart', JSON.stringify( cart ) )
   }
 
   async getCart() {

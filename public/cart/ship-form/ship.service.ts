@@ -22,7 +22,7 @@ export class ShipService {
     
     async saveCita( cita: PickupOrder ) {
         try {
-            await this.fs.collection( 'panel/tienda/pickups' ).ref.doc( cita.orderId ).set( cita )
+            await this.fs.collection( 'tienda/pedidos/pickups' ).ref.doc( cita.orderId ).set( cita )
             return
         } catch (error) {
                         
@@ -91,7 +91,7 @@ export class ShipService {
 
     async checkAvaliblePickBranchHours(ship_date: Date, brach: string, ship_method: string) {
 
-        var docs = await this.fs.collection(`panel/tienda/${ship_method}s`).ref
+        var docs = await this.fs.collection(`tienda/pedidos/${ship_method}s`).ref
             .where('branch', '==', brach)
             .where('pickup_date', '==', ship_date)
             .get()
@@ -146,7 +146,7 @@ export class ShipService {
     }
 
     async updateCita(cita: PickupOrder) {
-        await this.fs.collection('panel/tienda/pickups').ref.doc(cita.orderId).update(cita).then(res => {
+        await this.fs.collection('tienda/pedidos/pickups').ref.doc(cita.orderId).update(cita).then(res => {
             alert('Cita actualizada correctamente')
         })
     }

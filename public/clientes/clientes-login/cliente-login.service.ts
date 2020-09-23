@@ -30,6 +30,7 @@ export class ClienteLoginService {
     this.cliente$ = this.auth.authState.pipe(
       switchMap( client => {
         if ( client ) {
+          console.log(client.uid);
           return this.fs.doc<ClienteModel>( `clientes/${ client.uid }` ).valueChanges()
         } else {
           return of( null );
@@ -96,7 +97,7 @@ export class ClienteLoginService {
 
   async saveCliente( cliente: ClienteModel ) {
 
-    var clienteGuardado = await this._clientes.getCliente('celular', cliente.celular)
+    var clienteGuardado = await this._clientes.getCliente('email', cliente.email)
 
     console.log(clienteGuardado);
     if( !clienteGuardado) {
@@ -124,15 +125,15 @@ export class ClienteLoginService {
         if ( !idCliente ) {
           cliente.registrado = new Date()
           cliente.idCliente = clienteNew.user.uid
-          clienteRef.add( cliente ).then( ref => {
-            clienteRef.doc( ref.id ).update( { idCliente: ref.id } )
+          clienteRef.doc(cliente.idCliente).set( cliente ).then( ref => {
+            clienteRef.doc( cliente.idCliente ).update( { idCliente: cliente.idCliente } )
             console.log( 'cliente guardado' );
             this._snack.open('Listo! Te has registrado. Ahora inicia sesión')
           } )
         } else {
           await clienteRef.doc( idCliente ).update( cliente )
           console.log( 'cliente guardado' );
-          this._snack.open( 'Listo! Te has registrado. Ahora inicia sesión' )
+          return this._snack.open( 'Listo! Te has registrado. Ahora inicia sesión' )
         }
       } else {
         console.log('no se guardó');

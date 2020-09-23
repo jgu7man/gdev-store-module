@@ -1,8 +1,8 @@
-<ul class="collapsible" data-collapsible="accordion" id="sidenav-menu">
+<ul class="collapsible" data-collapsible="accordion" id="sidenav-menu" gdev-color [background]="'dark'">
 
     <app-main-menu></app-main-menu>
 
-    <mat-accordion>
+    <mat-accordion gdev-color background="dark">
 
         <mat-expansion-panel [expanded]="onActive('datos')" disabled>
             <mat-expansion-panel-header [routerLink]="[ '/tienda/datos' ]">

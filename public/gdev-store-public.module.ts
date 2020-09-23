@@ -9,12 +9,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 export var options: Partial<IConfig> | ( () => Partial<IConfig> );
 
 
-import { AparadorComponent } from './aparador/aparador.component';
-import { AparadorMasVistosComponent } from './aparador/aparador-mas-vistos/aparador-mas-vistos.component';
-import { AparadorProductosComponent } from './aparador/aparador-productos/aparador-productos.component';
-import { AparadorPromoComponent } from './aparador/aparador-promo/aparador-promo.component';
-import { AparadorScrollThumbnailComponent } from './aparador/aparador-scroll-thumbnail/aparador-scroll-thumbnail.component';
-import { AparadorSliderComponent } from './aparador/aparador-slider/aparador-slider.component';
+
 import { SliderComponent } from './slider/slider.component';
 import { TiendaNavbarComponent } from './tienda-navbar/tienda-navbar.component';
 import { MenuCategoriasComponent } from './tienda-navbar/menu-categorias/menu-categorias.component';
@@ -51,16 +46,15 @@ import { ResultadosBusquedaComponent } from './resultados-busqueda/resultados-bu
 import { GdevStorePublicComponent } from './gdev-store-public.component';
 import { PopupLoginComponent } from './clientes/clientes-login/popup-login/popup-login.component';
 import { GdevToolsModule } from '../../Gdev-Tools/gdev-tools.module';
+import { AparadorComponent } from './aparador/aparador.component';
+import { DestacadosComponent } from './aparador/destacados/destacados.component';
+import { FooterComponent } from './footer/footer.component';
+import { UserAreaComponent } from './tienda-navbar/user-area/user-area.component';
 
 @NgModule({
   declarations: [
     GdevStorePublicComponent,
-    AparadorComponent,
-    AparadorMasVistosComponent,
-    AparadorProductosComponent,
-    AparadorPromoComponent,
-    AparadorSliderComponent,
-    AparadorScrollThumbnailComponent,
+    
     SliderComponent,
     TiendaNavbarComponent,
     MenuCategoriasComponent,
@@ -96,6 +90,10 @@ import { GdevToolsModule } from '../../Gdev-Tools/gdev-tools.module';
     ProductOnWishlistComponent,
     ResultadosBusquedaComponent,
     PopupLoginComponent,
+    AparadorComponent,
+    DestacadosComponent,
+    FooterComponent,
+    UserAreaComponent
   ],
   imports: [
     CommonModule,

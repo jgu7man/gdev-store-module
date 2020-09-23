@@ -17,7 +17,7 @@ export class PayFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.cliente = JSON.parse(localStorage.getItem('lasmotoscliente'))
+    this.cliente = JSON.parse(localStorage.getItem('gdev-cliente'))
   }
 
   getErrorMessage() {

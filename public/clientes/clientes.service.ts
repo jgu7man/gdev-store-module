@@ -28,16 +28,21 @@ export class ClientesService {
 
   async getCliente( idKind: 'celular' | 'id' | 'email', id: string ) {
     const clientsRef = this.fs.collection( 'clientes' ).ref
-    var Doc = await clientsRef.where( 'celular', '==', id ).get()
-
+    // var Doc = await clientsRef.where( 'celular', '==', id ).get()
     var clienteDoc: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>,
       cliente: ClienteModel;
+
+    
     if ( idKind == 'celular' ) {
       clienteDoc = await clientsRef.where( 'celular', '==', id ).get()
-      cliente = clienteDoc.docs[ 0 ].data() as ClienteModel
+      if ( clienteDoc.size > 0 )
+        cliente = clienteDoc.docs[ 0 ].data() as ClienteModel;
+      
     } else if ( idKind == 'email' ) {
       clienteDoc = await clientsRef.where( 'email', '==', id ).get()
-      cliente = clienteDoc.docs[ 0 ].data() as ClienteModel
+      if ( clienteDoc.size > 0 )
+        cliente = clienteDoc.docs[ 0 ].data() as ClienteModel;
+      
     } else {
       cliente = ( await clientsRef.doc( id ).get() ).data() as ClienteModel
     }

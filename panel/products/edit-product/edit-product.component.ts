@@ -92,9 +92,7 @@ export class EditProductComponent implements OnInit {
   onSubmit() {
     this._products.updateProduct( this.product ).then( () => {
       this._form.onResetValues()
-      this.router.navigateByUrl( '/panel/store', { skipLocationChange: true } ).then( () => {
-        this.router.navigate( [ '/panel/store/products' ] );
-      } );
+      this.closeForm.emit()
     } )
   }
 }

@@ -23,7 +23,7 @@ export class ProductOnWishlistComponent implements OnInit {
   }
 
   get productOnWishlist() {
-    var localWishlist: WishlistProduct[] = JSON.parse( localStorage.getItem( 'lasmotoswishlist' ) )
+    var localWishlist: WishlistProduct[] = JSON.parse( localStorage.getItem( 'gdev-whislist' ) )
     if ( localWishlist ) {
       var product = localWishlist.find( prod => prod.productId == this.product.productId )
       if ( product ) {

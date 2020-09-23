@@ -19,7 +19,7 @@ export class ProductActionsComponent implements OnInit {
   }
 
   get productOnCart() {
-    var localCart: CartProductModel[] = JSON.parse( localStorage.getItem( 'lasmotoscart' ) )
+    var localCart: CartProductModel[] = JSON.parse( localStorage.getItem( 'gdev-cart' ) )
     if ( localCart ) {
       var product = localCart.find( prod => prod.productId == this.product.id )
       if ( product ) return product

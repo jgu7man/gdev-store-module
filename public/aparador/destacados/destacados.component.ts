@@ -1,40 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { GdevStoreProductModel } from '../../../panel/products/product.model';
+import { GdevStorePublicService } from '../../gdev-store-public.service';
 import { ActivatedRoute } from '@angular/router';
 import { WishlistService } from '../../wishlist/wishlist.service';
 import { CartService } from '../../cart/cart.service';
 import { MobileNavbarService } from '../../tienda-navbar/mobile-navbar.service';
-import { GdevStorePublicService } from '../../gdev-store-public.service';
 import { SeoService } from '../../../../Gdev-Tools/commons/gdev-seo.service';
-import { GdevStoreProductModel } from '../../../panel/products/product.model';
-import { Location } from '@angular/common';
 
 @Component({
-  templateUrl: './categoria.component.html',
-  styleUrls: ['./categoria.component.scss']
+  selector: 'gdev-destacados',
+  templateUrl: './destacados.component.html',
+  styleUrls: ['./destacados.component.scss']
 })
-export class CategoriaComponent implements OnInit {
+export class DestacadosComponent implements OnInit {
 
   products: GdevStoreProductModel[]
-  categoria: string
-  queryLimit: number = 12
+  queryLimit: number = 6
   constructor (
     private _tienda: GdevStorePublicService,
     private _ruta: ActivatedRoute,
     public wishlist: WishlistService,
     public cart: CartService,
     private navbar: MobileNavbarService,
-    private seo: SeoService,
-    public location: Location
-  ) {
-    this.categoria = this._ruta.snapshot.params['catego']
-    this.navbar.title = this.categoria
-    this.seo.generarTags( {
-      title:this.categoria
-    })
-   }
+    private seo: SeoService
+  ) { }
 
   async ngOnInit() {
-    this.products = await this._tienda.getArticulosFilter( this.categoria, this.queryLimit ) as GdevStoreProductModel[]
+    this.products = await this._tienda.getArticulosFilter( 'destacados', this.queryLimit ) as GdevStoreProductModel[]
     console.log( this.products );
     this.wishlist.getWishlist()
     this.cart.getCart()
@@ -48,10 +40,8 @@ export class CategoriaComponent implements OnInit {
   async loadMore() {
     var last = this.products[ this.products.length - 1 ]
     var lastId = last.id
-    var more = await this._tienda.getMoreProducts( this.categoria, this.queryLimit, lastId )
-    more.forEach(product => this.products.push(product))
+    var more = await this._tienda.getMoreProducts( 'destacados', this.queryLimit, lastId )
+    more.forEach( product => this.products.push( product ) )
   }
-
-  
 
 }

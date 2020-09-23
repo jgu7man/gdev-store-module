@@ -3,6 +3,7 @@
         <app-register-form (getRegistered)="onRegistered($event)" ></app-register-form>
     </mat-tab>
     <mat-tab label="Inicia Sesión">
-        <app-login-form (getLogged)="onLogged($event)"></app-login-form>
+        <gdev-login-card (onSubmit)="onPasswordLoggin($event)"></gdev-login-card>
+        <!-- <app-login-form (getLogged)="onLogged($event)"></app-login-form> -->
     </mat-tab>
 </mat-tab-group>

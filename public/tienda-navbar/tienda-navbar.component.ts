@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { GdevResponsiveService } from '../../../Gdev-Tools/commons/gdev-responsive.service';
 import { GdevSearchService } from '../../../Gdev-Tools/search/gdev-search.service';
 import { Loading } from 'src/app/Gdev-Tools/loading/loading.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupLoginComponent } from '../clientes/clientes-login/popup-login/popup-login.component';
+import { ClienteLoginService } from '../clientes/clientes-login/cliente-login.service';
 
 @Component({
   selector: 'app-tienda-navbar',
@@ -24,7 +27,9 @@ export class TiendaNavbarComponent implements OnInit {
     public _navbar: MobileNavbarService,
     private _search: GdevSearchService,
     private _router: Router,
-    private _loading: Loading
+    private _loading: Loading,
+    public login: ClienteLoginService,
+    private _dialog: MatDialog
   ) {
     this.logo = !responsive.small ? 
       'assets/img/lasmotos-logotipo-h-trans-neg.png'
@@ -72,6 +77,11 @@ export class TiendaNavbarComponent implements OnInit {
       })
       console.log(res);
     })
+  }
+
+  openLoginDialog() {
+    this._dialog.open( PopupLoginComponent,
+    {maxWidth:'50%'})
   }
 
 }

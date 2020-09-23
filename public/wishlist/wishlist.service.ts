@@ -32,17 +32,17 @@ export class WishlistService {
   }
 
   get LocalClient() {
-    var cliente: ClienteModel = JSON.parse( localStorage.getItem( 'lasmotoscliente' ) )
+    var cliente: ClienteModel = JSON.parse( localStorage.getItem( 'gdev-cliente' ) )
     return cliente ? cliente : false
   }
 
   get LocalWishlist() {
-    var localwish = JSON.parse( localStorage.getItem( 'lasmotoswishlist' ) )
+    var localwish = JSON.parse( localStorage.getItem( 'gdev-wishlist' ) )
     return localwish ? localwish : false
   }
 
   setLocalWishlist( wishlist ) {
-    localStorage.setItem( 'lasmotoswishlist', JSON.stringify( wishlist ) )
+    localStorage.setItem( 'gdev-whislist', JSON.stringify( wishlist ) )
   }
 
   async getWishlist() {
