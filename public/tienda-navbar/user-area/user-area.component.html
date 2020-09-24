@@ -1,5 +1,5 @@
 <ul class="menu-items">
-    <li class="menu-link" id="cart" [routerLink]="['/cart']">
+    <li class="menu-link" id="cart" [routerLink]="['/tienda/cuenta/cart']">
         <ng-container *ngIf="cart.totalCartItems() > 0; else noItems">
             <i class="fas fa-shopping-cart"
             matBadgeColor="accent"
@@ -11,7 +11,7 @@
             
     </li>
     <li class="menu-link hide-on-med-and-down" id="wish"
-    [routerLink]="['/wishlist']"
+    [routerLink]="['/tienda/cuenta/wishlist']"
     >
         <i class="fas fa-heart"></i>
     </li>
@@ -19,7 +19,7 @@
         Cuenta
     </li>
     <li class="menu-link hide-on-med-and-down" id="account-icon"
-    [routerLink]="['/cuenta']" routerLinkActive="router-link-active" 
+    [routerLink]="['/tienda/cuenta']" routerLinkActive="router-link-active" 
     >
         <i class="fas fa-user"></i>
     </li>

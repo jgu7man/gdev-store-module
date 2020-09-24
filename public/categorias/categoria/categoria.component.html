@@ -14,14 +14,14 @@
         <div class="col s12 m4 l3" *ngFor="let product of products">
             <mat-card class="mat-elevation-z8">
                 <mat-card-content 
-                [routerLink]="['/producto', product.id]"
+                [routerLink]="['/tienda/producto', product.id]"
                 class="card-image">
                     <img [src]="product.imagenUrl['url']"
                     [alt]="product.referencia"
                     mat-card-image>
                     
                 </mat-card-content>
-                <mat-card-title [routerLink]="['/producto', product.id]">
+                <mat-card-title [routerLink]="['/tienda/producto', product.id]">
                     <strong>{{product.referencia}}</strong> 
                 </mat-card-title>
                 <mat-card-subtitle>

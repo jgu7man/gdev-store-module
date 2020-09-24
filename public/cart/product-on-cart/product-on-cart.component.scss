@@ -4,4 +4,28 @@
 
 .referencia {
     cursor: pointer;
+    .name {
+        font-size: 28px;
+    }
+    .precio{
+        font-size: 20px;
+    }
+}
+
+#product_on_cart {
+    margin: 0;
+}
+
+.precios {
+    .precio_total {
+        font-size: 20px;
+    }
+}
+
+#imageCont {
+
+}
+
+img {
+    width: 100%;
 }

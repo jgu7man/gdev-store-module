@@ -45,7 +45,7 @@ export class ClienteLoginService {
       // var uid = resp.user.uid
       // console.log(resp.user);
       this.cliente = await this._clientes.getCliente( 'email', email )
-      localStorage.setItem( 'lasmotoscliente', JSON.stringify( this.cliente ) )
+      localStorage.setItem( 'gdev-cliente', JSON.stringify( this.cliente ) )
       this._wishlist.updateOnlogin( this.cliente.idCliente )
       return true
     }    
@@ -71,7 +71,7 @@ export class ClienteLoginService {
     var credential = await this.auth.signInWithPopup( provider )
     var email = credential.user.email
     this.cliente = await this._clientes.getCliente( 'email', email )
-    localStorage.setItem( 'lasmotoscliente', JSON.stringify( this.cliente ) )
+    localStorage.setItem( 'gdev-cliente', JSON.stringify( this.cliente ) )
     this._wishlist.updateOnlogin( this.cliente.idCliente )
     return true
   }
@@ -82,14 +82,14 @@ export class ClienteLoginService {
     var credential = await this.auth.signInWithPopup( provider )
     var email = credential.user.email
     this.cliente = await this._clientes.getCliente( 'email', email )
-    localStorage.setItem( 'lasmotoscliente', JSON.stringify( this.cliente ) )
+    localStorage.setItem( 'gdev-cliente', JSON.stringify( this.cliente ) )
     this._wishlist.updateOnlogin(this.cliente.idCliente)
     return true
   }
 
 
   async logOut() {
-    localStorage.removeItem( 'lasmotoscliente' )
+    localStorage.removeItem( 'gdev-cliente' )
     this.router.navigate( [ '/' ] )
   }
 

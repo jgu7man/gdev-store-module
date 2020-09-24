@@ -18,7 +18,7 @@ export class CuentaComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    var cliente = JSON.parse( localStorage.getItem( 'lasmotoscliente' ) )
+    var cliente = JSON.parse( localStorage.getItem( 'gdev-cliente' ) )
     if ( cliente ) { this.cliente = cliente }
     else { this.router.navigate(['/tienda/login']) }
   }

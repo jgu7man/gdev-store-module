@@ -12,6 +12,7 @@ import { CartComponent } from './cart/cart.component';
 import { ShipFormComponent } from './cart/ship-form/ship-form.component';
 import { ResultadosBusquedaComponent } from './resultados-busqueda/resultados-busqueda.component';
 import { GdevStorePublicComponent } from './gdev-store-public.component';
+import { PayFormComponent } from './cart/pay-form/pay-form.component';
 
 const moduleTitle = 'Las motos'
 
@@ -29,10 +30,11 @@ const routes: Routes = [
       { path: 'cuenta', component: CuentaComponent, children:[
         { path: '', pathMatch: 'full', redirectTo: 'datos' },
         { path: 'datos', component: DatosCuentaComponent },
+        { path: 'cart', component: CartComponent },
+        { path: 'ship', component: ShipFormComponent },
+        { path: 'pay', component: PayFormComponent },
+        { path: 'wishlist', component: WishlistComponent },
       ] },
-      { path: 'cart', component: CartComponent },
-      { path: 'ship', component: ShipFormComponent },
-      { path: 'wishlist', component: WishlistComponent },
       { path: 'resultados', component: ResultadosBusquedaComponent },
     ]
   },

@@ -26,7 +26,12 @@ export class GdevStoreComponent implements OnInit {
           name: 'Contacto',
           route: 'contacto',
           routeId: 'contacto'
-        }
+        },
+        {
+          name: 'Configuración',
+          route: 'config',
+          routeId: 'config'
+        },
       ]
     },
     {

@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MobileNavbarService } from './tienda-navbar/mobile-navbar.service';
 
 @Component({
   selector: 'gdev-store-public',
   templateUrl: './gdev-store-public.component.html',
-  styleUrls: ['./gdev-store-public.component.css']
+  styleUrls: [ './gdev-store-public.component.css' ],
+  encapsulation: ViewEncapsulation.None
 })
 export class GdevStorePublicComponent implements OnInit {
 

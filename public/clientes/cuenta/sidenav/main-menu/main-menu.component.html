@@ -1,7 +1,7 @@
 <li id="main-menu">
     <div class="collection">
 
-        <a *ngIf="auth.cliente$ | async as user" class="collection-item" [routerLink]="[ '' ]">
+        <a *ngIf="auth.cliente$ | async as user" class="collection-item" [routerLink]="[ '/tienda' ]">
           {{user.email}}
         </a>
         <a class="collection-item" [routerLink]="[ '/tienda' ]">Ir a tienda</a>

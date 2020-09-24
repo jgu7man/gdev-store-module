@@ -1,13 +1,15 @@
-export interface OrderModel {
-    orderId:string
-    products: ProductOrdered[],
-    totales: OrderTotales,
-    order_date: Date,
-    ship_method: 'pickup' | 'delivey'
-    buyer?: Buyer,
-    delivery?: DeliveryAddress,
-    pickup?: PickupOrder
-    pay_date?: Date
+export class OrderModel {
+    constructor (
+        public products: ProductOrdered[],
+        public totales: OrderTotales,
+        public order_date: Date,
+        public ship_method?: 'pickup' | 'delivey',
+        public buyer?: Buyer,
+        public delivery?: DeliveryAddress,
+        public pickup?: PickupOrder,
+        public pay_date?: Date,
+        public orderId?:string,
+    ){}
 }
 
 export interface Buyer {

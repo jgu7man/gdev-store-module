@@ -35,6 +35,8 @@ import { ProdAddonsComponent } from './products/prod-addons/prod-addons.componen
 import { ProdDescComponent } from './products/prod-desc/prod-desc.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { StoreConfigComponent } from './store-config/store-config.component';
+import { DeliveryConfigComponent } from './store-config/delivery-config/delivery-config.component';
 
 @NgModule( {
   declarations: [
@@ -65,6 +67,8 @@ import { ClientesComponent } from './clientes/clientes.component';
     ProdDescComponent,
     ContactoComponent,
     ClientesComponent,
+    StoreConfigComponent,
+    DeliveryConfigComponent,
   ],
   imports: [
     CommonModule,

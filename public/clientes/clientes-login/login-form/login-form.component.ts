@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ClienteLoginService } from '../cliente-login.service';
 import { ClienteModel } from '../../cliente.model';
+import { GdevLoginFields } from '../../../../../Gdev-Tools/gdev-login/components/login-card/login-card.component';
 
 @Component({
   selector: 'app-login-form',
@@ -20,8 +21,8 @@ export class LoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    this._authCliente.emailSingIn( this.cliente.email, this.cliente.contra ).then( () => {
+  onSubmit(fields: GdevLoginFields) {
+    this._authCliente.emailSingIn(fields.email, fields.password ).then( () => {
       this.getLogged.emit(true)
     })
   }

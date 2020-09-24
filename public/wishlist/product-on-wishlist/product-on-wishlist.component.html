@@ -3,7 +3,7 @@
         <img [src]="product.description.imagenUrl['url']" [alt]="product.description.imagenUrl['alt']">
     </div>
     <div class="col s7 referencia">
-        <h5 [routerLink]="['/producto',product.description.id]" > {{product.description.referencia}} </h5>
+        <h5 [routerLink]="['/tienda/producto',product.description.id]" > {{product.description.referencia}} </h5>
         <p> ${{product.description.precio}} </p>
         <p> Agregado {{product.agregado}} </p>
     </div>

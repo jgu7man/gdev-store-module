@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card id="checkout-container">
     <mat-card-header>
         <mat-card-title>Finalizar Compra</mat-card-title>
         <mat-card-subtitle>Llena tus datos para finalizar la compra</mat-card-subtitle>
@@ -6,17 +6,89 @@
     <form (ngSubmit)="onSubmit()" #form="ngForm">
         <mat-card-content>
             
-            <ng-container *ngIf="!cliente; else unAuth">
-                <mat-form-field>
-                    <mat-label>Nombre completo</mat-label>
-                    <input matInput type="text" name="nombre" id="nombre" [(ngModel)]="cliente.nombre">
-                    <mat-error *ngIf="payForm.invalid">{{getErrorMessage()}}</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Celular</mat-label>
-                    <input matInput type="text" name="celular" id="celular" [(ngModel)]="cliente.celular">
-                    <mat-error *ngIf="payForm.invalid">{{getErrorMessage()}}</mat-error>
-                </mat-form-field>
+            <ng-container *ngIf="cliente; else unAuth">
+                <div class="row" *ngIf="buyer">
+                    <div class="col s12 m6">
+                        <mat-form-field>
+                            <mat-label>Nombre completo</mat-label>
+                            <input matInput type="text" name="nombre" id="nombre" [(ngModel)]="buyer.name">
+                            <mat-error *ngIf="payForm.invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Celular</mat-label>
+                            <input matInput type="text" name="celular" id="celular" [(ngModel)]="buyer.celular">
+                            <mat-error *ngIf="payForm.invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input matInput type="text" name="email" id="email" [(ngModel)]="buyer.email">
+                            <mat-error *ngIf="payForm.invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col s12 m6">
+                        <mat-form-field>
+                            <mat-label>Dirección</mat-label>
+                            <input
+                            matInput
+                            type="text"
+                            name="address"
+                            #adress="ngModel"
+                            [(ngModel)]="delivery.address"
+                            required
+                            >
+                            <mat-error *ngIf="adress.invalid
+                            || (adress.dirty && adress.touched)">
+                                Este campo es necesario
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Barrio</mat-label>
+                            <input
+                            matInput
+                            type="text"
+                            name="depto"
+                            [(ngModel)]="delivery.depto"
+                            #depto="ngModel"
+                            required
+                            >
+                            <mat-error *ngIf="depto.invalid
+                            || (depto.dirty && depto.touched)">
+                                Este campo es necesario
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Ciudad</mat-label>
+                            <input
+                            matInput
+                            type="text"
+                            name="city"
+                            [(ngModel)]="delivery.city"
+                            #city="ngModel"
+                            required
+                            >
+                            <mat-error *ngIf="city.invalid
+                            || (city.dirty && city.touched)">
+                                Este campo es necesario
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Estado</mat-label>
+                            <input
+                            matInput
+                            type="text"
+                            name="state"
+                            [(ngModel)]="delivery.state"
+                            #state="ngModel"
+                            required
+                            >
+                            <mat-error *ngIf="state.invalid
+                            || (state.dirty && state.touched)">
+                                Este campo es necesario
+                            </mat-error>
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
             </ng-container>
 
 
@@ -25,7 +97,7 @@
                 <div class="row">
                     <div class="col s12 center">
                         <p>Necesitas crear una cuenta o iniciar sesión</p>
-                        <a mat-button [routerLink]="['/cuenta']"> REGISTRARSE</a>
+                        <a mat-button [routerLink]="['/tienda/cuenta']"> REGISTRARSE</a>
                     </div>
                 </div>
                 <div class="row">
@@ -37,8 +109,9 @@
             
         </mat-card-content>
         <mat-card-actions >
-            <mat-card-subtitle >Total a pagar</mat-card-subtitle>
-            <mat-card-title>${{total_pagar}}</mat-card-title>
+            <p class="subtotal">Subtotal: {{order.totales.subtotal}}</p>
+            <p class="taxes">Envío: {{order.totales.tax}}</p>
+            <mat-card-title>Total: ${{order.totales.grand_total}}</mat-card-title>
             <button mat-raised-button [color]="'primary'">Pagar</button>
         </mat-card-actions>
     </form>

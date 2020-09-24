@@ -33,7 +33,7 @@ export class ShipFormComponent implements OnInit {
 
   async ngOnInit() {
     await this.loadOrder()
-    this.adverticeShipOptions()
+    // this.adverticeShipOptions()
   }
 
   

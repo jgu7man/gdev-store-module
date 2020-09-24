@@ -13,12 +13,14 @@ import { HeroSliderComponent } from './page-design/hero-slider/hero-slider.compo
 import { GdevSliderConfigComponent } from '../../Gdev-Tools/gdev-slider/gdev-slider-config/gdev-slider-config.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { StoreConfigComponent } from './store-config/store-config.component';
 
 const routes: Routes = [
   { path: '', component: GdevStoreComponent, children:[
     { path: '', pathMatch: 'full', redirectTo: '/panel/inicio' },
     { path: 'inicio', component: DashboardComponent },
     { path: 'contacto', component: ContactoComponent },
+    { path: 'config', component: StoreConfigComponent },
     
     { path: 'categories', component: CategoriesComponent },
     { path: 'products', component: ProductsComponent },

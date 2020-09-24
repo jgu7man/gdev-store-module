@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteLoginService } from './cliente-login.service';
 import { ClienteModel } from '../cliente.model';
+import { GdevLoginFields } from '../../../../Gdev-Tools/gdev-login/components/login-card/login-card.component';
 
 @Component({
   templateUrl: './clientes-login.component.html',
@@ -18,8 +19,8 @@ export class ClientesLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    
+  onSubmit(fields: GdevLoginFields) {
+    this.login.emailSingIn(fields.email, fields.password)
   }
 
 }

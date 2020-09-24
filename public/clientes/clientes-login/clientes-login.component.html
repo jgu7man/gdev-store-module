@@ -4,7 +4,7 @@
             <app-register-form></app-register-form>
         </div>
         <div class="col s12 m6 loginContainer">
-            <app-login-form></app-login-form>
+            <gdev-login-card (onSubmit)="onSubmit($event)"></gdev-login-card>
             <p class="center">O inicia sesión con:</p>
             <div class="social_login_content">
                 <button 

@@ -1,15 +1,14 @@
-<div class="row">
-    <div class="col s12 m3">
+<div class="row" id="product_on_cart">
+    <div class="col s12 m2" id="imageCont" >
         <img [src]="product.description.imagenUrl['url']" [alt]="product.description.imagenUrl['alt']">
     </div>
     <div class="col s7 referencia">
-        <h5 [routerLink]="['/producto',product.description.id]" > {{product.description.referencia}} </h5>
-        <p> ${{product.description.precio}} </p>
+        <p class="name" [routerLink]="['/tienda/producto',product.description.id]" > {{product.description.referencia}} </p>
+        <p class="precio"> $<b>{{product.description.precio * productOnCart.cant}}</b> </p>
     </div>
-    <div class="col s5 m2 precios">
+    <div class="col s5 m3 precios">
         <app-addcart-btn [productId]="product.productId"></app-addcart-btn>
         <h6 class="precio_total">
-            $<b>{{product.description.precio * productOnCart.cant}}</b>
         </h6>
     </div>
     <!-- <div class="col s6"></div> -->
