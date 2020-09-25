@@ -2,13 +2,17 @@ export class OrderModel {
     constructor (
         public products: ProductOrdered[],
         public totales: OrderTotales,
-        public order_date: Date,
+        public aviso?: string,
+        public factura?: boolean,
+        public order_date?: Date,
         public ship_method?: 'pickup' | 'delivey',
         public buyer?: Buyer,
         public delivery?: DeliveryAddress,
         public pickup?: PickupOrder,
         public pay_date?: Date,
-        public orderId?:string,
+        public pay_method?: string,
+        public orderId?: string,
+        public state?: 'pendiente' | 'entregado' | 'enviado' | 'cancelado'
     ){}
 }
 
@@ -24,7 +28,7 @@ export interface DeliveryAddress {
     city: string,
     state: string,
     country: string,
-    delivery_date: Date
+    delivery_date?: Date
     orderId?: string
 }
 

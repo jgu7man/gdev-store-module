@@ -11,6 +11,11 @@ import { DeliveryConfig } from './delivery-config.model';
 export class DeliveryConfigComponent implements OnInit {
 
   deliveryConfig: DeliveryConfig
+  shipPosibilities: ShipPosibility[] = [
+    { value: 'delivery', viewValue: 'A domicilio' },
+    { value: 'pickup', viewValue: 'Recoger en sucursal' },
+  ]
+
 
   constructor (
     public storeConfig: StoreConfigService
@@ -28,6 +33,11 @@ export class DeliveryConfigComponent implements OnInit {
 
   
 
+}
+
+export interface ShipPosibility {
+  value: string,
+  viewValue: string
 }
 
 

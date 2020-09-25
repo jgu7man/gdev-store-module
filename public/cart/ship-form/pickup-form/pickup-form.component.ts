@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { PickupOrder } from '../../order.model';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { PickupOrder, DeliveryAddress } from '../../order.model';
 import { ShipService } from '../ship.service';
 // import { FullCalendarService } from '../../../../Gdev-Tools/calendar/calendar.service';
 import { CartService } from '../../cart.service';
-import { HorarioLaboral } from '../../../../../Gdev-Tools/calendar/select-date/select-date.component';
 import { AlertService } from '../../../../../Gdev-Tools/alerts/alert.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupLoginComponent } from '../../../clientes/clientes-login/popup-login/popup-login.component';
+import { BranchesService } from '../../../../panel/store-config/branches/branches.service';
+import { BranchModel, HorarioLaboral } from '../../../../panel/store-config/branches/branch.model';
+import { MatSelectChange } from '@angular/material/select';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-pickup-form',
@@ -15,25 +18,27 @@ import { PopupLoginComponent } from '../../../clientes/clientes-login/popup-logi
 })
 export class PickupFormComponent implements OnInit {
 
-  citas: any
   pickupForm: PickupOrder
   pickupByOther: boolean = false
   cita_disponible: string
   eventDuration: string = '00:15'
 
-  horarioLaboral: HorarioLaboral[] = [
-    { startTime: '08:00', endTime: '17:00', daysOfWeek: [ 1, 2, 3, 4, 5 ] },
-    { startTime: '08:00', endTime: '14:00', daysOfWeek: [ 6 ] }
-  ]
+  branches: BranchModel[]
+  horarioLaboral: HorarioLaboral
+  ubicacion: DeliveryAddress
+
 
   pickup_date:Date
   pickup_hour: string
+
+  @Output() pickupChanges = new EventEmitter<any>();
 
   constructor (
     private _ship: ShipService,
     private _cart: CartService,
     private _alerta: AlertService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _branches: BranchesService
   ) {
     this.pickupForm = {
       branch: '',
@@ -42,22 +47,18 @@ export class PickupFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getBranches()
   }
 
+  async getBranches() {
+   this.branches  = await this._branches.getList()
+  }
 
-  setBranchHours() {
-    var horario = this._ship.horarioSucursales.find( suc => {
-      suc.brach == this.pickupForm.branch
-    } )
-    if ( horario.abre.hours == 0 ) horario.abre.hours == +'00'
-    if ( horario.cierra.hours == 0 ) horario.cierra.hours == +'00'
-
-
-    var abre = `${ horario.abre.hours }:${ horario.abre.minutes }`
-    var cierra = `${ horario.cierra.hours }:${ horario.cierra.minutes }`
-    this.horarioLaboral = [
-      { startTime: abre, endTime: cierra, daysOfWeek: [ 1, 2, 3, 4, 5, 6 ] }
-    ]
+  setBranchHours(change: MatSelectChange) {
+    var branch = this.branches.find( b => b.displayName == change.value )
+    this.horarioLaboral = branch.horario
+    this.ubicacion = branch.ubicacion
+    this.pickupChanges.emit( {pickup: this.pickupForm, valid: this.validatePickup} )
   }
 
 
@@ -71,11 +72,14 @@ export class PickupFormComponent implements OnInit {
 
     } else {
     }
+
+    this.pickupChanges.emit( {pickup: this.pickupForm, valid: this.validatePickup} )
     
   }
   
   async setPickupDate(event) {
-    console.log( this.pickup_date, this.pickup_hour );
+    console.log( this.pickup_date, event );
+    this.pickup_hour = event
     let hour = +this.pickup_hour.split( ':' )[ 0 ]
     let min = +this.pickup_hour.split( ':' )[ 1 ]
     if ( this.pickup_date ) {
@@ -91,6 +95,18 @@ export class PickupFormComponent implements OnInit {
       }
 
     }
+
+    this.pickupChanges.emit( {pickup: this.pickupForm, valid: this.validatePickup} )
+  }
+
+  get validatePickup() {
+    if (
+      !this.pickupForm.branch &&
+      !this.pickupForm.pickup_date
+    ) { return false }
+    else if ( this.pickupByOther && !this.pickupForm.otherName ) {
+      return false 
+    } else { return true}
   }
 
   savePickup() {

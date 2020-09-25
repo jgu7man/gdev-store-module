@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
   ) {
 
     this.totales = { grand_total: 0, tax: 0, subtotal: 0, }
-    this.order = new OrderModel([],this.totales, new Date())
+    this.order = new OrderModel([],this.totales, '', false, new Date())
   }
   
   async ngOnInit() {

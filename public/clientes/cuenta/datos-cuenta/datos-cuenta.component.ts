@@ -11,7 +11,7 @@ export class DatosCuentaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    var cliente = JSON.parse(localStorage.getItem('lasmotoscliente'))
+    var cliente = JSON.parse(localStorage.getItem('gdev-cliente'))
     if (cliente) this.cliente = cliente
   }
 

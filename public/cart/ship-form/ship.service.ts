@@ -4,12 +4,16 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertService } from 'src/app/Gdev-Tools/alerts/alert.service';
 import { Time } from '@angular/common';
 import { PickupOrder } from '../order.model';
+import { BranchesService } from '../../../panel/store-config/branches/branches.service';
+import { BranchModel } from '../../../panel/store-config/branches/branch.model';
 
 @Injectable({ providedIn: 'root' })
 export class ShipService {
     cita: PickupOrder
     public citaFecha: any
-  public citas: any
+    public citas: any
+    
+    sucursales: BranchModel[]
   
   horarioSucursales: SucursalHorario[] = [
     { brach: 'Riohacha', abre: { hours: 8, minutes: 0 }, cierra: { hours: 16, minutes: 30 } },
@@ -17,8 +21,11 @@ export class ShipService {
   ]
     constructor(
         private fs: AngularFirestore,
-        private _alerta: AlertService
-    ) {}
+        private _alerta: AlertService,
+        private _branches: BranchesService
+    ) {
+        
+    }
     
     async saveCita( cita: PickupOrder ) {
         try {
@@ -71,17 +78,24 @@ export class ShipService {
     
 
 
-    async checkHorarioLaboral(ship_date: Date, brach: string) {
-      var horario = this.horarioSucursales.find( suc => {
-          return suc.brach == brach
-        })
+    async checkHorarioLaboral( ship_date: Date, branch: string ) {
+        console.log( branch );
+        this.sucursales = await this._branches.getList()
+      var sucursal = this.sucursales.find( suc => {
+          return suc.displayName == branch
+      } )
+        var horario = sucursal.horario,
+            abre = +horario.startTime.toString().split( ':' )[ 0 ],
+            cierra = +horario.endTime.toString().split( ':' )[ 0 ]
 
+        console.log(horario, abre, cierra);
         const diaSemana = ship_date.getDay(),
             hora = ship_date.getHours()
+        
         // Descartar domingos
         if(diaSemana == 0) return false
         //Descartar horario semanal
-        else if (hora <= horario.abre.hours || hora > horario.cierra.hours) return false 
+        else if (hora <= abre || hora > cierra) return false 
         // Descartar sabado por la tarde
         else if (diaSemana == 6 && (hora <= 8 || hora >= 13)) return false
         // Confirmar horario disponible

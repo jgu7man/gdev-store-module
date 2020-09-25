@@ -30,7 +30,6 @@ export class ClienteLoginService {
     this.cliente$ = this.auth.authState.pipe(
       switchMap( client => {
         if ( client ) {
-          console.log(client.uid);
           return this.fs.doc<ClienteModel>( `clientes/${ client.uid }` ).valueChanges()
         } else {
           return of( null );
@@ -89,6 +88,7 @@ export class ClienteLoginService {
 
 
   async logOut() {
+    this.auth.signOut()
     localStorage.removeItem( 'gdev-cliente' )
     this.router.navigate( [ '/' ] )
   }

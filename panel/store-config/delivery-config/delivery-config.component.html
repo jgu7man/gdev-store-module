@@ -11,9 +11,23 @@
                     [(ngModel)]="deliveryConfig.costo"
                     >
                 </mat-form-field>
+
+                <mat-select placeholder="Posibilidades de entrega" [(ngModel)]="deliveryConfig.shipPosibilities" name="item" multiple="true">
+                    <mat-option *ngFor="let item of shipPosibilities" [value]="item.value">
+                        {{item.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </div>
+
+            <div class="col s12 m6 mat-elevation-z4">
+                <gdev-branches></gdev-branches>
             </div>
         </div>
     </mat-card-content>
+   
+   
+   
+   
     <mat-card-actions
     style="display: flex; justify-content: center;">
         <button mat-raised-button

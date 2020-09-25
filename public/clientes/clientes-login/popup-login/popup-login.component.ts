@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ClienteLoginService } from '../cliente-login.service';
 import { Router } from '@angular/router';
 import { ClienteModel } from '../../cliente.model';
 import { GdevLoginFields } from '../../../../../Gdev-Tools/gdev-login/components/login-card/login-card.component';
+import { RestorePasswordComponent } from '../../../../../Gdev-Tools/gdev-login/components/restore-password/restore-password.component';
 
 @Component({
   templateUrl: './popup-login.component.html',
@@ -14,7 +15,8 @@ export class PopupLoginComponent implements OnInit {
   tabIndex: number = 0
 
   constructor (
-    public dialog: MatDialogRef<PopupLoginComponent>,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<PopupLoginComponent>,
     @Inject( MAT_DIALOG_DATA ) public cliente: ClienteModel,
     public login: ClienteLoginService,
     private router: Router
@@ -25,28 +27,34 @@ export class PopupLoginComponent implements OnInit {
 
   onPasswordLoggin(login:GdevLoginFields) {
     this.login.emailSingIn( login.email, login.password )
-    .then(()=> this.dialog.close())
+    .then(()=> this.dialogRef.close())
   }
 
   onRegistered(event) {
     this.tabIndex = 0
-    this.dialog.close()
+    this.dialogRef.close()
   }
 
   onLogged(event) {
-    this.dialog.close()
+    this.dialogRef.close()
   }
 
   logGoogle() {
     this.login.googleSingIn().then( () => {
-      this.dialog.close()
+      this.dialogRef.close()
     })
   }
 
   logFacebook() {
     this.login.facebookSingIn().then( () => {
-      this.dialog.close()
+      this.dialogRef.close()
     } )
+  }
+
+  restorePwd() {
+    this.dialog.open( RestorePasswordComponent, {
+      minWidth: 320
+    })
   }
 
 }

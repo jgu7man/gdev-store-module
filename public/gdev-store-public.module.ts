@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GdevStorePublicRoutinModule } from './gdev-store-public-routing.module';
 import { MaterialModule } from 'src/app/material.module';
 // import { FullCalendarModule } from '@fullcalendar/angular';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 export var options: Partial<IConfig> | ( () => Partial<IConfig> );
@@ -50,6 +51,7 @@ import { AparadorComponent } from './aparador/aparador.component';
 import { DestacadosComponent } from './aparador/destacados/destacados.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserAreaComponent } from './tienda-navbar/user-area/user-area.component';
+import { PayMethodsComponent } from './cart/pay-methods/pay-methods.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +95,8 @@ import { UserAreaComponent } from './tienda-navbar/user-area/user-area.component
     AparadorComponent,
     DestacadosComponent,
     FooterComponent,
-    UserAreaComponent
+    UserAreaComponent,
+    PayMethodsComponent
   ],
   imports: [
     CommonModule,
@@ -102,7 +105,8 @@ import { UserAreaComponent } from './tienda-navbar/user-area/user-area.component
     GdevStorePublicRoutinModule,
     MaterialModule,
     NgxMaskModule.forRoot(),
-    GdevToolsModule
+    GdevToolsModule,
+    NgxMaterialTimepickerModule
   ],
   exports: [
     GdevStorePublicComponent,

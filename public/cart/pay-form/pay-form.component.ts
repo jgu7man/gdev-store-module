@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DeliveryConfig } from 'src/app/gdev-store/panel/store-config/delivery-config/delivery-config.model';
 import { ClienteModel } from '../../clientes/cliente.model';
-import { DeliveryAddress, ProductOrdered, OrderModel, Buyer } from '../order.model';
+import { DeliveryAddress, ProductOrdered, OrderModel, Buyer, OrderTotales } from '../order.model';
 import { StoreConfigService } from '../../../panel/store-config/store-config.service';
 import { OrdersService } from '../orders.service';
 import { AlertService } from '../../../../Gdev-Tools/alerts/alert.service';
@@ -21,14 +21,21 @@ export class PayFormComponent implements OnInit {
   buyer: Buyer
   delivery: DeliveryAddress
   order: OrderModel
+  totales: OrderTotales
   @Input() total_pagar: number = 0
   deliveryConfig: DeliveryConfig
+  
+  deliveryInvalidForm: boolean
+  pickupValidForm: boolean
+  
   constructor (
     private _storeConfig: StoreConfigService,
     private _orders: OrdersService,
     private _alert: AlertService,
     private router: Router
   ) {
+    this.order = new OrderModel([], this.totales,'',false)
+    this.order = JSON.parse( localStorage.getItem( 'gdev-order' ) )
     this.delivery = {
       address: '',
       depto: '',
@@ -37,15 +44,11 @@ export class PayFormComponent implements OnInit {
       country: 'México',
       delivery_date: new Date(),
     }
-    this.buyer = {
-      name: '',
-      email: '',
-      celular: '',
-    }
+    this.buyer = { name: '', email: '', celular: '', }
+    this.totales = { grand_total: 0, tax: 0, subtotal: 0,}
    }
 
   async ngOnInit() {
-    this.order = JSON.parse( localStorage.getItem( 'gdev-order' ) )
     this.setBuyer()
     this.setCostos()
   }
@@ -63,9 +66,32 @@ export class PayFormComponent implements OnInit {
     this.order.totales.grand_total = this.deliveryConfig.costo + this.order.totales.subtotal
   }
 
+  
+
+  async setDelivery( changes ) {
+    this.delivery = changes.delivery
+    this.deliveryInvalidForm = changes.invalid
+  }
+
+  async setPickup( changes ) {
+    console.log(changes);
+    this.order.pickup = changes.pickup
+    this.pickupValidForm = changes.valid
+  }
+
   getErrorMessage() {
     if ( this.payForm.hasError( 'required' ) ) {
       return 'Este campo es requerido';
+    }
+  }
+
+  validatePay(){
+    if ( this.deliveryInvalidForm && !this.order.pay_method   ) {
+      return false
+    } else if ( !this.pickupValidForm && !this.order.pay_method) {
+      return false
+    } else {
+      return true
     }
   }
 
@@ -73,9 +99,13 @@ export class PayFormComponent implements OnInit {
     this.order.buyer = this.buyer
     this.order.delivery = this.delivery
     this.order.ship_method = 'delivey'
-    localStorage.setItem( 'gdev-shp', JSON.stringify( this.delivery ) )
+    localStorage.setItem( 'gdev-ship', JSON.stringify( this.delivery ) )
 
-    var alertBody: MessageAlertModel = new MessageAlertModel('Transacción completada', 'pregunta', 'Ir a tienda', 'Ir a Cuenta')
+    var alertBody: MessageAlertModel = new MessageAlertModel(
+      'Transacción completada',
+      'pregunta',
+      'Ir a tienda', 
+      'Ir a Cuenta' )
 
     this._orders.saveOrder( this.order )
       .then( () => {

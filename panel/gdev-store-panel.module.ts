@@ -5,6 +5,7 @@ import { GdevStorePanelRoutinModule } from './gdev-store-panel-routing.module';
 import { CollapsibleTableModule } from 'src/app/Gdev-Tools/collapsible-table/collapsible-table.module';
 import { MaterialModule } from 'src/app/material.module';
 import { FormConstructorModule } from 'src/app/Gdev-Tools/form-constructor/form-constructor.module';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 
 import { GdevStoreComponent } from './gdev-store-panel.component';
@@ -37,6 +38,11 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { StoreConfigComponent } from './store-config/store-config.component';
 import { DeliveryConfigComponent } from './store-config/delivery-config/delivery-config.component';
+import { BranchesComponent } from './store-config/branches/branches.component';
+import { GdevComponentsModule } from '../../gdev-components/gdev-components.module';
+import { BranchLocationComponent } from './store-config/branches/branch-location/branch-location.component';
+import { BranchFormComponent } from './store-config/branches/branch-form/branch-form.component';
+import { PayMethodConfigComponent } from './store-config/pay-method-config/pay-method-config.component';
 
 @NgModule( {
   declarations: [
@@ -69,6 +75,10 @@ import { DeliveryConfigComponent } from './store-config/delivery-config/delivery
     ClientesComponent,
     StoreConfigComponent,
     DeliveryConfigComponent,
+    BranchesComponent,
+    BranchLocationComponent,
+    BranchFormComponent,
+    PayMethodConfigComponent,
   ],
   imports: [
     CommonModule,
@@ -77,6 +87,8 @@ import { DeliveryConfigComponent } from './store-config/delivery-config/delivery
     ReactiveFormsModule,
     MaterialModule,
     GdevToolsModule,
+    GdevComponentsModule,
+    NgxMaterialTimepickerModule
   ],
   entryComponents: [
     AddCategoryComponent,

@@ -9,83 +9,43 @@
             <ng-container *ngIf="cliente; else unAuth">
                 <div class="row" *ngIf="buyer">
                     <div class="col s12 m6">
-                        <mat-form-field>
+                        <mat-form-field appearance="outline">
                             <mat-label>Nombre completo</mat-label>
                             <input matInput type="text" name="nombre" id="nombre" [(ngModel)]="buyer.name">
                             <mat-error *ngIf="payForm.invalid">{{getErrorMessage()}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field>
+                        <mat-form-field appearance="outline">
                             <mat-label>Celular</mat-label>
                             <input matInput type="text" name="celular" id="celular" [(ngModel)]="buyer.celular">
                             <mat-error *ngIf="payForm.invalid">{{getErrorMessage()}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field>
+                        <mat-form-field appearance="outline">
                             <mat-label>Email</mat-label>
                             <input matInput type="text" name="email" id="email" [(ngModel)]="buyer.email">
                             <mat-error *ngIf="payForm.invalid">{{getErrorMessage()}}</mat-error>
                         </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Instrucción o nota adicional</mat-label>
+                            <textarea matInput [(ngModel)]="order.aviso"
+                            name="aviso" id="aviso" cols="10" rows="5"
+                            ></textarea>
+                        </mat-form-field>
+                        
                     </div>
+
+
+                    <!-- * SHIP METHOD -->
                     <div class="col s12 m6">
-                        <mat-form-field>
-                            <mat-label>Dirección</mat-label>
-                            <input
-                            matInput
-                            type="text"
-                            name="address"
-                            #adress="ngModel"
-                            [(ngModel)]="delivery.address"
-                            required
-                            >
-                            <mat-error *ngIf="adress.invalid
-                            || (adress.dirty && adress.touched)">
-                                Este campo es necesario
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>Barrio</mat-label>
-                            <input
-                            matInput
-                            type="text"
-                            name="depto"
-                            [(ngModel)]="delivery.depto"
-                            #depto="ngModel"
-                            required
-                            >
-                            <mat-error *ngIf="depto.invalid
-                            || (depto.dirty && depto.touched)">
-                                Este campo es necesario
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>Ciudad</mat-label>
-                            <input
-                            matInput
-                            type="text"
-                            name="city"
-                            [(ngModel)]="delivery.city"
-                            #city="ngModel"
-                            required
-                            >
-                            <mat-error *ngIf="city.invalid
-                            || (city.dirty && city.touched)">
-                                Este campo es necesario
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>Estado</mat-label>
-                            <input
-                            matInput
-                            type="text"
-                            name="state"
-                            [(ngModel)]="delivery.state"
-                            #state="ngModel"
-                            required
-                            >
-                            <mat-error *ngIf="state.invalid
-                            || (state.dirty && state.touched)">
-                                Este campo es necesario
-                            </mat-error>
-                        </mat-form-field>
+                        <mat-tab-group *ngIf="deliveryConfig && deliveryConfig.shipPosibilities">
+                            <mat-tab label="Entrega a domicilio"
+                            *ngIf="deliveryConfig.shipPosibilities.includes('delivery')">
+                                <app-delivery-form (formChanges)="setDelivery($event)" ></app-delivery-form>
+                            </mat-tab>
+                            <mat-tab label="Recoger en sucursal"
+                            *ngIf="deliveryConfig.shipPosibilities.includes('pickup')">
+                                <app-pickup-form (pickupChanges)="setPickup($event)"></app-pickup-form>
+                            </mat-tab>
+                        </mat-tab-group>
                         
                     </div>
                 </div>
@@ -109,10 +69,32 @@
             
         </mat-card-content>
         <mat-card-actions >
-            <p class="subtotal">Subtotal: {{order.totales.subtotal}}</p>
-            <p class="taxes">Envío: {{order.totales.tax}}</p>
-            <mat-card-title>Total: ${{order.totales.grand_total}}</mat-card-title>
-            <button mat-raised-button [color]="'primary'">Pagar</button>
+            <div class="row">
+
+                <!-- * PAY METHOD -->
+                <div class="col s12 m6">
+                    <gdev-pay-methods
+                    (methodSelected)="order.pay_method = $event"
+                    ></gdev-pay-methods>
+                </div>
+                
+                
+                <!-- * PAY ACTIONS -->
+                <div class="col s12 m6">
+                    <p class="subtotal">Subtotal: {{order.totales.subtotal}}</p>
+                    <p class="taxes">Envío: {{order.totales.tax}}</p>
+                    <mat-card-title>Total: ${{order.totales.grand_total}}</mat-card-title>
+                    
+                    <mat-checkbox [(ngModel)]="order.factura"
+                    [name]="'factura'" #factura="ngModel"
+                    >Requiere Factura</mat-checkbox>
+                    
+                    <button mat-raised-button 
+                    [color]="'primary'"
+                    [disabled]="!validatePay()"
+                    >Pagar</button>
+                </div>
+            </div>
         </mat-card-actions>
     </form>
 </mat-card>

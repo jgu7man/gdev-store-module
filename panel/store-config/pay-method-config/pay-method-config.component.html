@@ -1,0 +1,23 @@
+<div class="col s12 m6">
+    <div class="row">
+        <h2>Métodos de pago</h2>
+        <div class="row"*ngFor="let method of payConfigS.methods" >
+            <div class="col s12">
+                <mat-slide-toggle
+                #element
+                [aria-label]="method.value"
+                [checked]="payConfig.avalibleMethods.includes(method.value)"
+                (change)="toggleMethod(element, $event)"
+                >{{method.viewValue}}</mat-slide-toggle>
+            </div>
+            <div class="col s12">
+                <mat-expansion-panel [disabled]="!payConfig.avalibleMethods.includes(method.value)">
+                    <mat-expansion-panel-header>
+                        {{method.viewValue}}
+                    </mat-expansion-panel-header>
+                    content
+                </mat-expansion-panel>
+            </div>
+        </div>
+    </div>
+</div>
