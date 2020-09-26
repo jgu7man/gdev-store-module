@@ -6,6 +6,9 @@ export class ClienteModel {
         public email?: string,
         public direcciones?: ClienteDomicilio[],
         public registrado?: Date,
+        public telefono?: string,
+        public RFC?: string,
+        public razon_social?: string,
         public idCliente?: string,
     ) { }
 }

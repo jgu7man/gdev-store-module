@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ClienteModel } from '../../../public/clientes/cliente.model';
+import { ClientesService } from '../../../public/clientes/clientes.service';
 
 @Component({
   selector: 'gdev-cliente',
@@ -9,8 +10,11 @@ import { ClienteModel } from '../../../public/clientes/cliente.model';
 export class ClienteComponent implements OnInit {
 
   @Input() cliente: ClienteModel
+  @Output() close = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor (
+    public clienteS: ClientesService
+  ) { }
 
   ngOnInit(): void {
   }

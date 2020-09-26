@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ClienteModel } from './cliente.model';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertService } from '../../../Gdev-Tools/alerts/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,8 @@ export class ClientesService {
   
 
   constructor (
-    private fs: AngularFirestore
+    private fs: AngularFirestore,
+    private _alert: AlertService
   ) { }
   
   async editCliente( cliente: ClienteModel ) {
@@ -67,6 +70,12 @@ export class ClientesService {
       cliente = ( await clientsRef.doc( id ).get() ).data() as ClienteModel
     }
     return cliente ? cliente : undefined
+  }
+
+  async updateCliente(cliente: ClienteModel) {
+    this.fs.doc( `clientes/${ cliente.idCliente }` ).ref
+      .set( { ...cliente }, { merge: true } )
+    .then(()=> this._alert.sendFloatNotification('Datos guardados'))
   }
 
 

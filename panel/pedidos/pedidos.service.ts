@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { OrderModel } from '../../public/cart/order.model';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { AlertService } from '../../../Gdev-Tools/alerts/alert.service';
 
 @Injectable( {
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class PedidosService {
   pedidos$: BehaviorSubject<OrderModel[]> = new BehaviorSubject([])
 
   constructor (
-    private fs: AngularFirestore
+    private fs: AngularFirestore,
+    private _alertS: AlertService
   ) { }
   
   async getLista() {
@@ -43,7 +45,8 @@ export class PedidosService {
 
   async updatePedido(pedido: OrderModel) {
     this.fs.doc( `clientes/${ pedido.buyer.id }/orders/${ pedido.orderId }` ).ref
-    .set({...pedido}, {merge: true})
+      .set( { ...pedido }, { merge: true } )
+    .then(()=> this._alertS.sendFloatNotification('Pedido actualizado'))
   }
 }
 

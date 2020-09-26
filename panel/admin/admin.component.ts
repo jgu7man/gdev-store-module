@@ -23,7 +23,9 @@ export class AdminComponent implements OnInit {
   constructor (
     public adminS: AdminsService,
     private _dialog: MatDialog,
-  ) {}
+  ) {
+   this.adminS.getAdmins()  
+  }
 
   ngOnInit(): void {
   }
