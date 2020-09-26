@@ -12,11 +12,14 @@
                     >
                 </mat-form-field>
 
-                <mat-select placeholder="Posibilidades de entrega" [(ngModel)]="deliveryConfig.shipPosibilities" name="item" multiple="true">
-                    <mat-option *ngFor="let item of shipPosibilities" [value]="item.value">
-                        {{item.viewValue}}
-                    </mat-option>
-                </mat-select>
+                <mat-form-field>
+                    <mat-label>Opciones de entrega</mat-label>
+                    <mat-select placeholder="Posibilidades de entrega" [(ngModel)]="deliveryConfig.shipPosibilities" name="item" multiple="true">
+                        <mat-option *ngFor="let item of shipPosibilities" [value]="item.value">
+                            {{item.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
 
             <div class="col s12 m6 mat-elevation-z4">

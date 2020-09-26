@@ -15,7 +15,7 @@ export class ShipFormComponent implements OnInit {
   
   cita_disponible: string
   eventDuration: string = '00:15'
-  ship_method: 'pickup' | 'delivey'
+  ship_method: 'pickup' | 'delivery'
   citas: any
 
   constructor (

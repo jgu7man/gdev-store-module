@@ -43,7 +43,7 @@
                             </mat-tab>
                             <mat-tab label="Recoger en sucursal"
                             *ngIf="deliveryConfig.shipPosibilities.includes('pickup')">
-                                <app-pickup-form (pickupChanges)="setPickup($event)"></app-pickup-form>
+                                <app-pickup-form (setUbication)="setDelivery($event)" (pickupChanges)="setPickup($event)"></app-pickup-form>
                             </mat-tab>
                         </mat-tab-group>
                         

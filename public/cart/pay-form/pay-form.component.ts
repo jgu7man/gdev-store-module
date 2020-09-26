@@ -42,9 +42,8 @@ export class PayFormComponent implements OnInit {
       city: '',
       state: '',
       country: 'México',
-      delivery_date: new Date(),
     }
-    this.buyer = { name: '', email: '', celular: '', }
+    this.buyer = { name: '', email: '', celular: '',id:'' }
     this.totales = { grand_total: 0, tax: 0, subtotal: 0,}
    }
 
@@ -58,6 +57,7 @@ export class PayFormComponent implements OnInit {
     this.buyer.name = this.cliente.nombre ? this.cliente.nombre : '';
     this.buyer.celular = this.cliente.celular ? this.cliente.celular : '';
     this.buyer.email = this.cliente.email ? this.cliente.email : '';
+    this.buyer.id = this.cliente.idCliente ? this.cliente.idCliente : '';
   }
   
   async setCostos() {
@@ -98,7 +98,7 @@ export class PayFormComponent implements OnInit {
   onSubmit() {
     this.order.buyer = this.buyer
     this.order.delivery = this.delivery
-    this.order.ship_method = 'delivey'
+    this.order.ship_method = 'delivery'
     localStorage.setItem( 'gdev-ship', JSON.stringify( this.delivery ) )
 
     var alertBody: MessageAlertModel = new MessageAlertModel(

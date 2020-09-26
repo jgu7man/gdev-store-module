@@ -62,7 +62,26 @@ export class GdevStoreComponent implements OnInit {
     },
     {
       name: 'Pedidos',
-      routeId: 'pedidos',
+      routeId: [ 'pendientes', 'enviados', 'entregados', 'cancelados' ],
+      route: 'pedidos'
+      // childs: [
+      //   {
+      //     name: 'pendientes',
+      //     route: 'pendientes'
+      //   },
+      //   {
+      //     name: 'enviados',
+      //     route: 'enviados'
+      //   },
+      //   {
+      //     name: 'entregados',
+      //     route: 'entregados'
+      //   },
+      //   {
+      //     name: 'cancelados',
+      //     route: 'cancelados'
+      //   },
+      // ]
     },
     {
       name: 'Clientes',

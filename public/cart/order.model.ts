@@ -5,7 +5,7 @@ export class OrderModel {
         public aviso?: string,
         public factura?: boolean,
         public order_date?: Date,
-        public ship_method?: 'pickup' | 'delivey',
+        public ship_method?: 'pickup' | 'delivery',
         public buyer?: Buyer,
         public delivery?: DeliveryAddress,
         public pickup?: PickupOrder,
@@ -20,6 +20,7 @@ export interface Buyer {
     name: string,
     email: string,
     celular: string,
+    id: string
 }
 
 export interface DeliveryAddress {

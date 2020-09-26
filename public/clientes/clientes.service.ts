@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ClienteModel } from './cliente.model';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,8 @@ import { ClienteModel } from './cliente.model';
 export class ClientesService {
 
   clientes: ClienteModel[]
+  clientesList$: Observable<any[]>
+  clientes$: BehaviorSubject<ClienteModel[]> = new BehaviorSubject([])
   
 
   constructor (
@@ -23,7 +26,24 @@ export class ClientesService {
   }
 
 
+  getClientes() {
+    this.clientesList$ =
+      this.fs.collection<ClienteModel>( 'clientes' ).valueChanges()
 
+    this.clientesList$.forEach( docs => {
+
+      docs.forEach( doc => {
+        var clientes: ClienteModel[] = []
+
+        let client = doc as ClienteModel
+        client.registrado = doc.registrado.toDate()
+        
+
+        clientes.push( client )
+        this.clientes$.next( clientes )
+      })
+    } )
+  }
 
 
   async getCliente( idKind: 'celular' | 'id' | 'email', id: string ) {

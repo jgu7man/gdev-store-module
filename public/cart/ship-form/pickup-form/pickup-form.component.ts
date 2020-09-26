@@ -32,6 +32,7 @@ export class PickupFormComponent implements OnInit {
   pickup_hour: string
 
   @Output() pickupChanges = new EventEmitter<any>();
+  @Output() public setUbication = new EventEmitter<any>();
 
   constructor (
     private _ship: ShipService,
@@ -57,7 +58,7 @@ export class PickupFormComponent implements OnInit {
   setBranchHours(change: MatSelectChange) {
     var branch = this.branches.find( b => b.displayName == change.value )
     this.horarioLaboral = branch.horario
-    this.ubicacion = branch.ubicacion
+    this.setUbication.emit(branch.ubicacion)
     this.pickupChanges.emit( {pickup: this.pickupForm, valid: this.validatePickup} )
   }
 

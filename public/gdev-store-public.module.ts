@@ -52,6 +52,8 @@ import { DestacadosComponent } from './aparador/destacados/destacados.component'
 import { FooterComponent } from './footer/footer.component';
 import { UserAreaComponent } from './tienda-navbar/user-area/user-area.component';
 import { PayMethodsComponent } from './cart/pay-methods/pay-methods.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
+import { PedidoComponent } from './pedidos/pedido/pedido.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import { PayMethodsComponent } from './cart/pay-methods/pay-methods.component';
     DestacadosComponent,
     FooterComponent,
     UserAreaComponent,
-    PayMethodsComponent
+    PayMethodsComponent,
+    PedidosComponent,
+    PedidoComponent
   ],
   imports: [
     CommonModule,

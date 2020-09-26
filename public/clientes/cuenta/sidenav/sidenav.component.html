@@ -32,8 +32,10 @@
                 Pedidos
             </mat-expansion-panel-header>
             <div class="collection">
-                <a class="collection-item" [routerLink]="[ '/tienda/pedidos/pendientes' ]" routerLinkActive="active">Pedidos pendientes</a>
-                <a class="collection-item" [routerLink]="[ '/tienda/pedidos/pasados' ]" routerLinkActive="active">Pedidos pasados</a>
+                <a class="collection-item" [routerLink]="[ '/tienda/cuenta/pedidos/pendientes' ]" routerLinkActive="active">Pedidos pendientes</a>
+                <a class="collection-item" [routerLink]="[ '/tienda/pedidos/entregados' ]" routerLinkActive="active">Pedidos entregados</a>
+                <a class="collection-item" [routerLink]="[ '/tienda/pedidos/enviados' ]" routerLinkActive="active">Pedidos enviados</a>
+                <a class="collection-item" [routerLink]="[ '/tienda/pedidos/cancelados' ]" routerLinkActive="active">Pedidos cancelados</a>
             </div>
 
         </mat-expansion-panel>

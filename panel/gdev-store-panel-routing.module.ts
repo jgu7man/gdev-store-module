@@ -14,6 +14,7 @@ import { GdevSliderConfigComponent } from '../../Gdev-Tools/gdev-slider/gdev-sli
 import { ContactoComponent } from './contacto/contacto.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { StoreConfigComponent } from './store-config/store-config.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 const routes: Routes = [
   { path: '', component: GdevStoreComponent, children:[
@@ -33,6 +34,7 @@ const routes: Routes = [
     { path: 'slider', component: HeroSliderComponent },
     { path: 'slider-config', component: GdevSliderConfigComponent },
     { path: 'clientes', component: ClientesComponent },
+    { path: 'pedidos', component: PedidosComponent },
   ]
   },
   { path: 'login', component: LoginComponent },

@@ -43,6 +43,10 @@ import { GdevComponentsModule } from '../../gdev-components/gdev-components.modu
 import { BranchLocationComponent } from './store-config/branches/branch-location/branch-location.component';
 import { BranchFormComponent } from './store-config/branches/branch-form/branch-form.component';
 import { PayMethodConfigComponent } from './store-config/pay-method-config/pay-method-config.component';
+import { PedidosComponent } from "./pedidos/pedidos.component";
+import { PedidoComponent } from "./pedidos/pedido/pedido.component";
+import { ClienteComponent } from './clientes/cliente/cliente.component';
+
 
 @NgModule( {
   declarations: [
@@ -79,6 +83,9 @@ import { PayMethodConfigComponent } from './store-config/pay-method-config/pay-m
     BranchLocationComponent,
     BranchFormComponent,
     PayMethodConfigComponent,
+    PedidosComponent,
+    PedidoComponent,
+    ClienteComponent,
   ],
   imports: [
     CommonModule,
