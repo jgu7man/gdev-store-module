@@ -15,6 +15,8 @@ import { GdevStorePublicComponent } from './gdev-store-public.component';
 import { PayFormComponent } from './cart/pay-form/pay-form.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ContactoComponent } from './contacto/contacto.component';
+import { DocsComponent } from './docs/docs.component';
+import { PrivacidadComponent } from './docs/privacidad/privacidad.component';
 
 const moduleTitle = 'Las motos'
 
@@ -40,6 +42,9 @@ const routes: Routes = [
       ] },
       { path: 'resultados', component: ResultadosBusquedaComponent },
       { path: 'contacto', component: ContactoComponent },
+      { path: 'docs', component: DocsComponent, children: [
+        { path: 'politicas-de-privacidad', component: PrivacidadComponent },
+      ] },
     ]
   },
 ];

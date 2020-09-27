@@ -13,6 +13,11 @@
     .headers-align .mat-form-field + .mat-form-field {
       margin-left: 8px;
     }
+
+    .mat-expansion-panel-header .mat-content {
+        height: 35px;
+        align-items: center;
+    }
     
 }
 
@@ -21,17 +26,30 @@
     border-radius: 5px;
 }
 
-.fab, .fas, .mat-expansion-panel, .collection-item span {
+.fab, .fas, .mat-expansion-panel, .collection-item p {
     transition: all ease-out .4s;
 }
 
 ::ng-deep {
     .mat-expansion-panel-header:hover, .collection-item:hover  {
-        .fab, .fas, .collection-item span {
+        .fab, .fas, .collection-item p {
             transform: scale(2.5) rotate(25deg);
             color: #ffffff;
         }
         
+    }
+    .collection-item {
+        display: flex !important;
+        align-items: center;
+        p {
+            margin: 0 0 0 .5em;
+        }
+    }
+    .collection-item:hover p{
+        position: relative;
+        left: 2em;
+        color: #ffffff;
+        transition: all ease-out .4s;
     }
 }
 .whatsapp:hover {
@@ -50,10 +68,7 @@
     background: #bd081c !important;
 } 
 
-.collection-item:hover span{
-    position: relative;
-    left: 2em;
-}
+
 
 .facebook:hover {
     background: #3b5999 !important;
