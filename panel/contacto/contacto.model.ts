@@ -1,3 +1,4 @@
+import { GeoCords, Ubication } from 'src/app/Gdev-Tools/maps/maps.interface';
 export class DatosContactoModel {
     constructor (
         public store_name: string,
@@ -6,8 +7,14 @@ export class DatosContactoModel {
         public email?: string,
         public facebook?: string,
         public instagram?: string,
-        public youtube?: string
+        public youtube?: string,
+        public skype?: string,
+        public ubication?: Ubication,
+        public maps?: GeoCords
     ) {
         
     }
 }
+
+
+

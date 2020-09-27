@@ -14,6 +14,7 @@ import { ResultadosBusquedaComponent } from './resultados-busqueda/resultados-bu
 import { GdevStorePublicComponent } from './gdev-store-public.component';
 import { PayFormComponent } from './cart/pay-form/pay-form.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { ContactoComponent } from './contacto/contacto.component';
 
 const moduleTitle = 'Las motos'
 
@@ -38,6 +39,7 @@ const routes: Routes = [
         { path: 'pedidos/:state', component: PedidosComponent },
       ] },
       { path: 'resultados', component: ResultadosBusquedaComponent },
+      { path: 'contacto', component: ContactoComponent },
     ]
   },
 ];

@@ -9,10 +9,10 @@ export class MenuPaginaComponent implements OnInit {
 
   rutas: RUTA[] = [
     { name: 'inicio', route: 'tienda' },
-    { name: 'categorías', route: 'tienda/categorias' },
+    { name: 'categorías', route: 'categorias' },
     // { name: 'citas', route: 'citas' },
     // { name: 'blog', route: 'blog' },
-    { name: 'contacto', route: 'contact' },
+    { name: 'contacto', route: 'contacto' },
   ]
 
   constructor () { }

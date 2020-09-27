@@ -1,12 +1,12 @@
 #sidenav-menu {
     margin: 0;
     border: none;
-    height: 91vh;
+    height: 100vh;
     overflow-y: auto;
-    position: fixed;
+    position: relative;
     width: 20vw;
     background: #c53c03;
-    top: 9vh;
+    top: 0vh;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
     z-index: 1;
     a.collection-item {
