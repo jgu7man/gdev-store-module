@@ -18,3 +18,31 @@
         border: none !important;
     }
 }
+
+
+.collection-item:hover p{
+    position: relative;
+    left: 2em;
+    
+}
+
+p, .fas, .fab {
+    transition: ease-out all .4s;
+    color: #fff;
+}
+
+.collection {
+    overflow: visible;
+}
+
+.collection-item {
+    display: flex !important;
+    align-items: center;
+    transition: ease-out all .4s !important;
+    background: transparent !important;
+    overflow: visible;
+    p {
+        margin: 0;
+        margin-left: .5em;
+    }
+}

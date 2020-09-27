@@ -56,6 +56,8 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { PedidoComponent } from './pedidos/pedido/pedido.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { FormTemplateComponent } from './contacto/form-template/form-template.component';
+import { DocsComponent } from './docs/docs.component';
+import { PrivacidadComponent } from './docs/privacidad/privacidad.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +106,9 @@ import { FormTemplateComponent } from './contacto/form-template/form-template.co
     PedidosComponent,
     PedidoComponent,
     ContactoComponent,
-    FormTemplateComponent
+    FormTemplateComponent,
+    DocsComponent,
+    PrivacidadComponent
   ],
   imports: [
     CommonModule,
