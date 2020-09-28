@@ -4,6 +4,7 @@ import { SelectItem } from 'src/app/Gdev-Tools/commons/gdev-commons.service';
 import { TextService } from '../../../../Gdev-Tools/text/gdev-text.service';
 import { OrderModel } from '../../../public/cart/order.model';
 import { PedidosService } from '../pedidos.service';
+import { MailService } from '../../../../gdev-panel/mails/mail.service';
 
 @Component({
   selector: 'gdev-pedido',
@@ -28,7 +29,8 @@ export class PedidoComponent implements OnInit {
 
   constructor (
     public text: TextService,
-    private _pedidos: PedidosService
+    private _pedidos: PedidosService,
+    private _mails: MailService
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +46,9 @@ export class PedidoComponent implements OnInit {
 
   changeState() {
     this._pedidos.updatePedido( this.pedido )
+    if ( this.pedido.state == 'enviado' ) {
+      this._mails.sendClientMail(this.pedido.buyer.email, 'sendingOrder')
+    }
   }
 
   catchDeliveryDate( event: MatDatepickerInputEvent<Date>) {

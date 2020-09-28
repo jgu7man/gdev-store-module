@@ -64,12 +64,12 @@
                             </li>
                             <li class="collection-item">
                                 <b>Fecha estimada de entrega:</b> 
-                                <span *ngIf="pedido.delivery.state;else noAsignada">
+                                <ng-container *ngIf="pedido.delivery.delivery_date;else noAsignada">
                                     {{fecha(pedido.delivery.delivery_date)}} - {{hora(pedido.delivery.delivery_date)}}
-                                </span>
-                                <span #noAsignada>
+                                </ng-container>
+                                <ng-template #noAsignada>
                                     Aún no asignada
-                                </span>
+                                </ng-template>
                             </li>
                         </ul>
                     </div>

@@ -73,7 +73,7 @@
 
 
                         <b>Fecha estimada de entrega:</b> 
-                        <mat-form-field appearance="fill">
+                        <mat-form-field>
                             <mat-label>Fecha</mat-label>
                             <input matInput [matDatepicker]="pickupDate" disabled [(ngModel)]="pedido.delivery.delivery_date" (dateChange)="catchDeliveryDate($event)">
                             <mat-datepicker-toggle matSuffix [for]="pickupDate"></mat-datepicker-toggle>
@@ -82,7 +82,7 @@
                         
                         <mat-form-field>
                             <input matInput [ngxTimepicker]="start"[format]="24"  
-                            [value]="hora(pedido.delivery.delivery_date)">
+                            [value]="pedido.delivery.delivery_date ? hora(pedido.delivery.delivery_date) : '12:00'">
                             <ngx-material-timepicker #start
                             (timeSet)="catchDeliveryTime($event)"
                             [minutesGap]="5"
