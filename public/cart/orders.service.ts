@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { OrderModel } from './order.model';
 import { ClienteModel } from '../clientes/cliente.model';
+import { DatosContactoModel } from '../../../gdev-panel/contacto/contacto.model';
+import { GdevMainService } from '../../../gdev-panel/gdev-main.service';
+import { MailService } from '../../../gdev-panel/mails/mail.service';
+import { ContactoComponent } from '../../../gdev-panel/contacto/contacto.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,23 +13,35 @@ import { ClienteModel } from '../clientes/cliente.model';
 export class OrdersService {
 
   cliente: ClienteModel
+  store: DatosContactoModel
+
   constructor (
-    private fs: AngularFirestore
+    private fs: AngularFirestore,
+    private _mails: MailService,
+    private _main: GdevMainService
   ) {
     this.cliente = JSON.parse( localStorage.getItem( 'gdev-cliente' ) );
-   }
+    
+  }
+  
+  
 
   get userOrderRef() {
     return this.fs.collection(`clientes/${this.cliente.idCliente}/orders`).ref
   }
   
   async saveOrder( order: OrderModel ) {
+    this.store = await this._main.getContactDatos()
     order.pay_date = new Date()
     order.state = 'pendiente'
     try {
       console.log(order);
       this.userOrderRef.add( { ...order } )
-      .then(order => this.userOrderRef.doc(order.id).update({orderId:order.id}))
+        .then( order => this.userOrderRef.doc( order.id ).update( { orderId: order.id } ) );
+      
+      this._mails.sendAdminMail( 'newOrder' )
+      this._mails.sendClientMail( order.buyer.email, 'successOrder' )
+      
       localStorage.removeItem( 'gdev-order' )
       localStorage.removeItem( 'gdev-cart' )
       return 

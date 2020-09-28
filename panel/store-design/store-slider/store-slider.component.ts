@@ -23,7 +23,7 @@ export class StoreSliderComponent implements OnInit {
     public dialog: MatDialog,
     public slidesS: GdevSliderService
   ) {
-    // this.getSlides()
+    this.slidesS.getSlidesList('tienda')
    }
 
   ngOnInit(): void {

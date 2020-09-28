@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GdevStoreCategoryModel } from './category.model';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GdevStoreCategoriesService } from './categories.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCategoryComponent } from './add-category/add-category.component';
@@ -26,7 +26,8 @@ export class CategoriesComponent implements OnInit {
     private _loading: Loading,
     private _title: Title,
     private _dialog: MatDialog,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private router: Router
   ) {
     this._title.setTitle( 'Panel - Tienda - Categorias' )
   }
@@ -58,9 +59,14 @@ export class CategoriesComponent implements OnInit {
   }
 
   onAdd() {
-    this._dialog.open( AddCategoryComponent, {
+    var dialog = this._dialog.open( AddCategoryComponent, {
       maxWidth: '90vw',
       minWidth: '450px'
+    } )
+    
+    dialog.afterClosed().subscribe( () => {
+      this.router.navigateByUrl( 'panel', { skipLocationChange: true } )
+      .then(()=> this.router.navigate(['panel/tienda/categories']))
     })
   }
 

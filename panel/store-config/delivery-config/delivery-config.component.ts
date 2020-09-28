@@ -20,7 +20,7 @@ export class DeliveryConfigComponent implements OnInit {
   constructor (
     public storeConfig: DeliveryService
   ) {
-    this.deliveryConfig = new DeliveryConfig(0)
+    this.deliveryConfig = new DeliveryConfig(0, [])
     this.getConfig()
    }
 
@@ -28,7 +28,11 @@ export class DeliveryConfigComponent implements OnInit {
   }
 
   async getConfig() {
-    this.deliveryConfig = await this.storeConfig.getDeliveryConfig()
+    var config = await this.storeConfig.getDeliveryConfig()
+    if ( config ) {
+      this.deliveryConfig.costo = config.costo
+      this.deliveryConfig.shipPosibilities = config.shipPosibilities
+    }
   }
 
   

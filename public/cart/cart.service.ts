@@ -189,7 +189,7 @@ export class CartService {
     await this.getCart()
     var products: CartProductModel[] = []
     await this.loading.asyncForEach( this.cart, async ( product: CartProductModel ) => {
-      const productCol = this.fs.collection( 'productos' ).ref
+      const productCol = this.fs.collection( 'tienda/productos/referencias' ).ref
       const productDoc = await productCol.doc( product.productId ).get()
       product.description = productDoc.data() as GdevStoreProductModel
       products.push( product )

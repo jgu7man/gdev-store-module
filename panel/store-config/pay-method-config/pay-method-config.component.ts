@@ -21,7 +21,8 @@ export class PayMethodConfigComponent implements OnInit {
   }
 
   async getConfig() {
-    this.payConfig = await this.payConfigS.getAvalibleMethods()
+    var config = await this.payConfigS.getAvalibleMethods()
+    if ( config ) { this.payConfig = config }
   }
 
   toggleMethod(element: MatSlideToggle, change: MatSlideToggleChange) {

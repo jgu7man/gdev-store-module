@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DiaSemanal, BranchModel } from './branch.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subject } from 'rxjs';
+import { AlertService } from '../../../../Gdev-Tools/alerts/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +13,42 @@ export class BranchesService {
   onSave$ = new Subject<boolean>()
 
   constructor (
-    private fs: AngularFirestore
+    private fs: AngularFirestore,
+    private _alert: AlertService
   ) { }
 
+  
+  
+  
+  
   async save( sucursal: BranchModel ) {
     try {
+
+      console.log(sucursal);
       if ( sucursal.id ) {
         this.fs.collection('tienda/pickup/sucursales').ref.doc(sucursal.id).set({...sucursal}, {merge: true})
       } else {
+        sucursal.id = ''
         this.fs.collection( 'tienda/pickup/sucursales' ).ref.add( { ...sucursal } )
-        .then(nu => this.fs.collection('tienda/pickup/sucursales').doc(nu.id).update({id:nu.id}))
+          .then( nu => nu.update( { id: nu.id } ) )
+          .catch(error => console.log(error))
       }
+
+
 
       return
     } catch (error) {
-        
+        console.error(error);
+        this._alert.sendError('Error al guardar', error)
     }
   }
 
 
+
+
+
+
+  
   async getList() {
     const ref = this.fs.collection( 'tienda/pickup/sucursales' ).ref
     var docs = await ref.get()

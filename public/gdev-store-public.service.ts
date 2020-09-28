@@ -28,7 +28,7 @@ export class GdevStorePublicService {
             if ( !prod['id'] ) { prod['id'] = doc.id } 
             articulos.push( prod )
         } )
-        
+        console.log(articulos);
         return articulos 
     }
 

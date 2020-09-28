@@ -20,7 +20,7 @@ export class DeliveryService {
 
   saveDeliveryConfig(config) {
     this.fs.collection( 'tienda' ).ref.doc( 'delivery' )
-      .set( config, { merge: true } )
+      .set( {...config}, { merge: true } )
       .then( () =>
         this.alert.sendFloatNotification( 'Configuración guardada' )
       )

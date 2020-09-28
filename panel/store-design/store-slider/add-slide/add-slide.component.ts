@@ -49,7 +49,7 @@ export class AddSlideComponent implements OnInit {
 
   addSlide() {
     this.slide.enlace = this.enlace
-    this._slides.addSlide( this.slide )
+    this._slides.addSlide( this.slide, 'tienda' )
     .then(() => this.dialog.close())
   }
 

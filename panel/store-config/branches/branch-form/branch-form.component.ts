@@ -57,6 +57,7 @@ export class BranchFormComponent implements OnInit {
   onSave() {
     this.sucursal.horario = this.horarioLaboral
     this.sucursal.ubicacion = this.ubicacion
+    console.log(this.sucursal);
     this.branchS.save( this.sucursal ).then( () =>{
       console.log('guardado') 
       this.updated.emit()

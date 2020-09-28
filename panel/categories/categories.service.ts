@@ -45,15 +45,27 @@ export class GdevStoreCategoriesService {
             const productsDoc = this.fs.doc( `tienda/productos` ).ref
             var categoDoc = await productsDoc.get()
             var categoList: GdevStoreCategoryModel[]
+
+            var Category = {
+                description: category.description ? category.description : '',
+                fields: category.fields ? category.fields : [],
+                image: category.image ? category.image : '',
+                name: category.name ? category.name : '',
+                path: category.path ? category.path : ''
+            }
+
             if ( categoDoc.exists ) {
                 categoList = await categoDoc.get( 'categorias' )
                 let categoFinded = categoList.findIndex( c => c.name == category.name )
+
                 categoFinded >= 0
                     ? this._alerta.sendMessageAlert( 'Esta categoría ya existe, elige otro nombre' )
-                    : categoList.push( category );
+                    : categoList.push( { ...Category } );
+                console.log( categoList );
                 await productsDoc.set( { categorias: categoList }, { merge: true } )
             } else {
-                categoList = [ category ]
+                categoList = [ Category ]
+                console.log(categoList);
                 await productsDoc.set({categorias: categoList})
             }
 
