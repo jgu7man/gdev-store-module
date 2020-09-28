@@ -28,7 +28,6 @@ export class CategoriesComponent implements OnInit {
     private _dialog: MatDialog,
     private _route: ActivatedRoute
   ) {
-    this._categories.getCategories()
     this._title.setTitle( 'Panel - Tienda - Categorias' )
   }
 
@@ -39,6 +38,7 @@ export class CategoriesComponent implements OnInit {
     this._loading.turnOff( 'slide-up' )
   }
 
+ 
   fixOnScroll() {
     // if (window.scrollY >= 295) {
     $( '#table-body' ).css( {

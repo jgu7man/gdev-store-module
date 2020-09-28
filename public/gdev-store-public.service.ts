@@ -16,7 +16,7 @@ export class GdevStorePublicService {
     async getArticulosFilter( categoria: string, limit?: number,  order?: string ) {
         // NOTE Crear el sistema de orden por nuevo, más visitado, etc
         !order ? order = 'id' : order = order
-        var tiendaRef = this.fs.collection('productos').ref
+        var tiendaRef = this.fs.collection('tienda/productos/referencias').ref
         var docs = !limit ? 
             await tiendaRef.where( 'categorias', 'array-contains', categoria ).get() :
             await tiendaRef.where( 'categorias', 'array-contains', categoria )
@@ -35,7 +35,7 @@ export class GdevStorePublicService {
 
     async getMoreProducts( categoria: string, limit?: number, after?: string ,order?: string ) {
         !order ? order = 'id' : order = order
-        var tiendaRef = this.fs.collection( 'productos' ).ref
+        var tiendaRef = this.fs.collection( 'tienda/productos/referencias' ).ref
         var docs = await tiendaRef.where( 'categorias', 'array-contains', categoria )
             .limit( limit ).orderBy( order, 'asc' ).startAfter(after).get()
         
@@ -55,7 +55,7 @@ export class GdevStorePublicService {
     }
 
     async getProduct( idProduct: string ) {
-        var tiendaRef = this.fs.collection( 'productos' ).ref
+        var tiendaRef = this.fs.collection( 'tienda/productos/referencias' ).ref
         var productDoc = await tiendaRef.doc( idProduct ).get()
         var product: GdevStoreProductModel = productDoc.data() as GdevStoreProductModel
         return product

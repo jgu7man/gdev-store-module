@@ -58,7 +58,7 @@
 							<mat-selection-list #listPanel [multiple]="false"
 							(selectionChange)="onProdSelected($event)">
 								<mat-list-option *ngFor="let product of products" [value]="product">
-									<div class="row align-cols">
+									<div class="row align-cols" style="width: 100%;">
 										<div class="col s2 prodImg">
 											<img [src]="product.imagenUrl['url']" [alt]="product.referencia">
 										</div>

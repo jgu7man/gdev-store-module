@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { DeliveryConfig } from 'src/app/gdev-store/panel/store-config/delivery-config/delivery-config.model';
 import { ClienteModel } from '../../clientes/cliente.model';
 import { DeliveryAddress, ProductOrdered, OrderModel, Buyer, OrderTotales } from '../order.model';
-import { StoreConfigService } from '../../../panel/store-config/store-config.service';
+import { DeliveryService } from '../../../panel/store-config/delivery-config/delivery.service';
 import { OrdersService } from '../orders.service';
 import { AlertService } from '../../../../Gdev-Tools/alerts/alert.service';
 import { PreguntaAlertaModel, MessageAlertModel } from '../../../../Gdev-Tools/alerts/alerts.model';
@@ -29,7 +29,7 @@ export class PayFormComponent implements OnInit {
   pickupValidForm: boolean
   
   constructor (
-    private _storeConfig: StoreConfigService,
+    private _deliveryS: DeliveryService,
     private _orders: OrdersService,
     private _alert: AlertService,
     private router: Router
@@ -61,7 +61,7 @@ export class PayFormComponent implements OnInit {
   }
   
   async setCostos() {
-    this.deliveryConfig = await this._storeConfig.getDeliveryConfig()
+    this.deliveryConfig = await this._deliveryS.getDeliveryConfig()
     this.order.totales.tax = this.deliveryConfig.costo
     this.order.totales.grand_total = this.deliveryConfig.costo + this.order.totales.subtotal
   }

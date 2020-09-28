@@ -31,9 +31,6 @@ export class DelProdcutComponent implements OnInit {
       .then( () => {
         console.log( 'listo' );
         this._dialog.close()
-        this._router.navigateByUrl( 'panel/store', { skipLocationChange: true } ).then( () => {
-          this._router.navigate( [ 'panel/store/products' ] )
-        } )
       } )
       .catch( error => {
         this._dialog.close()

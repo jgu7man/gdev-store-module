@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { StoreConfigService } from '../store-config.service';
+import { DeliveryService } from './delivery.service';
 import { DeliveryConfig } from './delivery-config.model';
 
 @Component({
@@ -18,7 +18,7 @@ export class DeliveryConfigComponent implements OnInit {
 
 
   constructor (
-    public storeConfig: StoreConfigService
+    public storeConfig: DeliveryService
   ) {
     this.deliveryConfig = new DeliveryConfig(0)
     this.getConfig()

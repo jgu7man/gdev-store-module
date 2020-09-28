@@ -4,7 +4,7 @@ export class GdevStoreCategoryModel {
         public fields: string[],
         public path?: string,
         public image?: string,
-        public desription?: string
+        public description?: string
     ) {
         
     }

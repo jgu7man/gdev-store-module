@@ -18,10 +18,10 @@ export class BranchesService {
   async save( sucursal: BranchModel ) {
     try {
       if ( sucursal.id ) {
-        this.fs.collection('sucursales').ref.doc(sucursal.id).set({...sucursal}, {merge: true})
+        this.fs.collection('tienda/pickup/sucursales').ref.doc(sucursal.id).set({...sucursal}, {merge: true})
       } else {
-        this.fs.collection( 'sucursales' ).ref.add( { ...sucursal } )
-        .then(nu => this.fs.collection('sucursales').doc(nu.id).update({id:nu.id}))
+        this.fs.collection( 'tienda/pickup/sucursales' ).ref.add( { ...sucursal } )
+        .then(nu => this.fs.collection('tienda/pickup/sucursales').doc(nu.id).update({id:nu.id}))
       }
 
       return
@@ -32,7 +32,7 @@ export class BranchesService {
 
 
   async getList() {
-    const ref = this.fs.collection( 'sucursales' ).ref
+    const ref = this.fs.collection( 'tienda/pickup/sucursales' ).ref
     var docs = await ref.get()
 
     if ( docs.size > 0 ) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { timer } from "rxjs";
-import { DatosContactoModel } from '../../panel/contacto/contacto.model';
+import { DatosContactoModel } from '../../../gdev-panel/contacto/contacto.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({

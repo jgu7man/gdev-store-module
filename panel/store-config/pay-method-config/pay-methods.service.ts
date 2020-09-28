@@ -20,12 +20,12 @@ export class PayMethodsService {
 
 
   savePayConfig(config: PayConfigModel) {
-    const ref = this.fs.doc( 'gdev-store/pay_method_config' ).ref
+    const ref = this.fs.doc( 'tienda/pay_method' ).ref
     ref.set({...config}, {merge: true})
   }
   
   async getAvalibleMethods() {
-    const ref = this.fs.doc( 'gdev-store/pay_method_config' ).ref
+    const ref = this.fs.doc( 'tienda/pay_method' ).ref
     const doc = await ref.get()
     
     return doc.exists

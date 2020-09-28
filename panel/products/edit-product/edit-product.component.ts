@@ -6,6 +6,8 @@ import { GdevStoreCategoriesService } from '../../categories/categories.service'
 import { Location } from '@angular/common';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { FormConstructorService } from '../../../../Gdev-Tools/form-constructor/form-constructor.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DelProdcutComponent } from '../del-prodcut/del-prodcut.component';
 
 @Component({
   selector: 'gdev-edit-product',
@@ -22,11 +24,10 @@ export class EditProductComponent implements OnInit {
   @Output() closeForm: EventEmitter<any> = new EventEmitter()
   constructor (
     public _products: GdevStoreProductsService,
-    private router: Router,
     private _categorias: GdevStoreCategoriesService,
     public location: Location,
-    private _ruta: ActivatedRoute,
-    private _form: FormConstructorService
+    private _form: FormConstructorService,
+    private _dialog: MatDialog
   ) {
     this.product = undefined
     this.product = new GdevStoreProductModel( '', 0, false, '', {}, '', [], [] )
@@ -83,7 +84,16 @@ export class EditProductComponent implements OnInit {
     this.product.desc = desc
   }
 
-
+  onDelete() {
+    var dialog = this._dialog.open( DelProdcutComponent, {
+      minWidth: 320,
+      data: this.product.id
+    } )
+    
+    dialog.afterClosed().subscribe(
+      () => this.closeForm.emit() )
+    .unsubscribe()
+  }
 
   merge( values ) {
     this.product = { ...this.product, ...values }

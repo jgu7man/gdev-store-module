@@ -80,7 +80,7 @@ export class ProductsComponent implements OnInit {
   
 
   async loadProducts() {
-    this._index.initIndex( 'productos', 'id', 20 )
+    this._index.initIndex( 'tienda/productos/referencias', 'id', 20 )
     this._index.queryData.subscribe( data => {
       this.products = data
       // this.products = data as GdevStoreProductModel[]

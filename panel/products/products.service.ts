@@ -33,7 +33,7 @@ export class GdevStoreProductsService {
             productObject['id'] = productId
             
 
-            const colRef = this.fs.collection( 'productos' ).ref;
+            const colRef = this.fs.collection( 'tienda/productos/referencias' ).ref;
 
             var productCrated = await colRef.doc(productId).set( productObject )
 
@@ -90,7 +90,7 @@ export class GdevStoreProductsService {
 
     async getProduct(productId: string) {
         try {
-            const productRef = this.fs.collection( 'productos' ).ref.doc( productId )
+            const productRef = this.fs.collection( 'tienda/productos/referencias' ).ref.doc( productId )
             const productDoc = await productRef.get()
             var product = productDoc.data() as GdevStoreProductModel
             return product
@@ -105,7 +105,7 @@ export class GdevStoreProductsService {
             var productObject = {}
             productObject = { ...productObject, ...product }
 
-            const colRef = this.fs.collection( 'productos' ).ref;
+            const colRef = this.fs.collection( 'tienda/productos/referencias' ).ref;
             console.log(productObject);
             await colRef.doc( product.id ).update( productObject )
 
@@ -118,7 +118,7 @@ export class GdevStoreProductsService {
 
     async onDelAttr( itemAttr ) {
         var itemId = itemAttr.idItem, itemAttr = itemAttr.attrItem
-        const productRef = this.fs.collection( 'productos' ).ref
+        const productRef = this.fs.collection( 'tienda/productos/referencias' ).ref
         productRef.doc( itemId ).update( {
             [ itemAttr ]: firebase.firestore.FieldValue.delete()
         } )
@@ -128,7 +128,7 @@ export class GdevStoreProductsService {
 
     async delProduct( productId: string ) {
         try {
-            const productRef = this.fs.collection( 'productos' ).ref
+            const productRef = this.fs.collection( 'tienda/productos/referencias' ).ref
             await productRef.doc( productId ).delete()
             return true
         } catch ( error ) { console.error( error ); }

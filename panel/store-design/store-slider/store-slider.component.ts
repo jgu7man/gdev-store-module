@@ -5,13 +5,13 @@ import { GdevSliderService } from 'src/app/Gdev-Tools/gdev-slider/gdev-slider.se
 import { Slide } from 'src/app/Gdev-Tools/gdev-slider/gdev-slider.service';
 import { AddSlideComponent } from './add-slide/add-slide.component';
 import { MatDrawer } from '@angular/material/sidenav';
-import { Enlace } from '../../../../Gdev-Tools/gdev-slider/gdev-slider.service';
+import { Enlace } from 'src/app/Gdev-Tools/gdev-slider/gdev-slider.service';
 
 @Component({
-  templateUrl: './hero-slider.component.html',
-  styleUrls: ['./hero-slider.component.scss']
+  templateUrl: './store-slider.component.html',
+  styleUrls: ['./store-slider.component.scss']
 })
-export class HeroSliderComponent implements OnInit {
+export class StoreSliderComponent implements OnInit {
 
   // slides: Slide[]
   tempEnlace: Enlace = {url: '', newTab: true}

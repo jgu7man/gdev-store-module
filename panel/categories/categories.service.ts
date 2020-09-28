@@ -21,22 +21,18 @@ export class GdevStoreCategoriesService {
     ) {
      }
 
-    getCategories() {
-        this.categories$ = this.fs.collection('tienda/productos/categorias').valueChanges()
-    }
+   
     
 
     async loadCategories() {
         try {
-            const categoriesRef = this.fs.collection( 'tienda' ).ref
-                .doc( 'productos' ).collection( 'categorias' )
+            const productsDocRef = this.fs.doc( 'tienda/productos' ).ref;
+            const productDoc = await productsDocRef.get()
+            var categoList: GdevStoreCategoryModel[] = await productDoc.get('categorias')
+                
 
-            var categoriesRes = await categoriesRef.get()
-            var categories: GdevStoreCategoryModel[] = []
-            categoriesRes.forEach( catego => {
-                categories.push( catego.data() as GdevStoreCategoryModel )
-            } )
-            return categories
+            
+            return categoList
         } catch (error) {
             console.error(error)
         }
@@ -46,15 +42,22 @@ export class GdevStoreCategoriesService {
 
     async addCategory( category: GdevStoreCategoryModel ) {
         try {
-            const categoriesCol = this.fs.collection( category.path ).ref
-            var categoCreated = await categoriesCol.where( 'name', '==', category.name ).get()
-            if(categoCreated.size == 0){
-                await categoriesCol.doc( category.name ).set( {
-                    name: category.name
-                } )
+            const productsDoc = this.fs.doc( `tienda/productos` ).ref
+            var categoDoc = await productsDoc.get()
+            var categoList: GdevStoreCategoryModel[]
+            if ( categoDoc.exists ) {
+                categoList = await categoDoc.get( 'categorias' )
+                let categoFinded = categoList.findIndex( c => c.name == category.name )
+                categoFinded >= 0
+                    ? this._alerta.sendMessageAlert( 'Esta categoría ya existe, elige otro nombre' )
+                    : categoList.push( category );
+                await productsDoc.set( { categorias: categoList }, { merge: true } )
             } else {
-                this._alerta.sendMessageAlert('Esta categoría ya existe, elige otro nombre')
+                categoList = [ category ]
+                await productsDoc.set({categorias: categoList})
             }
+
+
 
             return 
 
@@ -63,13 +66,18 @@ export class GdevStoreCategoriesService {
         } catch (error) { console.error( error ); }
     }
 
+
+
+
     async editCategory( category: GdevStoreCategoryModel ) {
         try {
-            const categoriesCol = this.fs.collection( category.path ).ref
-            var categoryObject = {}
-            categoryObject = { ...category, categoryObject }
+            const productsDocRef = this.fs.doc( `tienda/productos` ).ref
+            var productsDoc = await productsDocRef.get()
+            var categoriasList: GdevStoreCategoryModel[] = await productsDoc.get( 'categorias' )
+            var categoFinded = categoriasList.findIndex( c => c.name == category.name )
+            categoriasList[categoFinded] = category
             
-            var categoUpdated = await categoriesCol.doc(category.name).set(categoryObject)
+            var categoUpdated = await productsDocRef.set( { categorias: categoriasList})
 
             return true
 
@@ -80,8 +88,12 @@ export class GdevStoreCategoriesService {
 
     async delCategory( category: GdevStoreCategoryModel ) {
         try {
-            const categoriesCol = this.fs.collection( category.path ).ref
-            await categoriesCol.doc(category.name).delete()
+            const productsDocRef = this.fs.doc( `tienda/productos` ).ref
+            var productsDoc = await productsDocRef.get()
+            var categoriasList: GdevStoreCategoryModel[] = await productsDoc.get( 'categorias' )
+            var categoFinded = categoriasList.findIndex( c => c.name == category.name )
+            categoriasList.splice(categoFinded, 1)
+            await productsDocRef.set( { categorias: categoriasList } )
 
             return true
 

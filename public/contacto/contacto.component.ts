@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { DatosContactoModel } from '../../panel/contacto/contacto.model';
+import { DatosContactoModel } from '../../../gdev-panel/contacto/contacto.model';
 import { ContactoForm } from './form-template/contacto.interface';
 import { ClienteModel } from '../clientes/cliente.model';
 import { AlertService } from '../../../Gdev-Tools/alerts/alert.service';
