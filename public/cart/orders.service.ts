@@ -59,7 +59,6 @@ export class OrdersService {
       let prodDoc = await productsRef.doc( p.productId ).get()
       let product = prodDoc.data() as GdevStoreProductModel
       if ( product.stockCant ) {
-        console.log(product);
         productsRef.doc(prodDoc.id).update({stockCant: product.stockCant - p.cant})
       }
     })

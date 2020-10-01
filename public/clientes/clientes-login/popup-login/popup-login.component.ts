@@ -25,7 +25,7 @@ export class PopupLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onPasswordLoggin(login:GdevLoginFields) {
+  onPasswordLoggin( login: GdevLoginFields ) {
     this.login.emailSingIn( login.email, login.password )
     .then(()=> this.dialogRef.close())
   }

@@ -9,6 +9,7 @@ import { ClientesService } from '../clientes.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WishlistService } from '../../wishlist/wishlist.service';
 import { ClienteModel } from '../cliente.model';
+import { AlertService } from '../../../../Gdev-Tools/alerts/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class ClienteLoginService {
     private router: Router,
     private _clientes: ClientesService,
     private _snack: MatSnackBar,
-    private _wishlist: WishlistService
+    private _wishlist: WishlistService,
+    private _alerts: AlertService
   ) {
     this.cliente = new ClienteModel( '', '', )
     this.cliente$ = this.auth.authState.pipe(
@@ -41,12 +43,17 @@ export class ClienteLoginService {
   async emailSingIn( email, pwd ) {
     try {
       var resp = await this.auth.signInWithEmailAndPassword( email, pwd )
-      // var uid = resp.user.uid
-      // console.log(resp.user);
-      this.cliente = await this._clientes.getCliente( 'email', email )
-      localStorage.setItem( 'gdev-cliente', JSON.stringify( this.cliente ) )
-      this._wishlist.updateOnlogin( this.cliente.idCliente )
-      return true
+      var uid = resp.user.uid
+      this.cliente = await this._clientes.getCliente( 'id', uid )
+      console.log( this.cliente );
+
+      if ( !this.cliente ) {
+        this._alerts.sendMessageAlert( 'Aún no eres cliente de esta tienda. Regístrate para acceder' )
+      } else {
+        localStorage.setItem( 'gdev-cliente', JSON.stringify( this.cliente ) )
+        this._wishlist.updateOnlogin( this.cliente.idCliente )
+        return true
+      }
     }    
     catch( error ) {
       console.log( error )
@@ -118,6 +125,7 @@ export class ClienteLoginService {
       var clienteNew = await this.auth
         .createUserWithEmailAndPassword( cliente.email, cliente.contra )
 
+      console.log(clienteNew);
       if ( clienteNew ) {
         delete cliente.contra
         const clienteRef = this.fs.collection( 'clientes' ).ref
@@ -143,7 +151,30 @@ export class ClienteLoginService {
       var errorCode = error.code;
       console.log( errorCode, error.message );
       if ( errorCode == 'auth/email-already-in-use' ) {
-        this._snack.open('Este correo ya está registrado, por favor usa otro')
+        var adminDoc = await this.fs.collection( 'admins' ).ref
+          .where( 'email', '==', cliente.email ).get()
+        
+        let isAdmin = adminDoc.size > 0 ? true : false
+        if ( !isAdmin ) {
+          this._snack.open('Este correo ya está registrado, por favor usa otro')
+        
+        } else {
+          var user = adminDoc.docs[ 0 ]
+          let nuevoCliente = {
+            celular: cliente.celular,
+            email: cliente.email,
+            idCliente: user.id,
+            nombre: cliente.nombre,
+            registrado: new Date()
+          }
+          
+
+          this.fs.collection( 'clientes' ).ref.doc( user.id ).set( nuevoCliente )
+          localStorage.setItem( 'gdev-cliente', JSON.stringify( nuevoCliente ) );
+          
+          this.router.navigate(['/'])
+        }
+          
       }
     }
   }

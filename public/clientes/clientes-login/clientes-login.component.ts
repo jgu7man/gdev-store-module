@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClienteLoginService } from './cliente-login.service';
 import { ClienteModel } from '../cliente.model';
 import { GdevLoginFields } from '../../../../Gdev-Tools/gdev-login/components/login-card/login-card.component';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './clientes-login.component.html',
@@ -11,12 +12,16 @@ export class ClientesLoginComponent implements OnInit {
 
   cliente: ClienteModel
   constructor (
-    public login: ClienteLoginService
+    public login: ClienteLoginService,
+    private router: Router
   ) {
     this.cliente = new ClienteModel('','')
    }
 
   ngOnInit(): void {
+    this.login.cliente$.subscribe( cliente => {
+      if(cliente) this.router.navigate(['/tienda'])
+    })
   }
 
   onSubmit(fields: GdevLoginFields) {

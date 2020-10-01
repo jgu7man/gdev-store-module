@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MenuPaginaComponent implements OnInit {
 
   rutas: RUTA[] = [
-    { name: 'inicio', route: 'tienda' },
+    { name: 'inicio', route: '' },
     { name: 'categorías', route: 'categorias' },
     // { name: 'citas', route: 'citas' },
     // { name: 'blog', route: 'blog' },
