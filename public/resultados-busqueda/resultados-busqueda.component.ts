@@ -33,8 +33,8 @@ export class ResultadosBusquedaComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.products = JSON.parse(sessionStorage.getItem('lasmotosresultados')) as GdevStoreProductModel[]
-    console.log( this.products );
+    this.products = JSON.parse( sessionStorage.getItem('gdev-search')) as GdevStoreProductModel[]
+    // console.log( this.products );
     this.wishlist.getWishlist()
     this.cart.getCart()
   }

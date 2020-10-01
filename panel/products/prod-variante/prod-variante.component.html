@@ -1,10 +1,10 @@
 <mat-accordion [displayMode]="'flat'">
-    <mat-expansion-panel *ngFor="let variant of variantes; index as iV">
+    <mat-expansion-panel class="mat-elevation-z0" *ngFor="let variant of variantes; index as iV">
         <mat-expansion-panel-header>
-            <mat-panel-title>
+            <mat-panel-title style="align-items: center;">
                 {{variant.name}}
             </mat-panel-title>
-            <mat-panel-description>
+            <mat-panel-description style="justify-content: flex-end;">
                 <button mat-icon-button
                 >
                     <i class="fas fa-trash red-text"></i>
@@ -17,7 +17,7 @@
                     {{item.ref}}
                 </div>
                 <div class="col s3">
-                    {{item.precio}}
+                    ${{item.precio}}
                 </div>
                 <div class="col s2">
                     <button mat-icon-button

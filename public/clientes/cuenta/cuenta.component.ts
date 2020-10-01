@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MobileNavbarService } from '../../tienda-navbar/mobile-navbar.service';
 import { ClienteModel } from '../cliente.model';
+import { ClienteLoginService } from '../clientes-login/cliente-login.service';
 
 @Component({
   templateUrl: './cuenta.component.html',
@@ -12,15 +13,17 @@ export class CuentaComponent implements OnInit {
   cliente: ClienteModel
   constructor (
     private router: Router,
-    private navbar: MobileNavbarService
+    private navbar: MobileNavbarService,
+    private login: ClienteLoginService
   ) {
     this.navbar.title = 'Cuenta'
    }
 
   ngOnInit(): void {
-    var cliente = JSON.parse( localStorage.getItem( 'gdev-cliente' ) )
-    if ( cliente ) { this.cliente = cliente }
-    else { this.router.navigate(['/tienda/login']) }
+    this.login.cliente$.subscribe( cliente => {
+      if ( cliente ) { this.cliente = cliente }
+      else { this.router.navigate(['/tienda/login']) }
+    })
   }
 
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, OnChanges, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Inject, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { GdevCommonsService } from 'src/app/Gdev-Tools/commons/gdev-commons.service';
 import { SeoService } from 'src/app/Gdev-Tools/commons/gdev-seo.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,96 +13,78 @@ import { WishlistService } from '../wishlist/wishlist.service';
 import { MobileNavbarService } from '../tienda-navbar/mobile-navbar.service';
 import { GdevStorePublicService } from '../gdev-store-public.service';
 import { Loading } from 'src/app/Gdev-Tools/loading/loading.service';
+import { GdevStoreProductModel, Addon, ProdVariante } from '../../panel/products/product.model';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { CartProductModel } from '../cart/cart-product.model';
+import { MatRadioChange } from '@angular/material/radio';
+import { CartService } from '../cart/cart.service';
+import { DinamicPriceService } from '../cart/dinamic-price/dinamic-price.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit, OnChanges {
+export class ProductComponent implements OnInit, OnDestroy {
 
-  private _product = new BehaviorSubject<{}>( {} )
-  @Input() set product( object: {} ) { this._product.next( object ) }
-  get product() { return this._product.getValue() }
-  public Product: any
+  public product: GdevStoreProductModel
+  priceSubs: Subscription
 
-  @Input() catego
-  @Input() onlyProduct: boolean = true
-  @ViewChild('details') details: HTMLElement
+  @ViewChild( 'details' ) details: HTMLElement
 
   public sended: boolean = false
   constructor (
     private _tienda: GdevStorePublicService,
     private _commons: GdevCommonsService,
     private _seo: SeoService,
-    private _snackBar: MatSnackBar,
     private domSanitizer: DomSanitizer, 
     private _dialog: MatDialog,
     private _ruta: ActivatedRoute,
-    private ft: AngularFireStorage,
     public location: Location,
     public wishlist: WishlistService,
-    private navbar: MobileNavbarService
+    public cart: CartService,
+    private navbar: MobileNavbarService,
+    public price: DinamicPriceService
   ) {
   }
   
   ngOnInit() {
-    this._product.subscribe( product => {
-      if ( !product || Object.keys(product).length == 0 ) {
-        var idProduct = this._ruta.snapshot.paramMap.get( 'id' )
-        if ( idProduct ) { this.loadProduct( idProduct ) }
-      } else {
-        this.Product = this.product
-      }
-    })
-    
+    var idProduct = this._ruta.snapshot.paramMap.get( 'id' )
+    if ( idProduct ) { this.loadProduct( idProduct ) }
   }
+
+  
   
   async loadProduct( idProduct ) {
-    this.Product = await this._tienda.getProduct( idProduct )
-    var catego = this._ruta.snapshot.params[ 'catego' ]
+    this.product = await this._tienda.getProduct( idProduct )
+    // console.log(this.product);
+    this.price._product.next( this.product )
+    // this.price._product.complete()
     
+
     this.navbar.title = this.navbar.title != 'Tienda' ?
-    this.Product.referencia : 'Tienda';
+    this.product.referencia : 'Tienda';
     
-    this.catego = catego ? catego : this.Product.categorias[ 0 ]
     this.setSeoConf()
   }
   
-  ngOnChanges(): void {
-    this._product.subscribe( product => {
-      this.Product = product
-      // this.setSeoConf()
-    } )
-  }
 
-  scroll() {
+  private scroll() {
     let el = document.getElementById( 'product_more' );
     el.scrollIntoView();
   }
 
 
   setSeoConf() {
-    if ( this.Product[ '#Link de youtube' ] ) {
-      this.Product[ '#Link de youtube' ] = this.convertYTlink( this.Product[ '#Link de youtube' ] )
-
-    }
-
-    this._commons.setTitle( this.Product[ 'referencia' ] + ' - Las motos' )
+    this._commons.setTitle( this.product[ 'referencia' ])
     this._seo.generarTags( {
-      title: this.Product[ 'referencia' ],
-      description: this.Product[ 'descripcion' ],
-      image: this.Product[ 'imagenUrl' ]['url'],
-      slug: `tienda/categoria/${this.catego}/${this.Product[ 'id' ]}`
+      title: this.product[ 'referencia' ],
+      description: this.product[ 'descripcion' ],
+      image: this.product[ 'imagenUrl' ]['url'],
+      slug: `tienda/producto/${this.product[ 'id' ]}`
     } )
   }
 
-
-
-  formSended(event) {
-    this.sended = event
-    this._snackBar.open('Mensaje enviado', 'OK', {duration: 5000})
-  }
 
   convertYTlink( link: any ) {
     let Link: any = typeof link == 'string' ?
@@ -118,9 +100,14 @@ export class ProductComponent implements OnInit, OnChanges {
     })
   }
 
-  validateIcon(propiedad: string) {
-    return this.Product[ propiedad ] == 'Si' || this.Product['#'+propiedad] == 'Si' ? true : false
+  ngOnDestroy() {
+    // console.log( 'unsubscribe' );
+    this.product = undefined
+    this.price.unsubscribe()
   }
+  
+  
+  
 
 }
 

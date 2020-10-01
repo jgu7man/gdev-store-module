@@ -4,3 +4,9 @@
     margin: 0;
     max-width: unset;
 }
+
+app-categorias {
+    .container {
+        min-height: 40vh !important;
+    }
+}

@@ -1,6 +1,6 @@
 <mat-drawer-container [hasBackdrop]="false">
 	<mat-drawer #currentProduct [mode]="'over'" [position]="'end'">
-		<gdev-edit-product [product]="prodSelected" (closeForm)="onClosePanel()" ></gdev-edit-product>
+		<gdev-edit-product *ngIf="prodSelected" [product]="prodSelected" (closeForm)="onClosePanel()" ></gdev-edit-product>
 	</mat-drawer>
 	<mat-drawer-content>
 		
@@ -44,7 +44,7 @@
 
 
 						<!-- * TABLA * -->
-						<div class="row" *ngIf="products" [class.mat-elevation-z3]="true">
+						<div class="row"  [class.mat-elevation-z3]="true">
 							<gdev-index-caller
 							style="padding: 1em;"
 							></gdev-index-caller>

@@ -7,8 +7,16 @@
     .name {
         font-size: 28px;
     }
-    .precio{
-        font-size: 20px;
+}
+.precio{
+    font-size: 20px;
+    text-align: right;
+}
+
+::ng-deep {
+    .addCartBtn{
+        text-align: right;
+        margin-right: 8%;
     }
 }
 

@@ -47,7 +47,7 @@ export class WishlistService {
 
   async getWishlist() {
     if ( !this.LocalWishlist ) {
-      console.log('no hay localwishlist');
+      // console.log('no hay localwishlist');
       if ( this.LocalClient ) {
         try {
           var tempWishlist = []

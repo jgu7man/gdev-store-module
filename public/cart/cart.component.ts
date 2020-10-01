@@ -44,8 +44,8 @@ export class CartComponent implements OnInit {
     var totales = []
     if(this.products) {
       this.products.forEach( cartProd => {
-        let product = localCart.find( prod => prod.productId == cartProd.productId )
-        totales.push (product.cant * cartProd.description.precio)
+        // let product = localCart.find( prod => prod.productId == cartProd.productId )
+        totales.push( cartProd.cant * cartProd.unit_precio)
       } )
     }
     var amount = totales.reduce( function ( a, b ) {

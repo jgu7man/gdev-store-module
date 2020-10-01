@@ -24,7 +24,8 @@ export class ProdAddonsComponent implements OnInit {
     this._addons.subscribe(value => this.addons = value)
   }
 
-  onAddAddon( ) {
+  onAddAddon() {
+    if(this.addons == undefined) this.addons = []
     this.addons.push( this.nuAddon )
     this.nuAddon = { ref: '', precio: 0 }
     this.onChange.emit( this.addons )

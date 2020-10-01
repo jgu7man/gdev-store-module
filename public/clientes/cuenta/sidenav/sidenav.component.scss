@@ -17,7 +17,9 @@
     }
     
     .collection .collection-item.active {
-        background-color: #fff !important;
+        background-color: rgb(255 255 255 / 0.5) !important;
+        color: #202020;
+        font-weight: 600;
     }
     
     .collection a.collection-item:not(.active):hover {

@@ -28,7 +28,6 @@ export class GdevStorePublicService {
             if ( !prod['id'] ) { prod['id'] = doc.id } 
             articulos.push( prod )
         } )
-        console.log(articulos);
         return articulos 
     }
 
@@ -58,7 +57,14 @@ export class GdevStorePublicService {
         var tiendaRef = this.fs.collection( 'tienda/productos/referencias' ).ref
         var productDoc = await tiendaRef.doc( idProduct ).get()
         var product: GdevStoreProductModel = productDoc.data() as GdevStoreProductModel
-        return product
+
+        if ( product.descuento ) {
+            if ( product.descuento.cant > 0 ) {
+                product.descuento.exp = productDoc.data().desc.exp.toDate()
+            }
+        }
+
+        return product 
     }
 
 

@@ -17,11 +17,19 @@ import { DelProdcutComponent } from '../del-prodcut/del-prodcut.component';
 export class EditProductComponent implements OnInit {
 
   @Input() public product: GdevStoreProductModel
-  defultDesc: ProdDesc = {cant:0, exp:new Date(), type:'%'}
+
+  public defaultDesc: ProdDesc = {
+    cant: 0,
+    exp: `${ new Date().getFullYear() }-${new Date().getMonth()}-${new Date().getDate()}`,
+    type: '%'
+  }
   public imgToLoad: any;
   public precio = [ '$', /[1-9]/, /\d/, /\d/, ',', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/ ]
   public categories: any[]
+  
   @Output() closeForm: EventEmitter<any> = new EventEmitter()
+
+  
   constructor (
     public _products: GdevStoreProductsService,
     private _categorias: GdevStoreCategoriesService,
@@ -30,16 +38,36 @@ export class EditProductComponent implements OnInit {
     private _dialog: MatDialog
   ) {
     this.product = undefined
-    this.product = new GdevStoreProductModel( '', 0, false, '', {}, '', [], [] )
+    this.product = new GdevStoreProductModel( '', 0, false, '', {}, '', [], [],[],[], this.defaultDesc )
   }
 
   async ngOnInit() {
     this.categories = await this._categorias.loadCategories()
-    if ( !this.product.desc ) this.product.desc = this.defultDesc;
+
+    this._products.imageUrl.subscribe( imageUrl => {
+      this.product.imagenUrl = imageUrl
+    } )
+    this._products.galleyImageUrl.subscribe( imageUrl => {
+      this.product.galeria.push( imageUrl )
+    } )
+
+
+    if ( this.product.descuento ) {
+      let exp = this.product.descuento.exp
+      let month = exp.getMonth() + 1
+      if ( month < 10 ) { month = `0${ month.toString() }` }
+      else { month = `${month}` }
+      
+      this.defaultDesc = {
+        cant: this.product.descuento.cant,
+        exp: `${ exp.getFullYear() }-${ month }-${ exp.getDate() }`,
+        type: this.product.descuento.type
+      }
+    }
     
   }
 
-
+  
 
   setStock( e: MatSlideToggleChange ) {
     this.product.onStock = e.checked
@@ -81,7 +109,12 @@ export class EditProductComponent implements OnInit {
   }
 
   catchDesc( desc ) {
-    this.product.desc = desc
+    this.defaultDesc = desc
+    this.product.descuento.exp = new Date(
+      desc.exp.split( '-' )[ 0 ],
+      desc.exp.split( '-' )[ 1 ] - 1,
+      desc.exp.split( '-' )[ 2 ]
+    )
   }
 
   onDelete() {

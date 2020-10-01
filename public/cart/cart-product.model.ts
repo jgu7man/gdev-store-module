@@ -1,7 +1,14 @@
-import { GdevStoreProductModel } from '../../panel/products/product.model';
+import { GdevStoreProductModel, ProdVariante, Addon } from '../../panel/products/product.model';
+
 export interface CartProductModel {
-    productId: string,
-    cant: number,
-    varieties?: string[],
-    description?: GdevStoreProductModel
+    productId?: string,
+    unit_precio?: number
+    cant?: number,
+    variante?: {
+        name?: string,
+        option?: Addon
+    },
+    adiciones?: Addon[]
+    description?: GdevStoreProductModel,
 }
+

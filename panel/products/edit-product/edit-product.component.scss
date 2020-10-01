@@ -3,3 +3,12 @@
     max-width: 48%;
     margin-right: 2%;
 }
+
+::ng-deep {
+    .mat-tab-body-wrapper {
+        padding: 1em;
+    }
+    .mat-tab-body-content {
+        overflow-x: inherit;
+    }
+}

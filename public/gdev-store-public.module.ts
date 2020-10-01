@@ -58,6 +58,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { FormTemplateComponent } from './contacto/form-template/form-template.component';
 import { DocsComponent } from './docs/docs.component';
 import { PrivacidadComponent } from './docs/privacidad/privacidad.component';
+import { DinamicPriceComponent } from './cart/dinamic-price/dinamic-price.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { PrivacidadComponent } from './docs/privacidad/privacidad.component';
     ContactoComponent,
     FormTemplateComponent,
     DocsComponent,
-    PrivacidadComponent
+    PrivacidadComponent,
+    DinamicPriceComponent
   ],
   imports: [
     CommonModule,

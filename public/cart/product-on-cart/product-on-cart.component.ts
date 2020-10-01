@@ -9,7 +9,7 @@ import { CartProductModel } from '../cart-product.model';
 })
 export class ProductOnCartComponent implements OnInit {
 
-  private _product = new BehaviorSubject<CartProductModel>( {productId:'', cant:0} )
+  private _product = new BehaviorSubject<CartProductModel>( {productId:'', cant:0, unit_precio:0} )
   @Input() set product( product: CartProductModel ) { this._product.next( product) }
   get product() { return this._product.getValue() }
   producto: CartProductModel
@@ -21,6 +21,8 @@ export class ProductOnCartComponent implements OnInit {
   ngOnInit(): void {
     this._product.subscribe(prod => this.producto = prod)
   }
+
+  
 
   get productOnCart() {
     var localCart: CartProductModel[] = JSON.parse( localStorage.getItem( 'gdev-cart' ) )

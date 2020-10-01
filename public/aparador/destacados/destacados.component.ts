@@ -27,7 +27,6 @@ export class DestacadosComponent implements OnInit {
 
   async ngOnInit() {
     this.products = await this._tienda.getArticulosFilter( 'destacados', this.queryLimit ) as GdevStoreProductModel[]
-    console.log( this.products );
     this.wishlist.getWishlist()
     this.cart.getCart()
   }

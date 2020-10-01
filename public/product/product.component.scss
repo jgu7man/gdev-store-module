@@ -1,15 +1,13 @@
 #articulo {
-    height: 75vh;
 }
 
 #desc {
     position: relative;
-    height: 100%;
     overflow-y: auto;
 }
 
 #article-descripcion {
-    position: absolute;
+    position: relative;
     top: 0;
     transition: all .3s ease-out;
     h1 {
@@ -139,6 +137,27 @@
     cursor: pointer;
 }
 
+.variante_container, .addons_container {
+    padding: 1.5em 0;
+    .variante_header, .addons_header {
+        background: #ccc;
+        padding: 1em;
+        text-transform: capitalize;
+        font-weight: 700;
+        margin-bottom: 1em;
+        box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+        border-radius: 5px;
+    }
+    .variante_options mat-radio-group, .addons_options {
+        display: flex;
+        flex-direction: column;
+        margin: 15px 0;
+        mat-radio-button {
+            margin: 5px;
+        }
+    }
+}
+
 #video {
     display: flex;
     justify-content: center;
@@ -154,15 +173,12 @@
 #product_actions {
     margin-top: 3em;
     padding: 1em;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
 }
 
-#actions {
-    display: flex; 
-    justify-content: space-around;
-}
+
 
 @keyframes salir {
     from{left: 50%;}

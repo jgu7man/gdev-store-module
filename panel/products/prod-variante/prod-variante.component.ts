@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProdVariante, Addon } from '../product.model';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { distinct, map } from 'rxjs/operators';
 
 @Component({
   selector: 'gdev-prod-variante',
@@ -28,7 +29,8 @@ export class ProdVarianteComponent implements OnInit {
   }
 
 
-  onAddVariante( ) {
+  onAddVariante() {
+    if(this.variantes == undefined) this.variantes = []
     this.variantes.push( this.nuVariante )
     this.nuVariante = { name: '', variantes: [] }
     this.onChange.emit(this.variantes)

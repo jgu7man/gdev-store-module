@@ -107,39 +107,52 @@
                     <h4>Precios</h4>
                     <mat-tab-group backgroundColor="accent">
                         <mat-tab label="Precio">
-                            <mat-form-field>
-                                <mat-label>Precio</mat-label>
-                                <input
-                                matInput
-                                type="number"
-                                name="precio"
-                                #precio="ngModel"
-                                [(ngModel)]="product.precio"
-                                required
-                                >
-                                <mat-error *ngIf="precio.invalid
-                                || (precio.dirty && precio.touched)">
-                                    El precio es necesario
-                                </mat-error>
-                            </mat-form-field>
+                            <div class="row">
+                                <div class="col s9">
+                                    <p>Precio general del producto</p>
+                                </div>
+                                <div class="col s3">
+                                    <mat-form-field>
+                                        <mat-label>Precio</mat-label>
+                                        <input
+                                        matInput
+                                        type="number"
+                                        name="precio"
+                                        #precio="ngModel"
+                                        [(ngModel)]="product.precio"
+                                        required
+                                        >
+                                        <mat-error *ngIf="precio.invalid
+                                        || (precio.dirty && precio.touched)">
+                                            El precio es necesario
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
 
                         </mat-tab>
                         <mat-tab label="Variantes">
-                            Agrega variantes del producto como características, después especifica el valor de cada característica
+                            <p>
+                                Agrega variantes del producto como características, después especifica el valor de cada característica. El precio del producto cambiará con cada variante que hayas definido.
+                            </p>
                             <gdev-prod-variante [Variantes]="product.variantes"  (onChange)="catchVariantes($event)" ></gdev-prod-variante>
                         </mat-tab>
                         <mat-tab label="Adicionales">
-                            Agregar caraterísticas adicionales
+                            <p>
+                                Agregar caraterísticas adicionales y su precio. Cada característica adicional agregará un más valor al precio y el al final con cada adición el precio tendrá la suma. Ejemplo $10 + $5 = $15.
+                            </p>
                             <gdev-prod-addons [Addons]="product.addons" (onChange)="catchAddons($event)"></gdev-prod-addons>
                         </mat-tab>
                         <mat-tab label="Descuento">
-                            Agrega un descuento para este producto que puede ser en dinero o porcentaje sobre el precio total
-                            <gdev-prod-desc *ngIf="product.desc" [Desc]="product.desc" (OnChange)="catchDesc($event)"></gdev-prod-desc>
+                            <p>
+                                Agrega un descuento para este producto que puede ser en dinero o porcentaje sobre el precio total.
+                            </p>
+                            <gdev-prod-desc  [Desc]="defaultDesc" (OnChange)="catchDesc($event)"></gdev-prod-desc>
                         </mat-tab>
                     </mat-tab-group>
                 </div>
                 <div class="col s12">
-                    <button mat-raised-button color="warning">Eliminar</button>
+                    <button (click)="onDelete()" mat-raised-button color="warning">Eliminar Producto</button>
                 </div>
             </div>
 

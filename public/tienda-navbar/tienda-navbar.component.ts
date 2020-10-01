@@ -68,10 +68,10 @@ export class TiendaNavbarComponent implements OnInit {
   }
 
   onSearch() {
-    this._search.onSearchByString( this.queryTofind, 'productos', 'referencia' ).then( ( res ) => {
-      var resultados = JSON.parse( sessionStorage.getItem( 'lasmotosresultados' ) )
-      if ( resultados ) sessionStorage.removeItem( 'lasmotosresultados' )
-      sessionStorage.setItem( 'lasmotosresultados', JSON.stringify( res ) )
+    this._search.onSearchByString( this.queryTofind, 'tienda/productos/referencias', 'referencia' ).then( ( res ) => {
+      var resultados = JSON.parse( sessionStorage.getItem( 'gdev-search' ) )
+      if ( resultados ) sessionStorage.removeItem( 'gdev-search' )
+      sessionStorage.setItem( 'gdev-search', JSON.stringify( res ) )
       this._router.navigateByUrl( '/tienda', { skipLocationChange: true } ).then( () => {
         this._router.navigate( [ '/tienda/resultados' ] )
       })

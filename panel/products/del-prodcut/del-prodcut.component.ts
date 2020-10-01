@@ -23,7 +23,6 @@ export class DelProdcutComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.productId);
   }
 
   onDelete() {

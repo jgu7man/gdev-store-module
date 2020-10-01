@@ -1,11 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { GdevStoreProductModel } from '../product.model';
-import { Observable } from 'rxjs';
+import { GdevStoreProductModel, ProdDesc } from '../product.model';
 import { Router } from '@angular/router';
 import { GdevStoreCategoriesService } from '../../categories/categories.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { finalize } from 'rxjs/operators';
-import { NgForm } from '@angular/forms';
 import { GdevStoreProductsService } from '../products.service';
 import { Location } from '@angular/common';
 import { FormConstructorService } from '../../../../Gdev-Tools/form-constructor/form-constructor.service';
@@ -21,12 +18,20 @@ export class AddProductComponent implements OnInit {
   public imgToLoad: any;
   public precio = [ '$', /[1-9]/, /\d/, /\d/, ',', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/ ]
   public categories: any[]
+  
+
+  public defaultDesc: ProdDesc = {
+    cant: 0,
+    exp: `${ new Date().getFullYear() }-${ new Date().getMonth() }-${ new Date().getDate() }`,
+    type: '%'
+  }
+  
   @Output() closeForm: EventEmitter<any> = new EventEmitter()
+
+
   constructor (
     public _products: GdevStoreProductsService,
-    private router: Router,
     private _categorias: GdevStoreCategoriesService,
-    private _form: FormConstructorService,
     public location: Location
   ) {
     this.product = undefined
@@ -35,12 +40,27 @@ export class AddProductComponent implements OnInit {
 
   async ngOnInit() {
     this.categories = await this._categorias.loadCategories()
+    
     this._products.imageUrl.subscribe( imageUrl => {
       this.product.imagenUrl = imageUrl
     } )
     this._products.galleyImageUrl.subscribe( imageUrl => {
       this.product.galeria.push(imageUrl)
     } )
+
+
+    if ( this.product.descuento ) {
+      let exp = this.product.descuento.exp
+      let month = exp.getMonth() + 1
+      if ( month < 10 ) { month = `0${ month.toString() }` }
+      else { month = `${ month }` }
+
+      this.defaultDesc = {
+        cant: this.product.descuento.cant,
+        exp: `${ exp.getFullYear() }-${ month }-${ exp.getDate() }`,
+        type: this.product.descuento.type
+      }
+    }
   }
 
   getImageURL(imageURL) {
@@ -85,7 +105,12 @@ export class AddProductComponent implements OnInit {
   }
 
   catchDesc( desc ) {
-    this.product.desc = desc
+    this.defaultDesc = desc
+    this.product.descuento.exp = new Date(
+      desc.exp.split( '-' )[ 0 ],
+      desc.exp.split( '-' )[ 1 ] - 1,
+      desc.exp.split( '-' )[ 2 ]
+    )
   }
 
 
@@ -96,9 +121,7 @@ export class AddProductComponent implements OnInit {
 
   onSubmit( ) {
     this._products.addProduct( this.product ).then( () => {
-      this.router.navigateByUrl( '/panel/', { skipLocationChange: true } ).then( () => {
-        this.router.navigate( [ '/panel/products' ] );
-      } );
+      this.closeForm.emit()
     })
   }
 }
