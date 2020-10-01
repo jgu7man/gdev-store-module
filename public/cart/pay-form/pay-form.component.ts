@@ -86,13 +86,19 @@ export class PayFormComponent implements OnInit {
   }
 
   validatePay(){
-    // if ( this.deliveryInvalidForm && !this.order.pay_method   ) {
-    //   return false
-    // } else if ( !this.pickupValidForm && !this.order.pay_method) {
-    //   return false
-    // } else {
+    if ( !this.order.pay_method ) {
+      return false
+    } else if ( this.pickupValidForm || !this.deliveryInvalidForm ) {
       return true
-    // }
+    } else {
+      return false
+    }
+  }
+
+  catchMethodPay(method) {
+    console.log(method);
+    this.order.pay_method = method  
+    console.log(this.order);
   }
 
   onSubmit() {

@@ -14,9 +14,14 @@
             </div>
         </div>
     </div>
-    <div class="col s4 cants_area">
+    <div class="col s4 cants_area right">
         <p class="precio"> $<b>{{product.unit_precio * productOnCart.cant}}</b> </p>
         <app-addcart-btn [product]="product"></app-addcart-btn>
+        <button mat-icon-button
+        class="delProduct"
+        (click)="deleteProduct()">
+            <i class="fas fa-trash red-text"></i>
+        </button>
     </div>
     <!-- <div class="col s6"></div> -->
 </div>

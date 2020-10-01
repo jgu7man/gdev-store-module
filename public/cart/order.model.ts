@@ -1,6 +1,7 @@
+import { CartProductModel } from './cart-product.model';
 export class OrderModel {
     constructor (
-        public products: ProductOrdered[],
+        public products: CartProductModel[],
         public totales: OrderTotales,
         public aviso?: string,
         public factura?: boolean,

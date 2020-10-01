@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CartProductModel } from '../cart-product.model';
+import { CartService } from '../cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-on-cart',
@@ -16,7 +18,10 @@ export class ProductOnCartComponent implements OnInit {
 
   @Output() precio_prod_total: EventEmitter<number> = new EventEmitter()
 
-  constructor() { }
+  constructor (
+    private _cart: CartService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this._product.subscribe(prod => this.producto = prod)
@@ -30,6 +35,12 @@ export class ProductOnCartComponent implements OnInit {
       var product = localCart.find( prod => prod.productId == this.product.productId )
       if ( product ) return product
     } 
+  }
+
+  deleteProduct() {
+    this._cart.updateProduct( this.product, 0 )
+    this.router.navigateByUrl( 'tienda', { skipLocationChange: true } )
+    .then(() => this.router.navigate(['tienda/cuenta/cart']))
   }
 
 }

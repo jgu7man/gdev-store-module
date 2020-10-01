@@ -11,6 +11,7 @@
 .precio{
     font-size: 20px;
     text-align: right;
+    margin-right: 8%;
 }
 
 ::ng-deep {
@@ -22,6 +23,10 @@
 
 #product_on_cart {
     margin: 0;
+}
+
+.delProduct{
+    float: right;
 }
 
 .precios {

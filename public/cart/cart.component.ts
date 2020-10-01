@@ -59,22 +59,7 @@ export class CartComponent implements OnInit {
     // var productsOrder: ProductOrdered[] = [] 
     var localCart: CartProductModel[] = JSON.parse( localStorage.getItem( 'gdev-cart' ) )
 
-    await this.loading.asyncForEach( this.products, async ( product: CartProductModel ) => {
-      
-      let cant = localCart.find(
-        prod => prod.productId == product.productId ).cant
-      
-      let prodOrdered: ProductOrdered = {
-        id: product.productId,
-        reference: product.description.referencia,
-        cant: cant,
-        unit_price: product.description.precio,
-        cant_price: cant * product.description.precio
-      }
-  
-      return this.order.products.push(prodOrdered)
-    })
-
+    this.order.products = this.products
     this.order.totales.subtotal = this.precio_total
     localStorage.setItem( 'gdev-order', JSON.stringify( this.order ) )
     

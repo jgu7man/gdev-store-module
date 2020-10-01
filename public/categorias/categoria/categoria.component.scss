@@ -6,14 +6,16 @@
     max-height: 270px;
 }
 
-.mat-card-content,
 .mat-card-title {
     cursor: pointer;
 }
 
 
 
-.card-image img {
-    position: relative;
-    z-index: 2;
+.card-image { 
+    cursor: pointer;
+    img {
+        position: relative;
+        z-index: 2;
+    }
 }

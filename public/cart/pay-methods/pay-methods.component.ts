@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { PayMethodsService } from '../../../panel/store-config/pay-method-config/pay-methods.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { PayMethodsService } from '../../../panel/store-config/pay-method-config
 export class PayMethodsComponent implements OnInit {
 
   avalibleMethods: string[] = []
-  methodSelected: EventEmitter<string> = new EventEmitter()
+  @Output() methodSelected: EventEmitter<string> = new EventEmitter()
 
   constructor (
     public payConfigS: PayMethodsService
@@ -29,6 +29,8 @@ export class PayMethodsComponent implements OnInit {
     console.log('Método de pago: ', item);
     this.methodSelected.emit(item)
   }
+
+  
   
 
 }
