@@ -57,7 +57,7 @@ export class DinamicPriceService {
       distinctUntilKeyChanged('id')
     ).subscribe( prod => {
       // console.log(prod);
-      
+      this.product = prod
       this._cart.checkOnCart( prod.id ).then( cProd => {
         // console.log(cProd);
         if ( cProd ) { 

@@ -32,7 +32,7 @@ export class ProdAddonsComponent implements OnInit {
   }
 
   deleteAddon( i ) {
-    this.addons.slice( i, 1 )
+    this.addons.splice( i, 1 )
     this.onChange.emit( this.addons )
   }
 

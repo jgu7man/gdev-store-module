@@ -57,7 +57,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   
   async loadProduct( idProduct ) {
     this.product = await this._tienda.getProduct( idProduct )
-    // console.log(this.product);
+    console.log(this.product);
     this.price._product.next( this.product )
     // this.price._product.complete()
     

@@ -11,6 +11,7 @@
             <button mat-raised-button
             color="primary"
             (click)="priceS.addProdCart()"
+            [disabled]="inStock()"
             >Agregar al carrito
             </button>
         </ng-container>
@@ -22,6 +23,7 @@
                 </button>
                 {{priceS.productOnCart.cant}}
                 <button mat-icon-button
+                [disabled]="priceS.product.stockCant == priceS.productOnCart.cant"
                 (click)="priceS.addCant()">
                     <i class="fas fa-plus"></i>
                 </button>

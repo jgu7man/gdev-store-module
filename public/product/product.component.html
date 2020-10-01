@@ -75,6 +75,16 @@
 
 
             <div id="product_actions">
+                <p class="right" *ngIf="product.stockCant">
+                    Existencia: 
+                    <span 
+                    [ngClass]="{
+                        'deep-orange-text': product.stockCant < 5, 
+                        'red-text': product.stockCant < 1
+                    }">
+                        {{product.stockCant}}
+                    </span>
+                </p>
                 <mat-card>
                     <mat-card-content>
                         <gdev-dinamic-price

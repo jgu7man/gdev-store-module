@@ -6,6 +6,8 @@ import { DatosContactoModel } from '../../../gdev-panel/contacto/contacto.model'
 import { GdevMainService } from '../../../gdev-panel/gdev-main.service';
 import { MailService } from '../../../gdev-panel/mails/mail.service';
 import { ContactoComponent } from '../../../gdev-panel/contacto/contacto.component';
+import { CartProductModel } from './cart-product.model';
+import { GdevStoreProductModel } from '../../panel/products/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +37,8 @@ export class OrdersService {
     order.pay_date = new Date()
     order.state = 'pendiente'
     try {
-      console.log(order);
+      console.log( order );
+      this.dicountStock(order.products)
       this.userOrderRef.add( { ...order } )
         .then( order => this.userOrderRef.doc( order.id ).update( { orderId: order.id } ) );
       
@@ -48,6 +51,18 @@ export class OrdersService {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  dicountStock( products: CartProductModel[] ) {
+    const productsRef = this.fs.collection('tienda/productos/referencias').ref
+    products.forEach( async p => {
+      let prodDoc = await productsRef.doc( p.productId ).get()
+      let product = prodDoc.data() as GdevStoreProductModel
+      if ( product.stockCant ) {
+        console.log(product);
+        productsRef.doc(prodDoc.id).update({stockCant: product.stockCant - p.cant})
+      }
+    })
   }
 
   async getUsersOrder() {

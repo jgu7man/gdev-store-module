@@ -44,14 +44,14 @@ export class ProdVarianteComponent implements OnInit {
     this.onChange.emit( this.variantes )
   }
 
-  deleteVariant(iV) {
-    this.variantes.slice( iV, 1 )
+  deleteVariant( iV ) {
+    this.variantes.splice( iV, 1 )
     this.onChange.emit( this.variantes )
   }
 
   deleteAddon( i, iV ) {
     let variants = this.variantes[ iV ].variantes
-    variants.slice( i, 1 )
+    variants.splice( i, 1 )
     this.variantes[ iV ].variantes = variants
     this.onChange.emit( this.variantes )
   }

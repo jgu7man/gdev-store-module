@@ -15,7 +15,7 @@ import { SeoService } from '../../../../Gdev-Tools/commons/gdev-seo.service';
 export class DestacadosComponent implements OnInit {
 
   products: GdevStoreProductModel[]
-  queryLimit: number = 6
+  queryLimit: number = 8
   constructor (
     private _tienda: GdevStorePublicService,
     private _ruta: ActivatedRoute,
@@ -27,6 +27,7 @@ export class DestacadosComponent implements OnInit {
 
   async ngOnInit() {
     this.products = await this._tienda.getArticulosFilter( 'destacados', this.queryLimit ) as GdevStoreProductModel[]
+    console.log(this.products);
     this.wishlist.getWishlist()
     this.cart.getCart()
   }

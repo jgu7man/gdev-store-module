@@ -6,11 +6,13 @@
             </mat-panel-title>
             <mat-panel-description style="justify-content: flex-end;">
                 <button mat-icon-button
-                >
+                (click)="deleteVariant(iV)">
                     <i class="fas fa-trash red-text"></i>
                 </button>
             </mat-panel-description>
         </mat-expansion-panel-header>
+       
+        
         <mat-list role="list">
             <mat-list-item *ngFor="let item of variant.variantes; index as i">
                 <div class="col s7">
@@ -58,6 +60,7 @@
             </mat-list-item>
         </mat-list>
     </mat-expansion-panel>
+    
 </mat-accordion>
 <div class="row">
     <div class="col s10">

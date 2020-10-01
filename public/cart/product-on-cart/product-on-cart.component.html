@@ -9,7 +9,8 @@
             </div>
             <div class="col s12">
                 <p class="descripcion">
-                    {{product.description.descripcion}}
+                    {{product.description.descripcion.substring(0, 120)}}
+                    <span *ngIf="product.description.descripcion.length > 120">...</span>
                 </p>
             </div>
         </div>
