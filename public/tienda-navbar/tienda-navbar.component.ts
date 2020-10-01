@@ -45,7 +45,9 @@ export class TiendaNavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.login.cliente$.subscribe( cliente => {
+      console.log(cliente);
+    })
 
     $( '#page_menu' ).hover(
       () => $( '#menu-pagina' ).slideDown(),

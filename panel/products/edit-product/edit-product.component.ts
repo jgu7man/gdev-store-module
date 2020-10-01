@@ -35,7 +35,8 @@ export class EditProductComponent implements OnInit {
     private _categorias: GdevStoreCategoriesService,
     public location: Location,
     private _form: FormConstructorService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private router: Router
   ) {
     this.product = undefined
     this.product = new GdevStoreProductModel( '', 0, false, '', {}, '', [], [],[],[], this.defaultDesc )
@@ -124,7 +125,11 @@ export class EditProductComponent implements OnInit {
     } )
     
     dialog.afterClosed().subscribe(
-      () => this.closeForm.emit() )
+      () => {
+        this.closeForm.emit()
+        this.router.navigateByUrl( 'panel', { skipLocationChange: true } )
+        .then(() => this.router.navigate(['panel/tienda/products']))
+      } )
     .unsubscribe()
   }
 

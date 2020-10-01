@@ -48,15 +48,18 @@
 							<gdev-index-caller
 							style="padding: 1em;"
 							></gdev-index-caller>
-							<div class="row table-headers" gdev-color [background]="'bg1'">
-								<div class="col s2">Imagen</div>
-								<div class="col s4">Referencia</div>
-								<div class="col s3">Categorías</div>
-								<div class="col s2">Disponible</div>
-							</div>
-						<div class="col s12">   
-							<mat-selection-list #listPanel [multiple]="false"
-							(selectionChange)="onProdSelected($event)">
+							<div class="col s12">   
+								<mat-selection-list #listPanel [multiple]="false"
+								(selectionChange)="onProdSelected($event)">
+								<mat-list-option class="row align-cols" style="width: 100%;" [disabled]="true">
+									<div class="row table-headers" style="width: 110%;">
+										<div class="col s2">Imagen</div>
+										<div class="col s4">Referencia</div>
+										<div class="col s3">Categorías</div>
+										<div class="col s1">Disp.</div>
+										<div class="col s1">Cant.</div>
+									</div>
+								</mat-list-option>
 								<mat-list-option *ngFor="let product of products" [value]="product">
 									<div class="row align-cols" style="width: 100%;">
 										<div class="col s2 prodImg">
@@ -70,13 +73,16 @@
 												{{catego}}<span *ngIf="i != product.categorias.length -1">, </span>
 											</span>
 										</div>
-										<div class="col s2">
-											<ng-container *ngIf="!product.onStock; else onStock">
+										<div class="col s1 ">
+											<ng-container *ngIf="!product.onStock || product.stockCant > 0; else onStock">
 												<i class="fas fa-circle grey-text"></i>
 											</ng-container>
 											<ng-template #onStock>
 												<i class="fas fa-circle blue-text"></i>
 											</ng-template>
+										</div>
+										<div class="col s1">
+											{{product.stockCant}}
 										</div>
 									</div>
 								</mat-list-option>
