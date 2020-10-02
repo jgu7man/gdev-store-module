@@ -13,7 +13,16 @@
     <li class="menu-link hide-on-med-and-down" id="wish"
     [routerLink]="['/tienda/cuenta/wishlist']"
     >
-        <i class="fas fa-heart"></i>
+        <ng-container *ngIf="wish.totalWishlistItems() > 0; else noWishitems">
+            <i class="fas fa-heart"
+            matBadgeColor="accent"
+            [matBadge]="wish.totalWishlistItems()"
+            ></i>
+        </ng-container>
+        <ng-template #noWishitems>
+            <i class="fas fa-heart"></i>
+        </ng-template>
+        
     </li>
     <li class="menu-link hide-on-med-and-down" id="account">
         Cuenta

@@ -37,15 +37,11 @@ export class DinamicPriceComponent implements OnInit {
 
   inStock() {
     if ( this.priceS.product ) {
-      if ( this.priceS.product.stockCant > 0 || this.priceS.product.onStock) {
+      if ( this.priceS.product.stockCant > 0 || this.priceS.product.onStock ) {
         return true
-      } else {
-        return false
-      }
-    } else {
-      return false
-    }
-      
+      } else { return false }
+    } else { return false }
+    
   }
 
   

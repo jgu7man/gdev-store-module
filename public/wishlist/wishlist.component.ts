@@ -21,7 +21,6 @@ export class WishlistComponent implements OnInit {
 
   async getProducts() {
     this.products = await this.wishlist.getProductsInWishlist()
-    return console.log( this.products );
   }
 
 }

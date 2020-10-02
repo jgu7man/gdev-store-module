@@ -81,13 +81,15 @@ export class GdevStoreCategoriesService {
 
 
 
-    async editCategory( category: GdevStoreCategoryModel ) {
+    async editCategory( category: GdevStoreCategoryModel, categoId: string ) {
         try {
             const productsDocRef = this.fs.doc( `tienda/productos` ).ref
             var productsDoc = await productsDocRef.get()
             var categoriasList: GdevStoreCategoryModel[] = await productsDoc.get( 'categorias' )
-            var categoFinded = categoriasList.findIndex( c => c.name == category.name )
-            categoriasList[categoFinded] = category
+            var categoFinded = categoriasList.findIndex( c => c.name == categoId )
+            Object.keys( category ).forEach(
+                key => { if ( category[ key ] == undefined ) delete category[ key ] } );
+            categoriasList[categoFinded] = {...category}
             
             var categoUpdated = await productsDocRef.set( { categorias: categoriasList})
 

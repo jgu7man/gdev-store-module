@@ -21,11 +21,7 @@ export class WishlistService {
   totalWishlistItems() {
     var wishlist = this.LocalWishlist
     if ( wishlist ) {
-      var amount = wishlist.reduce( function ( a, b ) {
-        return b[ 'cant' ] == null ? a : a + b[ 'cant' ];
-      }, 0 );
-      console.log(amount);
-      return amount
+      return wishlist.length      
     } else {
       return 0
     }
@@ -42,12 +38,13 @@ export class WishlistService {
   }
 
   setLocalWishlist( wishlist ) {
-    localStorage.setItem( 'gdev-whislist', JSON.stringify( wishlist ) )
+    console.log(wishlist);
+    localStorage.setItem( 'gdev-wishlist', JSON.stringify( wishlist ) )
   }
 
   async getWishlist() {
     if ( !this.LocalWishlist ) {
-      // console.log('no hay localwishlist');
+      console.log('no hay localwishlist');
       if ( this.LocalClient ) {
         try {
           var tempWishlist = []
@@ -59,7 +56,8 @@ export class WishlistService {
             await this.loading.asyncForEach(
               wishdocs.docs, async ( doc ) => {
                 tempWishlist.push( doc.id )
-              } )
+            } )
+            this.setLocalWishlist(tempWishlist)
             return this.wishlist = tempWishlist
           } else {
             return this.wishlist = []
@@ -78,23 +76,28 @@ export class WishlistService {
 
   async updateProduct( productId ) {
     await this.getWishlist()
+    console.log(this.wishlist);
     var productIndex = this.wishlist.findIndex( prod => prod.productId == productId )
+    console.log(productIndex);
     if ( productIndex > -1 ) {
+      console.log('elimina del wish ', productId);
       this.wishlist.splice( productIndex, 1 )
       this.setLocalWishlist( this.wishlist )
+      
       if ( this.LocalClient ) {
         await this.delProductOn( this.LocalClient.idCliente, productId )
       }
 
     } else {
+      console.log('agrega al wish ', productId);
       this.wishlist.push( {
         productId: productId,
         agregado: new Date(),
       } )
       this.setLocalWishlist( this.wishlist )
-      if ( this.LocalClient ) {
-        await this.setProductOn( this.LocalClient.idCliente, productId )
-      }
+    }
+    if ( this.LocalClient ) {
+      await this.setProductOn( this.LocalClient.idCliente, productId )
     }
   }
 
@@ -103,7 +106,8 @@ export class WishlistService {
       const clienteRef = this.fs.collection( 'clientes' ).ref.doc( idCliente )
       const wishlistRef = clienteRef.collection( 'wishlist' )
       await wishlistRef.doc( idProducto ).set( {
-        agregado: new Date()
+        agregado: new Date(),
+        productId: idProducto
       } )
       return true
     } catch ( error ) {
@@ -133,12 +137,12 @@ export class WishlistService {
   async updateOnlogin( idCliente ) {
     await this.getWishlist()
     const wishlistRef = this.fs.collection( 'clientes' ).ref.doc( idCliente ).collection( 'wishlist' )
-    var cloudWishlist = await wishlistRef.get()
+    var wishlistDocs = await wishlistRef.get()
     
-    var Wishlist:WishlistProduct[] = []
-    if ( cloudWishlist.size > 0 ) {
-      await this.loading.asyncForEach( cloudWishlist.docs, async ( doc ) => {
-        Wishlist.push( doc.id )
+    var cloudWishlist:WishlistProduct[] = []
+    if ( wishlistDocs.size > 0 ) {
+      await this.loading.asyncForEach( wishlistDocs.docs, async ( doc ) => {
+        cloudWishlist.push( doc.data() )
       } )
       
       
@@ -146,17 +150,17 @@ export class WishlistService {
       if ( this.wishlist.length > 0 ) {
         await this.loading.asyncForEach( this.wishlist,
           async ( prod: WishlistProduct ) => {
-            let Prod = Wishlist.find( cartProd => cartProd.productId == prod.productId )
-            if ( Prod ) this.setProductOn( idCliente, prod )
+            let Prod = cloudWishlist.find( p => p.productId == prod.productId )
+            if ( !Prod ) this.setProductOn( idCliente, prod )
         } )
-        await this.loading.asyncForEach( Wishlist,
+        await this.loading.asyncForEach( cloudWishlist,
           async ( prod: WishlistProduct ) => {
-            let Prod = this.wishlist.find( cartProd => cartProd.productId == prod.productId )
-            if ( Prod ) this.setProductOn( idCliente, prod )
+            let Prod = this.wishlist.find( p => p.productId == prod.productId )
+            if ( !Prod ) this.setProductOn( idCliente, prod )
         })
         this.setLocalWishlist(this.wishlist)
       } else {
-        this.setLocalWishlist( Wishlist )
+        this.setLocalWishlist( cloudWishlist )
       }
 
 
@@ -174,6 +178,14 @@ export class WishlistService {
   }
 
 
+  async getWishlistProductFromDB( productId ) {
+    var product = 
+    await this.fs.collection( `tienda/productos/referencias` ).ref
+    .doc( productId ).get()
+    return product.data() as GdevStoreProductModel
+  }
+
+
   async getProductsInWishlist() {
     await this.getWishlist()
     var products: WishlistProduct[] = []
@@ -187,6 +199,19 @@ export class WishlistService {
   }
 
 
+  async deleteOfWishlist(productId) {
+    var productIndex = this.wishlist.findIndex( prod => prod.productId == productId )
+    if ( productIndex > -1 ) {
+      console.log( 'elimina del wish ', productId );
+      this.wishlist.splice( productIndex, 1 )
+      this.setLocalWishlist( this.wishlist )
+
+      if ( this.LocalClient ) {
+        await this.delProductOn( this.LocalClient.idCliente, productId )
+      }
+
+    }
+  }
 
 
 

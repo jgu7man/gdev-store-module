@@ -30,12 +30,12 @@ export class EditCategoryComponent implements OnInit {
   }
 
   onSubmit() {
-    this._category.editCategory( this.category )
+    this._category.editCategory( this.category, this.categoryId )
       .then( () => {
         console.log( 'listo' );
         this._dialog.close()
-        this._router.navigateByUrl( 'panel/store' ).then( () => {
-          this._router.navigate( [ 'panel/store/categories' ] )
+        this._router.navigateByUrl( 'panel' ).then( () => {
+          this._router.navigate( [ 'panel/tienda/categories' ] )
         } )
       } )
       .catch( error => { this._alerta.sendMessageAlert( 'Oops! Algo salió mal' ) } )

@@ -14,6 +14,7 @@ export class AddWishlistComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.product);
     this.wishlist.getWishlist()
   }
 

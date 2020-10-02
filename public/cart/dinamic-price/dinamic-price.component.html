@@ -11,7 +11,7 @@
             <button mat-raised-button
             color="primary"
             (click)="priceS.addProdCart()"
-            [disabled]="inStock()"
+            [disabled]="!inStock()"
             >Agregar al carrito
             </button>
         </ng-container>
@@ -34,6 +34,6 @@
     
 
     <app-add-wishlist 
-    [product]="productId">
+    [product]="priceS.product.id">
     </app-add-wishlist>
 </div>
