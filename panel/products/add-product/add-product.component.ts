@@ -1,11 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GdevStoreProductModel, ProdDesc } from '../product.model';
-import { Router } from '@angular/router';
 import { GdevStoreCategoriesService } from '../../categories/categories.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { GdevStoreProductsService } from '../products.service';
 import { Location } from '@angular/common';
-import { FormConstructorService } from '../../../../Gdev-Tools/form-constructor/form-constructor.service';
 
 @Component({
   selector: 'gdev-add-product',

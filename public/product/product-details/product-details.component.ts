@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { FormConstructorService } from 'src/app/Gdev-Tools/form-constructor/form-constructor.service';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { Loading } from '../../../../Gdev-Tools/loading/loading.service';
 
 @Component({
@@ -19,7 +17,6 @@ export class ProductDetailsComponent implements OnInit {
   attrs: any[] = []
 
   constructor (
-    private _form: FormConstructorService,
     private _loading: Loading,
   ) { }
 
@@ -33,8 +30,7 @@ export class ProductDetailsComponent implements OnInit {
           if ( attr.includes('#') ) {attrs.splice( i, 1 )}
         } )
         var path = `tienda/productos/categorias/${ this.categoria }`
-        var attrIndex = await this._form.setFieldOrder( path, attrs )
-        attrIndex.forEach( attr => { if ( attr.index != undefined ) this.attrs.push( attr ) } )
+        
       }
     })
   }

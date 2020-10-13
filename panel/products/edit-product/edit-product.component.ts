@@ -1,11 +1,10 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { GdevStoreProductModel, ProdDesc } from '../product.model';
 import { GdevStoreProductsService } from '../products.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { GdevStoreCategoriesService } from '../../categories/categories.service';
 import { Location } from '@angular/common';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { FormConstructorService } from '../../../../Gdev-Tools/form-constructor/form-constructor.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DelProdcutComponent } from '../del-prodcut/del-prodcut.component';
 
@@ -34,7 +33,6 @@ export class EditProductComponent implements OnInit {
     public _products: GdevStoreProductsService,
     private _categorias: GdevStoreCategoriesService,
     public location: Location,
-    private _form: FormConstructorService,
     private _dialog: MatDialog,
     private router: Router
   ) {
@@ -139,7 +137,6 @@ export class EditProductComponent implements OnInit {
 
   onSubmit() {
     this._products.updateProduct( this.product ).then( () => {
-      this._form.onResetValues()
       this.closeForm.emit()
     } )
   }

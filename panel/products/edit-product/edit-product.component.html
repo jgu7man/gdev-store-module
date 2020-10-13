@@ -162,15 +162,15 @@
                     Sube una imagen de producto, es necesaria
                     <gdev-file-uploader [folder]="'productos'"
                     (imageURL)="getImageURL($event)"
-                    [imgPreview]="product.imagenUrl['url']"
+                    [srcPreview]="product.imagenUrl['url']"
                     ></gdev-file-uploader>
                 </div>
 
                 <!-- GALERÍA -->
 
                 Puedes agregar más imágenes del producto como galería
-                <Gdev-file-image-field [field]="{llamadoAccion:'Subir imágenes'}" >
-                </Gdev-file-image-field>
+                <!-- <Gdev-file-image-field [field]="{llamadoAccion:'Subir imágenes'}" >
+                </Gdev-file-image-field> -->
             </div>
         </div>
 

@@ -1,7 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CollapsibleTableService, Column } from 'src/app/Gdev-Tools/collapsible-table/collapsible-table.service';
+import { Component, OnInit, Input} from '@angular/core';
 import { GdevStoreCategoryModel } from '../category.model';
-import { MatSelectChange } from '@angular/material/select';
 import { MatDialog } from '@angular/material/dialog';
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 import { DelCategoryComponent } from '../del-category/del-category.component';

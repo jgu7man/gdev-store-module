@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Slide, Enlace, GdevSliderService } from '../../../../../Gdev-Tools/gdev-slider/gdev-slider.service';
-import { FileImageInputModel } from '../../../../../Gdev-Tools/form-constructor/components/field-render/file-image/file-image-input.model';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatSliderChange } from '@angular/material/slider';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { imageEl } from '../../../../../Gdev-Tools/advance-fields/components/file-uploader/file-uploader.component';
@@ -18,7 +16,7 @@ export class AddSlideComponent implements OnInit {
     nombre: '', image: '', enlace: this.enlace,  activado: true
   }
 
-  uploader: FileImageInputModel
+  uploader
 
   
 
@@ -26,9 +24,9 @@ export class AddSlideComponent implements OnInit {
     public dialog: MatDialogRef<AddSlideComponent>,
     private _slides: GdevSliderService
   ) { 
-    this.uploader = new FileImageInputModel(
-      'Subir imagen', 'upload-image', true, 'Cargar'
-    )
+    // this.uploader = new FileImageInputModel(
+    //   'Subir imagen', 'upload-image', true, 'Cargar'
+    // )
   }
 
   ngOnInit(): void {
