@@ -3,7 +3,7 @@ import { Slide, Enlace, GdevSliderService } from '../../../../../Gdev-Tools/gdev
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { imageEl } from '../../../../../Gdev-Tools/advance-fields/components/file-uploader/file-uploader.component';
+import { imageElement } from '../../../../../Gdev-Tools/advance-fields/components/image-uploader/image-preview/image-preview.component';
 
 @Component({
   templateUrl: './add-slide.component.html',
@@ -41,7 +41,7 @@ export class AddSlideComponent implements OnInit {
     this.enlace.newTab = event.checked
   }
 
-  catchImageURL(image: imageEl) {
+  catchImageURL(image: imageElement) {
     this.slide.image = image.url
   }
 

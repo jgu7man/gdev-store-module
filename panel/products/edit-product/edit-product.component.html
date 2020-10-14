@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <form action="#" method="post" onsubmit="return false" #addProduct="ngForm" autocomplete="off">
+    
         <!-- * DATOS POR DEFAULT DEL PRODUCTO -->
         <div class="row">
             <!-- * CONTENIDO -->
@@ -160,17 +160,22 @@
             <div class="col s12 m6 mat-elevation-z2" >
                 <div class="col s12">
                     Sube una imagen de producto, es necesaria
-                    <gdev-file-uploader [folder]="'productos'"
-                    (imageURL)="getImageURL($event)"
-                    [srcPreview]="product.imagenUrl['url']"
-                    ></gdev-file-uploader>
+                    <gdev-image-uploader [folder]="'productos'"
+                    (result)="getImageURL($event)"
+                    [srcPreview]="product.imagenUrl"
+                    (itemDeleted)="deleteProductImage($event)"
+                    ></gdev-image-uploader>
                 </div>
 
                 <!-- GALERÍA -->
 
                 Puedes agregar más imágenes del producto como galería
-                <!-- <Gdev-file-image-field [field]="{llamadoAccion:'Subir imágenes'}" >
-                </Gdev-file-image-field> -->
+                <gdev-image-uploader [folder]="'productos'"
+                (result)="getImageGallery($event)"
+                [srcGroup]="product.galeria ? product.galeria : []"
+                [multiple]="true"
+                (itemDeleted)="deleteImageGallery($event)"
+                ></gdev-image-uploader>
             </div>
         </div>
 
@@ -187,11 +192,9 @@
                     mat-raised-button
                     color="primary"
                     (click)="onSubmit()"
-                    [disabled]="!addProduct.form.valid && product.imagenUrl == undefined"
                 >
                     Guardar
                 </button>
             </div>
         </div>
-    </form>
 </div>

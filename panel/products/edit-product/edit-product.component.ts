@@ -99,6 +99,22 @@ export class EditProductComponent implements OnInit {
     this.product.imagenUrl = imageURL
   }
 
+  getImageGallery( gallery ) {
+    console.log(gallery);
+    this.product.galeria = gallery
+  }
+
+  deleteProductImage(image) {
+    this.product.imagenUrl  = {}
+  }
+
+  deleteImageGallery(imageURL) {
+    var itemDeleted = this.product.galeria.findIndex(
+      img => img.url == imageURL
+    )
+    this.product.galeria.splice(itemDeleted, 1)
+  }
+
   catchVariantes( variantes ) {
     this.product.variantes = variantes
   }

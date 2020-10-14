@@ -155,17 +155,20 @@
             <div class="col s12 m6 mat-elevation-z2" >
                 <div class="col s12">
                     Sube una imagen de producto, es necesaria
-                    <gdev-file-uploader [folder]="'productos'"
+                    <gdev-image-uploader [folder]="'productos'"
                     (imageURL)="getImageURL($event)"
                     [srcPreview]="product.imagenUrl['url']"
-                    ></gdev-file-uploader>
+                    ></gdev-image-uploader>
                 </div>
 
                 <!-- GALERÍA -->
 
                 Puedes agregar más imágenes del producto como galería
-                <!-- <Gdev-file-image-field [field]="{llamadoAccion:'Subir imágenes'}" > -->
-                <!-- </Gdev-file-image-field> -->
+                <gdev-image-uploader [folder]="'productos'"
+                (imageURL)="getImageURL($event)"
+                [srcPreview]="product.imagenUrl['url']"
+                [multiple]="true"
+                ></gdev-image-uploader>
             </div>
         </div>
 
