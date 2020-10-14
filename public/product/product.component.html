@@ -5,9 +5,14 @@
     <div class="row" id="articulo" *ngIf="product">
         <div class="col s12 m6">
             <div id="article-image">
-                <div class="imgContainer">
-                    <img id="productImg" [src]="product.imagenUrl['url']" [alt]="product.referencia">
+                <div class="imgContainer" [ngStyle]="{background: 'url('+product.imagenUrl.url+')'}">
+                    <!-- <img id="productImg" [src]="product.imagenUrl['url']" [alt]="product.referencia"> -->
                 </div>
+            </div>
+            <div class="gallery-scroll">
+                <gdev-gallery-scroll-thumbnail
+                [images]="product.galeria"
+                ></gdev-gallery-scroll-thumbnail>
             </div>
         </div>
         

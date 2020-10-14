@@ -1,4 +1,4 @@
-<div id="menu-navbar" gdev-color [background]="'complement1'">
+<div id="menu-navbar" gdev-color [background]="'dark'">
     <div class="row">
         <div class="col s8 m3">
             <ng-container *ngIf="responsive.small; else logo">
@@ -12,7 +12,7 @@
             </ng-container>
             <ng-template #logo>
                 <div id="logoContent" [routerLink]="['/tienda']">
-                    <img [src]="'assets/app-logo-neg.png'" alt="logo oficial">
+                    <img [src]="'assets/icons/gdev-store-neg.png'" alt="logo oficial">
                 </div>        
             </ng-template>
         </div>

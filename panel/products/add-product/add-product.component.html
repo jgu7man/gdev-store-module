@@ -156,8 +156,9 @@
                 <div class="col s12">
                     Sube una imagen de producto, es necesaria
                     <gdev-image-uploader [folder]="'productos'"
-                    (imageURL)="getImageURL($event)"
-                    [srcPreview]="product.imagenUrl['url']"
+                    (result)="getImageURL($event)"
+                    [srcPreview]="product.imagenUrl"
+                    (itemDeleted)="deleteProductImage($event)"
                     ></gdev-image-uploader>
                 </div>
 
@@ -165,9 +166,10 @@
 
                 Puedes agregar más imágenes del producto como galería
                 <gdev-image-uploader [folder]="'productos'"
-                (imageURL)="getImageURL($event)"
-                [srcPreview]="product.imagenUrl['url']"
+                (result)="getImageGallery($event)"
+                [srcGroup]="product.galeria ? product.galeria : []"
                 [multiple]="true"
+                (itemDeleted)="deleteImageGallery($event)"
                 ></gdev-image-uploader>
             </div>
         </div>

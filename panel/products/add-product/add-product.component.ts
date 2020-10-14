@@ -84,15 +84,23 @@ export class AddProductComponent implements OnInit {
     this._products.addProductImage(this.imgToLoad)
   }
 
-  setGallery(images) {
-      let files: any[] = images.value
-      files.forEach( async image => {
-        let currentFile = this.product.galeria.find( img => img.alt == image.name )
-        if ( !currentFile ) {
-          this._products.loadGalleryImage(image)
-        }
-      } );
-    }
+
+
+  deleteProductImage( image ) {
+    this.product.imagenUrl = {}
+  }
+  
+  getImageGallery( gallery ) {
+    console.log( gallery );
+    this.product.galeria = gallery
+  }
+
+  deleteImageGallery( imageURL ) {
+    var itemDeleted = this.product.galeria.findIndex(
+      img => img.url == imageURL
+    )
+    this.product.galeria.splice( itemDeleted, 1 )
+  }
   
   catchVariantes(variantes) {
     this.product.variantes = variantes

@@ -99,13 +99,13 @@ export class EditProductComponent implements OnInit {
     this.product.imagenUrl = imageURL
   }
 
+  deleteProductImage(image) {
+    this.product.imagenUrl  = {}
+  }
+  
   getImageGallery( gallery ) {
     console.log(gallery);
     this.product.galeria = gallery
-  }
-
-  deleteProductImage(image) {
-    this.product.imagenUrl  = {}
   }
 
   deleteImageGallery(imageURL) {

@@ -59,6 +59,7 @@ import { FormTemplateComponent } from './contacto/form-template/form-template.co
 import { DocsComponent } from './docs/docs.component';
 import { PrivacidadComponent } from './docs/privacidad/privacidad.component';
 import { DinamicPriceComponent } from './cart/dinamic-price/dinamic-price.component';
+import { GalleryScrollThumbnailComponent } from './product/gallery-scroll-thumbnail/gallery-scroll-thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { DinamicPriceComponent } from './cart/dinamic-price/dinamic-price.compon
     FormTemplateComponent,
     DocsComponent,
     PrivacidadComponent,
-    DinamicPriceComponent
+    DinamicPriceComponent,
+    GalleryScrollThumbnailComponent,
   ],
   imports: [
     CommonModule,
@@ -120,7 +122,7 @@ import { DinamicPriceComponent } from './cart/dinamic-price/dinamic-price.compon
     MaterialModule,
     NgxMaskModule.forRoot(),
     GdevToolsModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
   ],
   exports: [
     GdevStorePublicComponent,

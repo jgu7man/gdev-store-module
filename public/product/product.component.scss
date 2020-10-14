@@ -81,23 +81,16 @@
 .imgContainer{
     position: relative;
     overflow: hidden;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    height: 80vh;
     img {
         position: relative;
         z-index: 2;
         transition: all .3s ease-in-out;
     }
-    .bg-box {
-        width: 300px;
-        height: 250px;
-        position: absolute;
-        z-index: 1;
-        background: linear-gradient(180deg, #005daa, #024175);
-        border-radius: 1em;
-        bottom: 50%;
-        left: 50%;
-        transform: translate(-50%, 50%);
-        opacity: .75;
-    }
+    
     #productImg.entrar {
         animation: entrar .5s ease-out  1 ;
     }
