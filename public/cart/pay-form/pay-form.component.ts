@@ -44,7 +44,9 @@ export class PayFormComponent implements OnInit {
       country: 'México',
     }
     this.buyer = { name: '', email: '', celular: '',id:'' }
-    this.totales = { grand_total: 0, tax: 0, subtotal: 0,}
+    this.totales = { grand_total: 0, tax: 0, subtotal: 0, }
+    let areCart = JSON.parse( localStorage.getItem( 'gdev-order' ) );
+    if(!areCart) this.router.navigate(['/'])
    }
 
   async ngOnInit() {

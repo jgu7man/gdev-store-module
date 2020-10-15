@@ -2,6 +2,10 @@
     min-height: 100vh;
 }
 
+#tienda-container {
+    position: fixed !important;
+}
+
 .contenido {
     top: 5em !important;
 }
@@ -13,7 +17,6 @@
 mat-drawer-container{
     height: 100vh;
     top: 0vh;
-    position: fixed !important;
     width: 100vw;
 }
 

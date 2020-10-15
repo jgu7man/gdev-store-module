@@ -55,7 +55,7 @@ export class WishlistService {
           if ( wishdocs.size > 0 ) {
             await this.loading.asyncForEach(
               wishdocs.docs, async ( doc ) => {
-                tempWishlist.push( doc.id )
+                tempWishlist.push( doc.data() )
             } )
             this.setLocalWishlist(tempWishlist)
             return this.wishlist = tempWishlist

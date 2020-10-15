@@ -131,10 +131,10 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of pedido.products">
-                            <td>{{item.reference}}</td>
+                            <td>{{item.description.referencia}}</td>
                             <td>{{item.cant}}</td>
-                            <td>{{item.unit_price}}</td>
-                            <td>{{item.cant_price}}</td>
+                            <td>{{item.unit_precio}}</td>
+                            <td>{{item.unit_precio * item.cant}}</td>
                         </tr>
                     </tbody>
                 </table>

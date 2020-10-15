@@ -31,6 +31,10 @@ export class OrdersService {
   get userOrderRef() {
     return this.fs.collection(`clientes/${this.cliente.idCliente}/orders`).ref
   }
+
+  get cartRef() {
+    return this.fs.collection( `clientes/${ this.cliente.idCliente }/cart` ).ref
+  }
   
   async saveOrder( order: OrderModel ) {
     this.store = await this._main.getContactDatos()
@@ -47,6 +51,8 @@ export class OrdersService {
       
       localStorage.removeItem( 'gdev-order' )
       localStorage.removeItem( 'gdev-cart' )
+      let cartDocs = await this.cartRef.get()
+      cartDocs.forEach( doc => { this.cartRef.doc( doc.id ).delete() })
       return 
     } catch (error) {
       console.error(error);
