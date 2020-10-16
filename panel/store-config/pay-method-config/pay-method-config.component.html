@@ -8,6 +8,7 @@
                 [aria-label]="method.value"
                 [checked]="payConfig.avalibleMethods.includes(method.value)"
                 (change)="toggleMethod(element, $event)"
+                color="primary"
                 >{{method.viewValue}}</mat-slide-toggle>
             </div>
             <div class="col s12">

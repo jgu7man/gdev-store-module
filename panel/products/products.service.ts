@@ -36,7 +36,7 @@ export class GdevStoreProductsService {
             const colRef = this.fs.collection( 'tienda/productos/referencias' ).ref;
 
             var productCrated = await colRef.doc(productId).set( productObject )
-
+            this.alertas.sendFloatNotification('Producto agregado')
             return true
         } catch (error) {
             console.log(error);
@@ -109,6 +109,7 @@ export class GdevStoreProductsService {
             console.log(productObject);
             await colRef.doc( product.id ).update( productObject )
 
+            this.alertas.sendFloatNotification('Producto guardado')
             return true
         } catch ( error ) {
             this.alertas.sendMessageAlert('Ups, algo falló. No se guardó')
@@ -122,6 +123,7 @@ export class GdevStoreProductsService {
         productRef.doc( itemId ).update( {
             [ itemAttr ]: firebase.firestore.FieldValue.delete()
         } )
+        this.alertas.sendFloatNotification('Producto eliminado')
         return 
     }
 

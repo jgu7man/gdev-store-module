@@ -130,9 +130,9 @@
     cursor: pointer;
 }
 
-.variante_container, .addons_container {
+.variante_container, .addons_container, .details_container {
     padding: 1.5em 0;
-    .variante_header, .addons_header {
+    .variante_header, .addons_header, .details_header {
         background: #ccc;
         padding: 1em;
         text-transform: capitalize;

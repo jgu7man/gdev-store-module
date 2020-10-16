@@ -1,10 +1,13 @@
 <div class="container">
     <div class="row align-cols">
-        <div class="col s10">
+        <div class="col s9">
             <h2>PRODUCTO</h2>
         </div>
-        <div class="col s2">
-            <button mat-raised-button (click)="closeForm.emit()" >REGRESAR</button>
+        <div class="col s3 align-cols" id="botonera">
+            <button mat-raised-button color="accent" (click)="closeForm.emit()" >REGRESAR</button>
+            <button (click)="onDelete()" mat-mini-fab color="warn">
+                <i class="fas fa-trash"></i> 
+            </button>
         </div>
     </div>
 
@@ -44,6 +47,7 @@
                             [(ngModel)]="product.onStock"
                             (change)="setStock($event)"
                             #onStock
+                            color="primary"
                             >¿En stock?
                         </mat-slide-toggle>
                     </div>
@@ -105,7 +109,7 @@
 
                 <div class="col s12">
                     <h4>Precios</h4>
-                    <mat-tab-group backgroundColor="accent">
+                    <mat-tab-group backgroundColor="primary">
                         <mat-tab label="Precio">
                             <div class="row">
                                 <div class="col s9">
@@ -152,7 +156,10 @@
                     </mat-tab-group>
                 </div>
                 <div class="col s12">
-                    <button (click)="onDelete()" mat-raised-button color="warning">Eliminar Producto</button>
+                    <gdev-prod-details 
+                    [details]="product.detalles ? product.detalles : []" 
+                    (detailsChanged)="product.detalles = $event" 
+                    ></gdev-prod-details>
                 </div>
             </div>
 

@@ -38,6 +38,7 @@ import { BranchFormComponent } from './store-config/branches/branch-form/branch-
 import { PayMethodConfigComponent } from './store-config/pay-method-config/pay-method-config.component';
 import { PedidosComponent } from "./pedidos/pedidos.component";
 import { PedidoComponent } from "./pedidos/pedido/pedido.component";
+import { ProdDetailsComponent } from './products/prod-details/prod-details.component';
 
 
 @NgModule( {
@@ -79,6 +80,7 @@ import { PedidoComponent } from "./pedidos/pedido/pedido.component";
     PayMethodConfigComponent,
     PedidosComponent,
     PedidoComponent,
+    ProdDetailsComponent,
   ],
   imports: [
     CommonModule,

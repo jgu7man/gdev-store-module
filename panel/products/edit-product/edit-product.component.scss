@@ -4,6 +4,11 @@
     margin-right: 2%;
 }
 
+#botonera {
+    display: flex;
+    justify-content: space-around;
+}
+
 ::ng-deep {
     .mat-tab-body-wrapper {
         padding: 1em;

@@ -10,7 +10,8 @@ export class GdevStoreProductModel {
         public galeria?: any[],
         public variantes?: ProdVariante[],
         public addons?: Addon[],
-        public descuento?:ProdDesc,
+        public descuento?: ProdDesc,
+        public detalles?: ProdDetalle[],
         public id?: string,
     ) { }
 }
@@ -32,3 +33,7 @@ export interface ProdDesc {
     exp?: any
 }
 
+export interface ProdDetalle {
+    detailName: string,
+    detailValue: any
+}
