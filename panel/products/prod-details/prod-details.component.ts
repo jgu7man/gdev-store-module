@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { parse } from 'path';
 import { ProdDetalle } from '../product.model';
 import { AlertService } from '../../../../Gdev-Tools/alerts/alert.service';
 
