@@ -3,8 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { ClienteLoginService } from '../cliente-login.service';
 import { Router } from '@angular/router';
 import { ClienteModel } from '../../cliente.model';
-import { GdevLoginFields } from '../../../../../Gdev-Tools/gdev-login/components/login-card/login-card.component';
-import { RestorePasswordComponent } from '../../../../../Gdev-Tools/gdev-login/components/restore-password/restore-password.component';
+import { GdevLoginFields } from '../../../../../gdev-tools/gdev-login/components/login-card/login-card.component';
+import { RestorePasswordComponent } from '../../../../../gdev-tools/gdev-login/components/restore-password/restore-password.component';
 
 @Component({
   templateUrl: './popup-login.component.html',

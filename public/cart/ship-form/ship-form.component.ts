@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MobileNavbarService } from '../../tienda-navbar/mobile-navbar.service';
 import { ShipService } from './ship.service';
-import { FullCalendarService } from '../../../../Gdev-Tools/calendar/calendar.service';
+import { FullCalendarService } from '../../../../gdev-tools/calendar/calendar.service';
 
 @Component({
   templateUrl: './ship-form.component.html',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { OrderModel } from '../../public/cart/order.model';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { AlertService } from '../../../Gdev-Tools/alerts/alert.service';
+import { AlertService } from '../../../gdev-tools/alerts/alert.service';
 
 @Injectable( {
   providedIn: 'root'

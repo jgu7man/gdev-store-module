@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from '@angular/fire/firestore';
 // import { ContactoService } from './contato.service';
-import { AlertService } from 'src/app/Gdev-Tools/alerts/alert.service';
+import { AlertService } from 'src/app/gdev-tools/alerts/alert.service';
 import { Time } from '@angular/common';
 import { PickupOrder } from '../order.model';
 import { BranchesService } from '../../../panel/store-config/branches/branches.service';
@@ -122,7 +122,7 @@ export class ShipService {
             
         var citas = []
             docs.docChanges().forEach(res => {
-                var fecha = res.doc.data().hora.toDate()
+                var fecha = res.doc.data()['hora'].toDate()
                 citas.push({start: fecha});
             })
         this.citas = citas
@@ -148,8 +148,8 @@ export class ShipService {
             docs.forEach(doc => {
                 citaFecha.push({
                         data: doc.data(),
-                        dia: doc.data().dia.toDate(),
-                        hora: doc.data().hora.toDate()
+                        dia: doc.data()['dia'].toDate(),
+                        hora: doc.data()['hora'].toDate()
                     })
             })
 

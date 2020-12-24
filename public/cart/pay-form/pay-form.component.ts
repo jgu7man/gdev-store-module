@@ -5,8 +5,8 @@ import { ClienteModel } from '../../clientes/cliente.model';
 import { DeliveryAddress, ProductOrdered, OrderModel, Buyer, OrderTotales } from '../order.model';
 import { DeliveryService } from '../../../panel/store-config/delivery-config/delivery.service';
 import { OrdersService } from '../orders.service';
-import { AlertService } from '../../../../Gdev-Tools/alerts/alert.service';
-import { PreguntaAlertaModel, MessageAlertModel } from '../../../../Gdev-Tools/alerts/alerts.model';
+import { AlertService } from '../../../../gdev-tools/alerts/alert.service';
+import { PreguntaAlertaModel, MessageAlertModel } from '../../../../gdev-tools/alerts/alerts.model';
 import { Router } from '@angular/router';
 
 @Component({

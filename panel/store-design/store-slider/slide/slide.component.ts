@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Slide } from 'src/app/Gdev-Tools/gdev-slider/gdev-slider.service';
-import { GdevSliderService, Enlace } from '../../../../../Gdev-Tools/gdev-slider/gdev-slider.service';
+import { Slide } from 'src/app/gdev-tools/gdev-slider/gdev-slider.service';
+import { GdevSliderService, Enlace } from '../../../../../gdev-tools/gdev-slider/gdev-slider.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { OrderModel } from '../../cart/order.model';
-import { TextService } from '../../../../Gdev-Tools/text/gdev-text.service';
+import { TextService } from '../../../../gdev-tools/text/gdev-text.service';
 
 @Component({
   selector: 'gdev-pedido',

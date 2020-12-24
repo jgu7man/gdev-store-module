@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { SeoService } from '../../../Gdev-Tools/commons/gdev-seo.service';
+import { SeoService } from '../../../gdev-tools/commons/gdev-seo.service';
 import { GdevMainService } from '../../../gdev-panel/gdev-main.service';
 import { DatosContactoModel } from '../../../gdev-panel/contacto/contacto.model';
 

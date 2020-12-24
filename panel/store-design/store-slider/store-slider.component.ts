@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionList, MatSelectionListChange } from '@angular/material/list';
-import { GdevSliderService } from 'src/app/Gdev-Tools/gdev-slider/gdev-slider.service';
-import { Slide } from 'src/app/Gdev-Tools/gdev-slider/gdev-slider.service';
+import { GdevSliderService } from 'src/app/gdev-tools/gdev-slider/gdev-slider.service';
+import { Slide } from 'src/app/gdev-tools/gdev-slider/gdev-slider.service';
 import { AddSlideComponent } from './add-slide/add-slide.component';
 import { MatDrawer } from '@angular/material/sidenav';
-import { Enlace } from 'src/app/Gdev-Tools/gdev-slider/gdev-slider.service';
+import { Enlace } from 'src/app/gdev-tools/gdev-slider/gdev-slider.service';
 
 @Component({
   templateUrl: './store-slider.component.html',

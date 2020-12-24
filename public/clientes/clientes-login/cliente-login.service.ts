@@ -4,12 +4,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { auth } from 'firebase/app';
+import firebase from 'firebase/app';
 import { ClientesService } from '../clientes.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WishlistService } from '../../wishlist/wishlist.service';
 import { ClienteModel } from '../cliente.model';
-import { AlertService } from '../../../../Gdev-Tools/alerts/alert.service';
+import { AlertService } from '../../../../gdev-tools/alerts/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +73,7 @@ export class ClienteLoginService {
   async googleSingIn() {
     // Abre el popup de autenticación
 
-    const provider = new auth.GoogleAuthProvider()
+    const provider = new firebase.auth.GoogleAuthProvider()
     var credential = await this.auth.signInWithPopup( provider )
     var email = credential.user.email
     this.cliente = await this._clientes.getCliente( 'email', email )
@@ -84,7 +84,7 @@ export class ClienteLoginService {
 
   async facebookSingIn() {
     // Abre el popup de autenticación
-    const provider = new auth.FacebookAuthProvider();
+    const provider = new firebase.auth.FacebookAuthProvider();
     var credential = await this.auth.signInWithPopup( provider )
     var email = credential.user.email
     this.cliente = await this._clientes.getCliente( 'email', email )

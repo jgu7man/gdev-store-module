@@ -60,7 +60,7 @@ export class GdevStorePublicService {
 
         if ( product.descuento ) {
             if ( product.descuento.cant > 0 ) {
-                product.descuento.exp = productDoc.data().desc.exp.toDate()
+                product.descuento.exp = productDoc.data()['desc'].exp.toDate()
             }
         }
 

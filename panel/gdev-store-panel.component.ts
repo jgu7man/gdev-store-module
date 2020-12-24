@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GdevResponsiveService } from '../../Gdev-Tools/commons/gdev-responsive.service';
-import { SidenavNode } from '../../Gdev-Tools/sidenav/sidenav.interface';
+import { GdevResponsiveService } from '../../gdev-tools/commons/gdev-responsive.service';
+import { SidenavNode } from '../../gdev-tools/sidenav/sidenav.interface';
 
 @Component({
   selector: 'gdev-store-panel',

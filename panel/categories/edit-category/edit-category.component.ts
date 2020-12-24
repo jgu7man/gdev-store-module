@@ -3,7 +3,7 @@ import { GdevStoreCategoryModel } from '../category.model';
 import { GdevStoreCategoriesService } from '../categories.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AlertService } from '../../../../Gdev-Tools/alerts/alert.service';
+import { AlertService } from '../../../../gdev-tools/alerts/alert.service';
 
 @Component({
   selector: 'gdev-edit-category',

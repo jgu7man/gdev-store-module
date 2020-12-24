@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PickupOrder, DeliveryAddress } from '../../order.model';
 import { ShipService } from '../ship.service';
-// import { FullCalendarService } from '../../../../Gdev-Tools/calendar/calendar.service';
+// import { FullCalendarService } from '../../../../gdev-tools/calendar/calendar.service';
 import { CartService } from '../../cart.service';
-import { AlertService } from '../../../../../Gdev-Tools/alerts/alert.service';
+import { AlertService } from '../../../../../gdev-tools/alerts/alert.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupLoginComponent } from '../../../clientes/clientes-login/popup-login/popup-login.component';
 import { BranchesService } from '../../../../panel/store-config/branches/branches.service';

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { WishlistProduct } from './wishlist-product.model';
 import { GdevStoreProductModel } from '../../panel/products/product.model';
-import { Loading } from 'src/app/Gdev-Tools/loading/loading.service';
+import { Loading } from 'src/app/gdev-tools/loading/loading.service';
 import { ClienteModel } from '../clientes/cliente.model';
 
 @Injectable( {

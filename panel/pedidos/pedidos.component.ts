@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatSelectionList, MatSelectionListChange } from '@angular/material/list';
-import { TextService } from '../../../Gdev-Tools/text/gdev-text.service';
+import { TextService } from '../../../gdev-tools/text/gdev-text.service';
 import { OrderModel } from '../../public/cart/order.model';
 import { PedidosService } from './pedidos.service';
 import { Subscription } from 'rxjs';

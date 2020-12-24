@@ -1,0 +1,22 @@
+{
+  "name": "gdev-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgu7man/gdev-store.git"
+  },
+  "author": "jgu7man",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgu7man/gdev-store/issues"
+  },
+  "homepage": "https://github.com/jgu7man/gdev-store#readme",
+  "dependencies": {
+    "ngx-mask": "^11.1.4"
+  }
+}

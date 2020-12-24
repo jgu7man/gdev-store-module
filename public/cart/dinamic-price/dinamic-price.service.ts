@@ -5,7 +5,7 @@ import { CartProductModel } from '../cart-product.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { BehaviorSubject, AsyncSubject, Subscription, Subject } from 'rxjs';
 import { MatRadioChange } from '@angular/material/radio';
-import { Loading } from '../../../../Gdev-Tools/loading/loading.service';
+import { Loading } from '../../../../gdev-tools/loading/loading.service';
 import { distinctUntilKeyChanged } from 'rxjs/operators';
 
 @Injectable({

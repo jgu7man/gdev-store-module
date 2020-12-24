@@ -1,13 +1,12 @@
+import { GdevMainService } from './../../../gdev-panel/gdev-main.service';
+import { MailService } from './../../../gdev-panel/mails/mail.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { OrderModel } from './order.model';
 import { ClienteModel } from '../clientes/cliente.model';
-import { DatosContactoModel } from '../../../gdev-panel/contacto/contacto.model';
-import { GdevMainService } from '../../../gdev-panel/gdev-main.service';
-import { MailService } from '../../../gdev-panel/mails/mail.service';
-import { ContactoComponent } from '../../../gdev-panel/contacto/contacto.component';
 import { CartProductModel } from './cart-product.model';
 import { GdevStoreProductModel } from '../../panel/products/product.model';
+import { DatosContactoModel } from 'src/app/gdev-panel/contacto/contacto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -87,12 +86,12 @@ export class OrdersService {
     if ( docs.size > 0 ) {
       docs.forEach( doc => {
         let order = doc.data() as OrderModel
-        order.pay_date = doc.data().pay_date.toDate()
+        order.pay_date = doc.data()['pay_date'].toDate()
         if ( order.delivery.delivery_date ) {
-          order.delivery.delivery_date = doc.data().delivery.delivery_date.toDate()
+          order.delivery.delivery_date = doc.data()['delivery'].delivery_date.toDate()
         }
         if ( order.ship_method == 'pickup' ) {
-          order.pickup.pickup_date = doc.data().pickup.pickup_date.toDate()
+          order.pickup.pickup_date = doc.data()['pickup'].pickup_date.toDate()
         }
         userOrders.push( order )
       } )

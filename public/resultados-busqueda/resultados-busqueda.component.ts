@@ -6,7 +6,7 @@ import { MobileNavbarService } from '../tienda-navbar/mobile-navbar.service';
 import { Location } from '@angular/common';
 import { GdevStoreProductModel } from '../../panel/products/product.model';
 import { GdevStorePublicService } from '../gdev-store-public.service';
-import { SeoService } from '../../../Gdev-Tools/commons/gdev-seo.service';
+import { SeoService } from '../../../gdev-tools/commons/gdev-seo.service';
 
 @Component({
   templateUrl: './resultados-busqueda.component.html',

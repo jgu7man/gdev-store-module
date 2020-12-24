@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderModel } from '../cart/order.model';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatSelectionList, MatSelectionListChange } from '@angular/material/list';
-import { TextService } from '../../../Gdev-Tools/text/gdev-text.service';
+import { TextService } from '../../../gdev-tools/text/gdev-text.service';
 
 @Component({
   selector: 'gdev-pedidos',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Loading } from '../../../../Gdev-Tools/loading/loading.service';
+import { Loading } from '../../../../gdev-tools/loading/loading.service';
 
 @Component({
   selector: 'app-product-details',

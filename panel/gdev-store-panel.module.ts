@@ -18,10 +18,10 @@ import { GdevCategoryAttributesComponent } from './categories/category-attribute
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { DelProdcutComponent } from './products/del-prodcut/del-prodcut.component';
-import { GdevToolsModule } from '../../Gdev-Tools/gdev-tools.module';
+import { GdevToolsModule } from '../../gdev-tools/gdev-tools.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AddAdminComponent } from '../../gdev-panel/admin/add-admin/add-admin.component';
-import { EditAdminComponent } from '../../gdev-panel/admin/edit-admin/edit-admin.component';
+// import { AddAdminComponent } from '../../gdev-panel/admin/add-admin/add-admin.component';
+// import { EditAdminComponent } from '../../gdev-panel/admin/edit-admin/edit-admin.component';
 import { StoreDesignComponent } from './store-design/store-design.component';
 import { StoreSliderComponent } from './store-design/store-slider/store-slider.component';
 import { AddSlideComponent } from './store-design/store-slider/add-slide/add-slide.component';
@@ -96,8 +96,8 @@ import { ProdDetailsComponent } from './products/prod-details/prod-details.compo
     AddCategoryComponent,
     EditCategoryComponent,
     DelCategoryComponent,
-    AddAdminComponent,
-    EditAdminComponent,
+    // AddAdminComponent,
+    // EditAdminComponent,
     AddSlideComponent
   ],
   exports: [

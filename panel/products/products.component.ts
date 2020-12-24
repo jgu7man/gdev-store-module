@@ -1,7 +1,7 @@
 import { GdevStoreCategoriesService } from './../categories/categories.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GdevStoreProductModel, ProdDesc } from './product.model';
-import { GdevIndexService } from 'src/app/Gdev-Tools/query-index/gdev-index.service';
+import { GdevIndexService } from 'src/app/gdev-tools/query-index/gdev-index.service';
 import { MatSelectionListChange, MatSelectionList } from '@angular/material/list';
 import { MatDrawer } from '@angular/material/sidenav';
 

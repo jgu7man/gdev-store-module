@@ -46,7 +46,7 @@ import { ProductOnWishlistComponent } from './wishlist/product-on-wishlist/produ
 import { ResultadosBusquedaComponent } from './resultados-busqueda/resultados-busqueda.component';
 import { GdevStorePublicComponent } from './gdev-store-public.component';
 import { PopupLoginComponent } from './clientes/clientes-login/popup-login/popup-login.component';
-import { GdevToolsModule } from '../../Gdev-Tools/gdev-tools.module';
+import { GdevToolsModule } from '../../gdev-tools/gdev-tools.module';
 import { AparadorComponent } from './aparador/aparador.component';
 import { DestacadosComponent } from './aparador/destacados/destacados.component';
 import { FooterComponent } from './footer/footer.component';

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Slide, Enlace, GdevSliderService } from '../../../../../Gdev-Tools/gdev-slider/gdev-slider.service';
+import { Slide, Enlace, GdevSliderService } from '../../../../../gdev-tools/gdev-slider/gdev-slider.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { imageElement } from '../../../../../Gdev-Tools/advance-fields/components/image-uploader/image-preview/image-preview.component';
+import { imageElement } from '../../../../../gdev-tools/advance-fields/components/image-uploader/image-preview/image-preview.component';
 
 @Component({
   templateUrl: './add-slide.component.html',

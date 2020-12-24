@@ -8,7 +8,7 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StoreSliderComponent } from './store-design/store-slider/store-slider.component';
-import { GdevSliderConfigComponent } from '../../Gdev-Tools/gdev-slider/gdev-slider-config/gdev-slider-config.component';
+import { GdevSliderConfigComponent } from '../../gdev-tools/gdev-slider/gdev-slider-config/gdev-slider-config.component';
 import { ClientesComponent } from '../../gdev-panel/clientes/clientes.component';
 import { StoreConfigComponent } from './store-config/store-config.component';
 import { PedidosComponent } from './pedidos/pedidos.component';

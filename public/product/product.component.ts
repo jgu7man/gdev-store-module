@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Inject, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { GdevCommonsService } from 'src/app/Gdev-Tools/commons/gdev-commons.service';
-import { SeoService } from 'src/app/Gdev-Tools/commons/gdev-seo.service';
+import { GdevCommonsService } from 'src/app/gdev-tools/commons/gdev-commons.service';
+import { SeoService } from 'src/app/gdev-tools/commons/gdev-seo.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 import { WishlistService } from '../wishlist/wishlist.service';
 import { MobileNavbarService } from '../tienda-navbar/mobile-navbar.service';
 import { GdevStorePublicService } from '../gdev-store-public.service';
-import { Loading } from 'src/app/Gdev-Tools/loading/loading.service';
+import { Loading } from 'src/app/gdev-tools/loading/loading.service';
 import { GdevStoreProductModel, Addon, ProdVariante } from '../../panel/products/product.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CartProductModel } from '../cart/cart-product.model';

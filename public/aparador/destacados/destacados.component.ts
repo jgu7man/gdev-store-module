@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { WishlistService } from '../../wishlist/wishlist.service';
 import { CartService } from '../../cart/cart.service';
 import { MobileNavbarService } from '../../tienda-navbar/mobile-navbar.service';
-import { SeoService } from '../../../../Gdev-Tools/commons/gdev-seo.service';
+import { SeoService } from '../../../../gdev-tools/commons/gdev-seo.service';
 
 @Component({
   selector: 'gdev-destacados',

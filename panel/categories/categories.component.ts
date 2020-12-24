@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GdevStoreCategoriesService } from './categories.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCategoryComponent } from './add-category/add-category.component';
-import { Loading } from '../../../Gdev-Tools/loading/loading.service';
+import { Loading } from '../../../gdev-tools/loading/loading.service';
 
 @Component({
   selector: 'gdev-store-categories',

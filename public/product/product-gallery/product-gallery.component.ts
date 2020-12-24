@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Inject, ViewChild, AfterViewInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { imageElement } from 'src/app/Gdev-Tools/advance-fields/components/image-uploader/image-preview/image-preview.component';
-import { MatCarouselComponent } from '../../../../Gdev-Tools/gdev-slider/mat-carousel/carousel.component';
+import { imageElement } from 'src/app/gdev-tools/advance-fields/components/image-uploader/image-preview/image-preview.component';
+import { MatCarouselComponent } from '../../../../gdev-tools/gdev-slider/mat-carousel/carousel.component';
 
 @Component( {
   selector: 'app-product-gallery',

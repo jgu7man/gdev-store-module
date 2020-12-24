@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GdevStoreCategoryModel } from '../category.model';
 import { GdevStoreCategoriesService } from '../categories.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AlertService } from 'src/app/Gdev-Tools/alerts/alert.service';
+import { AlertService } from 'src/app/gdev-tools/alerts/alert.service';
 import { Router } from '@angular/router';
 
 @Component({

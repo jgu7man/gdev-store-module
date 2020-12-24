@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { SelectItem } from 'src/app/Gdev-Tools/commons/gdev-commons.service';
-import { TextService } from '../../../../Gdev-Tools/text/gdev-text.service';
+import { SelectItem } from 'src/app/gdev-tools/commons/gdev-commons.service';
+import { TextService } from '../../../../gdev-tools/text/gdev-text.service';
 import { OrderModel } from '../../../public/cart/order.model';
 import { PedidosService } from '../pedidos.service';
 import { MailService } from '../../../../gdev-panel/mails/mail.service';

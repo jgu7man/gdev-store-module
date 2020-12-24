@@ -4,7 +4,7 @@ import { CartProductModel } from './cart-product.model';
 import { MobileNavbarService } from '../tienda-navbar/mobile-navbar.service';
 import { ProductOrdered, OrderModel, OrderTotales } from './order.model';
 import { Router } from '@angular/router';
-import { Loading } from 'src/app/Gdev-Tools/loading/loading.service';
+import { Loading } from 'src/app/gdev-tools/loading/loading.service';
 import { ClienteModel } from '../clientes/cliente.model';
 
 @Component({

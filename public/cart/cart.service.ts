@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CartProductModel } from './cart-product.model';
-import { Loading } from 'src/app/Gdev-Tools/loading/loading.service';
+import { Loading } from 'src/app/gdev-tools/loading/loading.service';
 import { GdevStoreProductModel } from '../../panel/products/product.model';
 import { ClienteModel } from '../clientes/cliente.model';
 

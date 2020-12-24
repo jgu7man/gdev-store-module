@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ClienteModel } from './cliente.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AlertService } from '../../../Gdev-Tools/alerts/alert.service';
+import { AlertService } from '../../../gdev-tools/alerts/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +52,7 @@ export class ClientesService {
   async getCliente( idKind: 'celular' | 'id' | 'email', id: string ) {
     const clientsRef = this.fs.collection( 'clientes' ).ref
     // var Doc = await clientsRef.where( 'celular', '==', id ).get()
-    var clienteDoc: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>,
+    var clienteDoc,
       cliente: ClienteModel;
 
     

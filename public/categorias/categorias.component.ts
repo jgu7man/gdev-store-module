@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { GdevCommonsService } from 'src/app/Gdev-Tools/commons/gdev-commons.service';
+import { GdevCommonsService } from 'src/app/gdev-tools/commons/gdev-commons.service';
 import { GdevStoreCategoriesService } from '../../panel/categories/categories.service';
 import { GdevStoreCategoryModel } from '../../panel/categories/category.model';
 
