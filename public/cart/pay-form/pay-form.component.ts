@@ -117,8 +117,7 @@ export class PayFormComponent implements OnInit {
 
     this._orders.saveOrder( this.order )
       .then( () => {
-        this._alert.sendRequestAlert( alertBody ).afterClosed()
-          .subscribe( resp => {
+        this._alert.sendRequestAlert( alertBody ).subscribe( resp => {
             resp
               ? this.router.navigate( [ '/tienda' ] )
               : this.router.navigate( [ '/tienda/cuenta' ] );

@@ -45,9 +45,11 @@ export class ProductsComponent implements OnInit {
 
   async loadCategories() {
     var categories = await this._categories.loadCategories()
-    categories.forEach( category => {
-      this.categories.push(category.name)
-    })
+    if ( categories ) {
+      categories.forEach( category => {
+        this.categories.push(category.name)
+      })
+    }
   }
 
   

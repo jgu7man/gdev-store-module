@@ -46,7 +46,7 @@ export class TiendaNavbarComponent implements OnInit {
 
   ngOnInit() {
     this.login.cliente$.subscribe( cliente => {
-      localStorage.setItem( 'gdev-cliente', JSON.stringify( cliente ) );
+      if (cliente) localStorage.setItem( 'gdev-cliente', JSON.stringify( cliente ) );
     })
 
     $( '#page_menu' ).hover(

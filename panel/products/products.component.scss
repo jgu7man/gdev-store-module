@@ -65,3 +65,14 @@ mat-drawer-container {
         max-height: 45px;
     }
 }
+
+.empty-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    p{
+        font-size: large;
+        font-weight: bold;
+    }
+}

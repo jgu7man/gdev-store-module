@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MobileNavbarService } from './tienda-navbar/mobile-navbar.service';
+import { GdevMainService } from '../../gdev-panel/gdev-main.service';
+import { AlertService } from '../../gdev-tools/alerts/alert.service';
+import { Router } from '@angular/router';
+import { StoreModel } from 'src/app/gdev-panel/models/store.model';
 
 @Component({
   selector: 'gdev-store-public',
@@ -11,7 +15,34 @@ import { MobileNavbarService } from './tienda-navbar/mobile-navbar.service';
 export class GdevStorePublicComponent implements OnInit {
 
   @ViewChild('menu_mobile') menuMobile: MatDrawer
-  constructor(public _navbar: MobileNavbarService) { }
+  constructor (
+    public _navbar: MobileNavbarService,
+    private _main: GdevMainService,
+    private _alert: AlertService,
+    private _router: Router
+  ) {
+    var favicon: HTMLLinkElement = document.querySelector( '[type="image/x-icon"]' )
+    favicon.href = 'app/gdev-panel/assets/img/gdev-icono-trans-1x1.png'
+    
+    this._main.getStoreData()
+      .then( (data: StoreModel ) => {
+        if ( data.logoURL ) {
+          // set logoURL
+        }
+      })
+      .catch( error => {
+      this._alert.sendRequestAlert( {
+        message:
+          "Errores adminsitrativos. Si eres administrador inicia sesión para resolverlos. Si no, disculpa las molestias",
+        trueMsg: "Ir al panel",
+        falseMsg: "OK",}
+      ).subscribe( response => {
+        if ( response ) {
+          this._router.navigate(['/panel'])
+        }
+      })
+    })
+   }
 
   ngOnInit() {
     this.toggleMenu()
