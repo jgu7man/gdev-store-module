@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { PayConfigModel } from './pay-config.model';
+import { AlertService } from '../../../../gdev-tools/alerts/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,21 @@ export class PayMethodsService {
     { value: 'oxxo', viewValue: 'OXXO' },
   ]
   constructor (
-    private fs: AngularFirestore
+    private fs: AngularFirestore,
+    private _alerts: AlertService
   ) { }
 
 
-  savePayConfig(config: PayConfigModel) {
-    const ref = this.fs.doc( 'tienda/pay_method' ).ref
-    ref.set({...config}, {merge: true})
+  async savePayConfig(config: PayConfigModel) {
+    try {
+      const ref = this.fs.doc( 'tienda/pay_method' ).ref
+      ref.set( { ...config }, { merge: true } )
+      this._alerts.sendFloatNotification( 'Data guardada' )
+      return 
+    } catch (error) {
+      console.error(error)
+      this._alerts.sendError('Error', error)
+    }
   }
   
   async getAvalibleMethods() {

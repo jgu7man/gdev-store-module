@@ -1,24 +1,88 @@
 <div class="col s12 m6">
     <div class="row">
         <h2>Métodos de pago</h2>
-        <div class="row"*ngFor="let method of payConfigS.methods" >
+        
+        <div class="row" >
             <div class="col s12">
                 <mat-slide-toggle
-                #element
-                [aria-label]="method.value"
-                [checked]="payConfig.avalibleMethods.includes(method.value)"
-                (change)="toggleMethod(element, $event)"
+                [checked]="payConfig.avalibleMethods.includes('efectivo')"
+                (change)="toggleMethod('efectivo', $event)"
                 color="primary"
-                >{{method.viewValue}}</mat-slide-toggle>
+                >efectivo}</mat-slide-toggle>
             </div>
             <div class="col s12">
-                <mat-expansion-panel [disabled]="!payConfig.avalibleMethods.includes(method.value)">
+                <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                        {{method.viewValue}}
+                        efectivo
+                    </mat-expansion-panel-header>
+                    Al activar este método de pago, no es necesario hacer nada. Sólo asegúrate de cobrar correctamente al entregar.
+                </mat-expansion-panel>
+            </div>
+        </div>
+        
+        
+        <div class="row" >
+            <div class="col s12">
+                <mat-slide-toggle
+                [checked]="payConfig.avalibleMethods.includes('transferencia')"
+                (change)="toggleMethod('transferencia', $event)"
+                color="primary"
+                >transferencia}</mat-slide-toggle>
+            </div>
+            <div class="col s12">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        transferencia
                     </mat-expansion-panel-header>
                     content
                 </mat-expansion-panel>
             </div>
         </div>
+        
+        <div class="row" >
+            <div class="col s12">
+                <mat-slide-toggle
+                [checked]="payConfig.avalibleMethods.includes('tarjeta')"
+                (change)="toggleMethod('tarjeta', $event)"
+                color="primary"
+                >tarjeta</mat-slide-toggle>
+            </div>
+            <div class="col s12">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        tarjeta
+                    </mat-expansion-panel-header>
+                    content
+                </mat-expansion-panel>
+            </div>
+        </div>
+        
+        <div class="row" >
+            <div class="col s12">
+                <mat-slide-toggle
+                [checked]="payConfig.avalibleMethods.includes('paypal')"
+                (change)="toggleMethod('paypal', $event)"
+                color="primary"
+                >paypal</mat-slide-toggle>
+            </div>
+            <div class="col s12">
+                <gdev-paypal-config [data]="payConfig.paypalData ? payConfig.paypalData : null" ></gdev-paypal-config>
+            </div>
+        </div>
+        
+        <div class="row" >
+            <div class="col s12">
+                <mat-slide-toggle
+                [checked]="payConfig.avalibleMethods.includes('mercadopago')"
+                (change)="toggleMethod('mercadopago', $event)"
+                color="primary"
+                >mercadopago</mat-slide-toggle>
+            </div>
+            <div class="col s12">
+                <gdev-mercado-config
+                [data]="payConfig.mercadopagoData ? payConfig.mercadopagoData : null"></gdev-mercado-config>
+            </div>
+        </div>
+
     </div>
 </div>

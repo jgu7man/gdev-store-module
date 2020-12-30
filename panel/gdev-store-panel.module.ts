@@ -39,6 +39,8 @@ import { PayMethodConfigComponent } from './store-config/pay-method-config/pay-m
 import { PedidosComponent } from "./pedidos/pedidos.component";
 import { PedidoComponent } from "./pedidos/pedido/pedido.component";
 import { ProdDetailsComponent } from './products/prod-details/prod-details.component';
+import { PaypalConfigComponent } from './store-config/pay-method-config/paypal-config/paypal-config.component';
+import { MercadoConfigComponent } from './store-config/pay-method-config/mercado-config/mercado-config.component';
 
 
 @NgModule( {
@@ -81,6 +83,8 @@ import { ProdDetailsComponent } from './products/prod-details/prod-details.compo
     PedidosComponent,
     PedidoComponent,
     ProdDetailsComponent,
+    PaypalConfigComponent,
+    MercadoConfigComponent
   ],
   imports: [
     CommonModule,
