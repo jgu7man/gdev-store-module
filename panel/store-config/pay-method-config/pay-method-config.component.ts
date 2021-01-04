@@ -25,13 +25,13 @@ export class PayMethodConfigComponent implements OnInit {
     if ( config ) { this.payConfig = config }
   }
 
-  toggleMethod(element: MatSlideToggle, change: MatSlideToggleChange) {
-    console.log( element.ariaLabel, change );
+  toggleMethod(element: string, change: MatSlideToggleChange) {
+    
     if ( change.checked ) {
-      this.payConfig.avalibleMethods.push(element.ariaLabel)
+      this.payConfig.avalibleMethods.push(element)
     } else {
       let i = this.payConfig.avalibleMethods.findIndex(
-        m => m === element.ariaLabel )
+        m => m === element )
       console.log(i);
       this.payConfig.avalibleMethods.splice( i, 1 )
       

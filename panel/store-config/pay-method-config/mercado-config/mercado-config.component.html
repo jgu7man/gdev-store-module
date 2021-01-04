@@ -1,6 +1,6 @@
 <mat-expansion-panel>
     <mat-expansion-panel-header>
-        Mercado Pago
+        Configuración
     </mat-expansion-panel-header>
     <form action="#"  [formGroup]="mercadopagoForm">
         <mat-form-field appearance="outline">
@@ -21,15 +21,16 @@
             formControlName="prodAccessToken"
             >
         </mat-form-field>
-        <div class="row" style="justify-content: space-around; display: flex;">
+        <div class="row" >
             
-            <button mat-raised-button
-            gdev-color
-            background="primary"
-            color="bg1"
-            [disabled]="disableForm()"
-            (click)="saveData()"
-            >Guardar</button>
+            <div class="col s12" style="justify-content: space-around; display: flex;">
+                <button mat-raised-button
+                gdev-color
+                background="primary"
+                color="bg1"
+                [disabled]="disableForm()"
+                (click)="saveData()"
+                >Guardar</button>
 
                                         
             <!-- <button mat-raised-button
@@ -39,6 +40,7 @@
             [disabled]="!mercadopagoForm.valid"
             (click)="createButton()"
             >Testear</button> -->
+            </div>
         
         </div>
         <!-- <div class="row" style="display: flex; justify-content: space-around">
