@@ -42,6 +42,7 @@ import { ProdDetailsComponent } from './products/prod-details/prod-details.compo
 import { PaypalConfigComponent } from './store-config/pay-method-config/paypal-config/paypal-config.component';
 import { MercadoConfigComponent } from './store-config/pay-method-config/mercado-config/mercado-config.component';
 import { PayStateComponent } from './store-config/pay-method-config/mercado-config/pay-state/pay-state.component';
+import { IntegrationsConfigComponent } from './store-config/integrations-config/integrations-config.component';
 
 
 @NgModule( {
@@ -86,7 +87,8 @@ import { PayStateComponent } from './store-config/pay-method-config/mercado-conf
     ProdDetailsComponent,
     PaypalConfigComponent,
     MercadoConfigComponent,
-    PayStateComponent
+    PayStateComponent,
+    IntegrationsConfigComponent
   ],
   imports: [
     CommonModule,
