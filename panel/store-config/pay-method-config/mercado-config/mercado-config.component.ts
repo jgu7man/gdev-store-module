@@ -4,7 +4,14 @@ import { BehaviorSubject } from 'rxjs';
 import { MercadopagoData } from '../pay-config.model';
 import { PayMethodsService } from '../pay-methods.service';
 import { DOCUMENT } from '@angular/common';
+import { Loading } from '../../../../../gdev-tools/loading/loading.service';
 declare let mercadopago: any
+import { get } from 'scriptjs';
+import postscribe from 'postscribe'
+import { ColorService } from 'src/app/gdev-tools/color/color.service';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { PayStateComponent } from './pay-state/pay-state.component';
 
 @Component({
   selector: 'gdev-mercado-config',
@@ -19,12 +26,23 @@ export class MercadoConfigComponent implements OnInit {
   get data() { return this._data.getValue() }
 
   mercadopagoForm: FormGroup
+  token: string
+  payId: string
 
   constructor (
-    public _payConfig: PayMethodsService,
-    private _renderer: Renderer2, 
-    @Inject( DOCUMENT ) private _document: Document,
+    public payConfig_: PayMethodsService,
+    private _color: ColorService,
+    private _route: ActivatedRoute,
+    private _dialog: MatDialog,
+    private _loading: Loading
   ) {
+    console.log( this._route.snapshot.params )
+    if ( this._route.snapshot.params[ 'state' ] ) { 
+      console.log( 'open dialog' )
+      this._dialog.open( PayStateComponent, {
+        width: '80%', data:this._route.snapshot.params[ 'state' ]
+      })
+    }
     this.mercadopagoForm = new FormGroup( { 
       testAccessToken: new FormControl('', [Validators.required]),
       prodAccessToken: new FormControl('', [Validators.required])
@@ -32,6 +50,12 @@ export class MercadoConfigComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this._data.subscribe( async data => {
+      if ( data ) {
+        this.mercadopagoForm.setValue( data )
+        this.token = data.testAccessToken
+      }
+    } )
   }
 
   disableForm() {
@@ -39,12 +63,28 @@ export class MercadoConfigComponent implements OnInit {
   }
   
   saveData() {
-    this._payConfig.savePayConfig( { mercadopagoData: this.mercadopagoForm.value } )
+    this.payConfig_.savePayConfig( { mercadopagoData: this.mercadopagoForm.value } )
     .then(() => {this.mercadopagoForm.markAsPristine({onlySelf: true})})
   }
 
-  createButton() {
-    // mercadopago.Buttons(this.paypalConfig).render("#paypal")
+  testPago() {
+    console.log( 'test start' )
+    this._loading.toggleWaitingSpinner(true)
+    this.payConfig_.testMercadopago( this.token )
+      .then( ( result: any ) => {
+        console.log( result )
+        this.payId = result.data.response.id
+        const script = `<script 
+        src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js" data-preference-id="${this.payId }" data-header-color="${this._color.ColorPalette.primary}" data-button-label="Ir a mercadopago" onmessage=${this.validatePaid()}"></script>`
+        postscribe("#mercadopago", script)
+        console.log( 'show modal' )
+        this._loading.toggleWaitingSpinner(false)
+      } )
+    .catch(error => {console.log( error )})
+  }
+
+  validatePaid() {
+    console.log( 'pagado' )
   }
 
 }

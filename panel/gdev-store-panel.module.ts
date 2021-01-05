@@ -41,6 +41,7 @@ import { PedidoComponent } from "./pedidos/pedido/pedido.component";
 import { ProdDetailsComponent } from './products/prod-details/prod-details.component';
 import { PaypalConfigComponent } from './store-config/pay-method-config/paypal-config/paypal-config.component';
 import { MercadoConfigComponent } from './store-config/pay-method-config/mercado-config/mercado-config.component';
+import { PayStateComponent } from './store-config/pay-method-config/mercado-config/pay-state/pay-state.component';
 
 
 @NgModule( {
@@ -84,7 +85,8 @@ import { MercadoConfigComponent } from './store-config/pay-method-config/mercado
     PedidoComponent,
     ProdDetailsComponent,
     PaypalConfigComponent,
-    MercadoConfigComponent
+    MercadoConfigComponent,
+    PayStateComponent
   ],
   imports: [
     CommonModule,
@@ -102,7 +104,8 @@ import { MercadoConfigComponent } from './store-config/pay-method-config/mercado
     DelCategoryComponent,
     // AddAdminComponent,
     // EditAdminComponent,
-    AddSlideComponent
+    AddSlideComponent,
+    PayStateComponent
   ],
   exports: [
     GdevStoreComponent

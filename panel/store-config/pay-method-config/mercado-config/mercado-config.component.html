@@ -33,19 +33,21 @@
                 >Guardar</button>
 
                                         
-            <!-- <button mat-raised-button
-            gdev-color
-            background="accent"
-            color="bg1"
-            [disabled]="!mercadopagoForm.valid"
-            (click)="createButton()"
-            >Testear</button> -->
+                <button mat-raised-button
+                gdev-color
+                background="accent"
+                color="bg1"
+                [disabled]="!mercadopagoForm.valid"
+                (click)="testPago()"
+                >Testear</button>
             </div>
         
         </div>
-        <!-- <div class="row" style="display: flex; justify-content: space-around">
-                <div #paypal width="50%" id="paypal"></div>
-        </div> -->
+        <div class="row" style="display: flex; justify-content: space-around">
+            <div class="col s12">
+                <div #mercadopago width="50%" id="mercadopago"></div>
+            </div>
+        </div>
     </form>
 
     

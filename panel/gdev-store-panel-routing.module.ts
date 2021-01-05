@@ -18,7 +18,7 @@ const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/panel/tienda/inicio' },
     { path: 'inicio', component: DashboardComponent },
     { path: 'config', component: StoreConfigComponent },
-    
+    { path: 'config/:state', component: StoreConfigComponent},
     { path: 'categories', component: CategoriesComponent },
     { path: 'products', component: ProductsComponent },
     { path: 'attributes/:id', component: GdevCategoryAttributesComponent },

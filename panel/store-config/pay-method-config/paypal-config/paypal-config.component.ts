@@ -88,7 +88,6 @@ export class PaypalConfigComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit() {
-    console.log( this.paypalElement.nativeElement )
   }
 
   disableForm() {

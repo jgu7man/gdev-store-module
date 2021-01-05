@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/jgu7man/gdev-store#readme",
   "dependencies": {
-    "ngx-mask": "^11.1.4"
+    "@types/mercadopago": "^1.5.3",
+    "mercadopago": "^1.5.2",
+    "ngx-mask": "^11.1.4",
+    "postscribe": "^2.0.8",
+    "scriptjs": "^2.5.9"
   }
 }
