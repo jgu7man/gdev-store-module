@@ -8,7 +8,7 @@
                 [checked]="payConfig.avalibleMethods.includes('efectivo')"
                 (change)="toggleMethod('efectivo', $event)"
                 color="primary"
-                >efectivo</mat-slide-toggle>
+                >Activar</mat-slide-toggle>
             </div>
             <div class="col s12">
                 <mat-expansion-panel>
@@ -27,7 +27,7 @@
                 [checked]="payConfig.avalibleMethods.includes('transferencia')"
                 (change)="toggleMethod('transferencia', $event)"
                 color="primary"
-                >transferencia</mat-slide-toggle>
+                >Activar</mat-slide-toggle>
             </div>
             <div class="col s12">
                 <mat-expansion-panel>
@@ -45,7 +45,7 @@
                 [checked]="payConfig.avalibleMethods.includes('tarjeta')"
                 (change)="toggleMethod('tarjeta', $event)"
                 color="primary"
-                >tarjeta</mat-slide-toggle>
+                >Activar</mat-slide-toggle>
             </div>
             <div class="col s12">
                 <mat-expansion-panel>
@@ -63,7 +63,7 @@
                 [checked]="payConfig.avalibleMethods.includes('paypal')"
                 (change)="toggleMethod('paypal', $event)"
                 color="primary"
-                >paypal</mat-slide-toggle>
+                >Activar</mat-slide-toggle>
             </div>
             <div class="col s12">
                 <gdev-paypal-config [data]="payConfig.paypalData ? payConfig.paypalData : null" ></gdev-paypal-config>
@@ -76,7 +76,7 @@
                 [checked]="payConfig.avalibleMethods.includes('mercadopago')"
                 (change)="toggleMethod('mercadopago', $event)"
                 color="primary"
-                >mercadopago</mat-slide-toggle>
+                >Activar</mat-slide-toggle>
             </div>
             <div class="col s12">
                 <gdev-mercado-config
