@@ -16,12 +16,12 @@ export class WishlistService {
     private fs: AngularFirestore,
     private loading: Loading
   ) { }
-  
+
 
   totalWishlistItems() {
     var wishlist = this.LocalWishlist
     if ( wishlist ) {
-      return wishlist.length      
+      return wishlist.length
     } else {
       return 0
     }
@@ -44,7 +44,7 @@ export class WishlistService {
 
   async getWishlist() {
     if ( !this.LocalWishlist ) {
-      console.log('no hay localwishlist');
+      // console.log('no hay localwishlist');
       if ( this.LocalClient ) {
         try {
           var tempWishlist = []
@@ -71,7 +71,7 @@ export class WishlistService {
     } else {
       return this.wishlist = this.LocalWishlist
     }
-    
+
   }
 
   async updateProduct( productId ) {
@@ -83,7 +83,7 @@ export class WishlistService {
       console.log('elimina del wish ', productId);
       this.wishlist.splice( productIndex, 1 )
       this.setLocalWishlist( this.wishlist )
-      
+
       if ( this.LocalClient ) {
         await this.delProductOn( this.LocalClient.idCliente, productId )
       }
@@ -138,15 +138,15 @@ export class WishlistService {
     await this.getWishlist()
     const wishlistRef = this.fs.collection( 'clientes' ).ref.doc( idCliente ).collection( 'wishlist' )
     var wishlistDocs = await wishlistRef.get()
-    
+
     var cloudWishlist:WishlistProduct[] = []
     if ( wishlistDocs.size > 0 ) {
       await this.loading.asyncForEach( wishlistDocs.docs, async ( doc ) => {
         cloudWishlist.push( doc.data() )
       } )
-      
-      
-      
+
+
+
       if ( this.wishlist.length > 0 ) {
         await this.loading.asyncForEach( this.wishlist,
           async ( prod: WishlistProduct ) => {
@@ -173,13 +173,13 @@ export class WishlistService {
       }
 
 
-    
+
     }
   }
 
 
   async getWishlistProductFromDB( productId ) {
-    var product = 
+    var product =
     await this.fs.collection( `tienda/productos/referencias` ).ref
     .doc( productId ).get()
     return product.data() as GdevStoreProductModel

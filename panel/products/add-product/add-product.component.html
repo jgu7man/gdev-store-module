@@ -149,6 +149,12 @@
                         </mat-tab>
                     </mat-tab-group>
                 </div>
+                <div class="col s12">
+                    <gdev-prod-details 
+                    [details]="product.detalles ? product.detalles : []" 
+                    (detailsChanged)="product.detalles = $event" 
+                    ></gdev-prod-details>
+                </div>
             </div>
 
             <!-- * IMAGEN DEL PRODUCTO -->

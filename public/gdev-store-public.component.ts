@@ -25,14 +25,16 @@ export class GdevStorePublicComponent implements OnInit, AfterViewInit {
   ) {
     var favicon: HTMLLinkElement = document.querySelector( '[type="image/x-icon"]' )
     favicon.href = 'app/gdev-panel/assets/img/gdev-icono-trans-1x1.png'
-    
+
     this._main.getStoreData()
-      .then( (data: StoreModel ) => {
+      .then( ( data: StoreModel ) => {
+        // console.log(data)
         if ( data.logoURL ) {
           // set logoURL
         }
       })
       .catch( error => {
+        // console.error(error)
       this._alert.sendRequestAlert( {
         message:
           "Errores adminsitrativos. Si eres administrador inicia sesión para resolverlos. Si no, disculpa las molestias",

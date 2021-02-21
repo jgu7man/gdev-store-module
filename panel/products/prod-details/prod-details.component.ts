@@ -34,6 +34,7 @@ export class ProdDetailsComponent implements OnInit {
       console.log(this.newDetail);
       this.details.push( this.newDetail )
       this.detailsChanged.emit( this.details )
+      this.newDetail = { detailName: '', detailValue: ''}
     } else {
       this._alert.sendMessageAlert('Esta característica ya existe, si deseas cambiarla, borra la actual y créala de nuevo')
     }

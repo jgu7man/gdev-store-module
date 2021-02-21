@@ -57,6 +57,7 @@ export class ProductsComponent implements OnInit {
   async loadProducts() {
     this._index.initIndex( 'tienda/productos/referencias', 'id', 20 )
     this._index.queryData.subscribe( data => {
+      console.log( data )
       this.products = data
     } )
     this._index.loadingQuery.subscribe( resp => {

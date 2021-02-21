@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import firebase from 'firebase/app';
 import { AlertService } from '../../../gdev-tools/alerts/alert.service';
 import { finalize } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Injectable({providedIn: 'root'})
 export class GdevStoreProductsService {
@@ -17,7 +18,8 @@ export class GdevStoreProductsService {
     constructor (
         private fs: AngularFirestore,
         private ft: AngularFireStorage,
-        private alertas: AlertService
+        private _alerts: AlertService,
+        private location: Location
     ) { }
     
     async addProduct(product: GdevStoreProductModel) {
@@ -36,55 +38,67 @@ export class GdevStoreProductsService {
             const colRef = this.fs.collection( 'tienda/productos/referencias' ).ref;
 
             var productCrated = await colRef.doc(productId).set( productObject )
-            this.alertas.sendFloatNotification('Producto agregado')
+            this._alerts.sendFloatNotification( 'Producto agregado' )
+            this.location.back()
             return true
         } catch (error) {
             console.log(error);
         }
     }
 
-    async addProductImage(file) {
-        const
-            dateId = new Date().getTime(),
-            fileName = `${ dateId }-${ file.name }`,
-            path = `products/${ fileName }`,
-            ref = this.ft.ref( path ),
-            task = this.ft.upload( path, file );
+    async addProductImage( file ) {
+        try {
+            
+            const
+                dateId = new Date().getTime(),
+                fileName = `${ dateId }-${ file.name }`,
+                path = `products/${ fileName }`,
+                ref = this.ft.ref( path ),
+                task = this.ft.upload( path, file );
 
-        await task.percentageChanges().subscribe( res => {
-            return this.imageLoadPercent = res
-        } )
-
-        await task.snapshotChanges().pipe(
-            finalize( async () => {
-                await ref.getDownloadURL()
-                    .subscribe( res => {
-                        this.imageUrl.next( { url: res, alt: file.name } )
-                    } )
-                return
+            await task.percentageChanges().subscribe( res => {
+                return this.imageLoadPercent = res
             } )
-        ).subscribe()
+
+            await task.snapshotChanges().pipe(
+                finalize( async () => {
+                    await ref.getDownloadURL()
+                        .subscribe( res => {
+                            this.imageUrl.next( { url: res, alt: file.name } )
+                        } )
+                    return
+                } )
+            ).subscribe()
+        } catch (error) {
+            console.error(error)
+            this._alerts.sendError('Error', error)
+        }
     }
 
 
 
     async loadGalleryImage( image ) {
-        let
-            dateId = new Date().getTime(),
-            fileName = `${ dateId }-${ image.name }`,
-            path = `products/${ fileName }`,
-            ref = this.ft.ref( path ),
-            task = this.ft.upload( path, image )
-        
-        
+        try {
+            let
+                dateId = new Date().getTime(),
+                fileName = `${ dateId }-${ image.name }`,
+                path = `products/${ fileName }`,
+                ref = this.ft.ref( path ),
+                task = this.ft.upload( path, image )
+            
+            
 
-        await task.snapshotChanges().pipe(
-            finalize( async () => {
-                await ref.getDownloadURL().subscribe( res => {
-                    this.imageUrl.next( { url: res, alt: image.name } )
-                } )
-                return
-            } ) ).subscribe()
+            await task.snapshotChanges().pipe(
+                finalize( async () => {
+                    await ref.getDownloadURL().subscribe( res => {
+                        this.imageUrl.next( { url: res, alt: image.name } )
+                    } )
+                    return
+                } ) ).subscribe()
+        } catch (error) {
+            console.error(error)
+            this._alerts.sendError('Error', error)
+        }
     }
 
 
@@ -109,22 +123,27 @@ export class GdevStoreProductsService {
             console.log(productObject);
             await colRef.doc( product.id ).update( productObject )
 
-            this.alertas.sendFloatNotification('Producto guardado')
+            this._alerts.sendFloatNotification('Producto guardado')
             return true
         } catch ( error ) {
-            this.alertas.sendMessageAlert('Ups, algo falló. No se guardó')
+            this._alerts.sendMessageAlert('Ups, algo falló. No se guardó')
             console.error(error);
         }
     }
 
     async onDelAttr( itemAttr ) {
-        var itemId = itemAttr.idItem, itemAttr = itemAttr.attrItem
-        const productRef = this.fs.collection( 'tienda/productos/referencias' ).ref
-        productRef.doc( itemId ).update( {
-            [ itemAttr ]: firebase.firestore.FieldValue.delete()
-        } )
-        this.alertas.sendFloatNotification('Producto eliminado')
-        return 
+        try {
+            var itemId = itemAttr.idItem, itemAttr = itemAttr.attrItem
+            const productRef = this.fs.collection( 'tienda/productos/referencias' ).ref
+            productRef.doc( itemId ).update( {
+                [ itemAttr ]: firebase.firestore.FieldValue.delete()
+            } )
+            this._alerts.sendFloatNotification('Producto eliminado')
+            return 
+        } catch (error) {
+            console.error(error)
+            this._alerts.sendError('Error', error)
+        }
     }
 
 
@@ -133,7 +152,10 @@ export class GdevStoreProductsService {
             const productRef = this.fs.collection( 'tienda/productos/referencias' ).ref
             await productRef.doc( productId ).delete()
             return true
-        } catch ( error ) { console.error( error ); }
+        } catch ( error ) {
+            console.error( error );
+            this._alerts.sendError('Error', error)
+        }
     }
 
 }
