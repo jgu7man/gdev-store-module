@@ -12,6 +12,7 @@ import { GdevSliderConfigComponent } from '../../gdev-tools/gdev-slider/gdev-sli
 import { ClientesComponent } from '../../gdev-panel/clientes/clientes.component';
 import { StoreConfigComponent } from './store-config/store-config.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { ImportExportComponent } from './import-export/import-export.component';
 
 const routes: Routes = [
   { path: '', component: GdevStoreComponent, children:[
@@ -24,9 +25,9 @@ const routes: Routes = [
     { path: 'attributes/:id', component: GdevCategoryAttributesComponent },
     { path: 'products/add', component: AddProductComponent },
     { path: 'products/edit/:id', component: EditProductComponent },
-    
-    
-    
+
+    {path: 'import-export', component: ImportExportComponent},
+
     { path: 'slider', component: StoreSliderComponent },
     { path: 'slider-config', component: GdevSliderConfigComponent },
     { path: 'clientes', component: ClientesComponent },
