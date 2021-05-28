@@ -18,21 +18,21 @@ export class ProductsComponent implements OnInit {
 
   @ViewChild( 'currentProduct' ) productPanel: MatDrawer
   @ViewChild( 'listPanel' ) listPanel: MatSelectionList
-  
-  
+
+
 
 
   constructor (
     private _categories: GdevStoreCategoriesService,
-    public _index: GdevIndexService
+    public index: GdevIndexService
   ) {
-    
+
   }
-  
+
   ngOnInit() {
     this.loadProducts()
     this.loadCategories()
-    
+
   }
 
 
@@ -52,18 +52,18 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  
+
 
   async loadProducts() {
-    this._index.initIndex( 'tienda/productos/referencias', 'id', 20 )
-    this._index.queryData.subscribe( data => {
+    this.index.initIndex( 'tienda/productos/referencias', 'referencia', 20 )
+    this.index.queryData.subscribe( data => {
       console.log( data )
       this.products = data
     } )
-    this._index.loadingQuery.subscribe( resp => {
+    this.index.loadingQuery.subscribe( resp => {
       if ( resp ) {
         this.products = []
-      } 
+      }
     } )
     return
   }
@@ -80,6 +80,6 @@ export class ProductsComponent implements OnInit {
     this.prodSelected = undefined
   }
 
-  
+
 
 }

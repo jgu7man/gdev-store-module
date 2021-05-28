@@ -1,4 +1,4 @@
-import { ProdlistReadrModule } from './prodlist-readr-module/prodlist-readr.module';
+import { ProdlistReadrModule } from './../../prodlist-readr-module/prodlist-readr.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -46,6 +46,8 @@ import { PayStateComponent } from './store-config/pay-method-config/mercado-conf
 import { IntegrationsConfigComponent } from './store-config/integrations-config/integrations-config.component';
 import { ImportExportComponent } from './import-export/import-export.component';
 
+import { MxStorageModule } from '@marxa/storage-v9';
+import { ProductsConfigComponent } from './store-config/products-config/products-config.component';
 
 
 @NgModule( {
@@ -93,7 +95,8 @@ import { ImportExportComponent } from './import-export/import-export.component';
     PayStateComponent,
     IntegrationsConfigComponent,
 
-    ImportExportComponent
+    ImportExportComponent,
+    ProductsConfigComponent
   ],
   imports: [
     CommonModule,
@@ -104,7 +107,8 @@ import { ImportExportComponent } from './import-export/import-export.component';
     GdevToolsModule,
     GdevComponentsModule,
     NgxMaterialTimepickerModule,
-    ProdlistReadrModule
+    ProdlistReadrModule,
+    MxStorageModule
   ],
   entryComponents: [
     AddCategoryComponent,

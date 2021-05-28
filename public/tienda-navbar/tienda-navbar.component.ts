@@ -8,6 +8,7 @@ import { Loading } from 'src/app/gdev-tools/loading/loading.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupLoginComponent } from '../clientes/clientes-login/popup-login/popup-login.component';
 import { ClienteLoginService } from '../clientes/clientes-login/cliente-login.service';
+import { GdevMainService } from 'src/app/gdev-panel/gdev-main.service';
 
 @Component({
   selector: 'app-tienda-navbar',
@@ -16,10 +17,10 @@ import { ClienteLoginService } from '../clientes/clientes-login/cliente-login.se
 })
 export class TiendaNavbarComponent implements OnInit {
 
-  logo: string
+  brandLogo: string
   @Input() open: boolean = false
   queryTofind: string = ''
-  
+
 
   constructor (
     public cart: CartService,
@@ -29,13 +30,21 @@ export class TiendaNavbarComponent implements OnInit {
     private _router: Router,
     private _loading: Loading,
     public login: ClienteLoginService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _main: GdevMainService
   ) {
-    this.logo = !responsive.small ? 
+    this.brandLogo = !responsive.small ?
       'assets/img/lasmotos-logotipo-h-trans-neg.png'
-      :  'assets/img/lasmotos-logotipo-trans-neg.png'
+      : 'assets/img/lasmotos-logotipo-trans-neg.png'
+
+    this._main.getBrandInfo().subscribe(info => {
+      console.log( info )
+      if (info) this.brandLogo = info.headLogo.url
+      else this.brandLogo
+      console.log( this.brandLogo )
+    })
   }
-  
+
   menuTrigger() {
     $( "#menuTrigger" ).toggleClass( 'rotate' )
     // if ( window.screen.width <= 500 ) $( "#menuList" ).slideToggle()
@@ -54,7 +63,7 @@ export class TiendaNavbarComponent implements OnInit {
       () => $( '#menu-pagina' ).slideUp()
     )
 
-    
+
   }
 
   expandSearch() {
