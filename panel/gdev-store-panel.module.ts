@@ -43,12 +43,14 @@ import { PaypalConfigComponent } from './store-config/pay-method-config/paypal-c
 import { MercadoConfigComponent } from './store-config/pay-method-config/mercado-config/mercado-config.component';
 import { PayStateComponent } from './store-config/pay-method-config/mercado-config/pay-state/pay-state.component';
 import { IntegrationsConfigComponent } from './store-config/integrations-config/integrations-config.component';
+import { MxStorageModule } from '@marxa/storage-v9';
+import { ProductsConfigComponent } from './store-config/products-config/products-config.component';
 
 
 @NgModule( {
   declarations: [
     GdevStoreComponent,
-    
+
     CategoriesComponent,
     AddCategoryComponent,
     EditCategoryComponent,
@@ -56,26 +58,26 @@ import { IntegrationsConfigComponent } from './store-config/integrations-config/
     CategoryTableComponent,
     CategoryFieldsComponent,
     GdevCategoryAttributesComponent,
-    
+
     ProductsComponent,
     AddProductComponent,
     EditProductComponent,
     DelProdcutComponent,
     DashboardComponent,
-    
-    
-    
+
+
+
     StoreDesignComponent,
     StoreSliderComponent,
     AddSlideComponent,
     SlideComponent,
-    
+
     ProdVarianteComponent,
     ProdAddonsComponent,
     ProdDescComponent,
-    
-    
-    
+
+
+
     StoreConfigComponent,
     DeliveryConfigComponent,
     BranchesComponent,
@@ -88,7 +90,8 @@ import { IntegrationsConfigComponent } from './store-config/integrations-config/
     PaypalConfigComponent,
     MercadoConfigComponent,
     PayStateComponent,
-    IntegrationsConfigComponent
+    IntegrationsConfigComponent,
+    ProductsConfigComponent
   ],
   imports: [
     CommonModule,
@@ -98,7 +101,8 @@ import { IntegrationsConfigComponent } from './store-config/integrations-config/
     MaterialModule,
     GdevToolsModule,
     GdevComponentsModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MxStorageModule
   ],
   entryComponents: [
     AddCategoryComponent,

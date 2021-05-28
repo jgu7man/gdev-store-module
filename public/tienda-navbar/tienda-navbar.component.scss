@@ -22,6 +22,7 @@
 #logoContent {
     padding: 10px 0;
     max-height: 4.5em;
+    cursor: pointer;
 }
 
 #logoContent img {
@@ -113,8 +114,8 @@
         font-size: 20px;
         color: #01579b;
     }
-    
-    
+
+
     #logoContent {
         img {
             width: 225%;
@@ -122,5 +123,5 @@
 
         }
     }
-    
+
 }

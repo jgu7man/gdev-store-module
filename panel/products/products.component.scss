@@ -3,7 +3,7 @@
 }
 
 mat-drawer-container {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .options i {
@@ -54,7 +54,7 @@ mat-drawer-container {
     .prodImg {
         margin-left: 0 !important;
     }
-    .s1, .s2, .s3, .s4 { 
+    .s1, .s2, .s3, .s4 {
         margin: 0;
         margin-left: 2%;
     }
@@ -75,4 +75,14 @@ mat-drawer-container {
         font-size: large;
         font-weight: bold;
     }
+}
+
+mat-list-option {
+  height: initial !important;
+  min-height: 48px;
+  align-self: center;
+  vertical-align: middle;
+  position: relative !important;
+  padding: 5px 0 !important;
+  border-bottom: solid .5px #ccc;
 }
