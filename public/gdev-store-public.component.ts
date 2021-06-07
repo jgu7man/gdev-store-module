@@ -24,7 +24,7 @@ export class GdevStorePublicComponent implements OnInit, AfterViewInit {
     private _integrations: IntegrationsService
   ) {
     var favicon: HTMLLinkElement = document.querySelector( '[type="image/x-icon"]' )
-    favicon.href = 'app/gdev-panel/assets/img/gdev-icono-trans-1x1.png'
+    // favicon.href = 'app/gdev-panel/assets/img/gdev-icono-trans-1x1.png'
 
     this._main.getStoreData()
       .then( ( data: StoreModel ) => {

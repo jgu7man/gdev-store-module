@@ -38,10 +38,8 @@ export class TiendaNavbarComponent implements OnInit {
       : 'assets/img/lasmotos-logotipo-trans-neg.png'
 
     this._main.getBrandInfo().subscribe(info => {
-      console.log( info )
       if (info) this.brandLogo = info.headLogo.url
       else this.brandLogo
-      console.log( this.brandLogo )
     })
   }
 
